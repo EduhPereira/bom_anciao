@@ -1,12 +1,9 @@
 import React from "react";
-import VoluntariesLogin from "./components/Login-Voluntaries";
-import GlobalStyle from "./Style/GlobalStyle";
-
+import GlobalStyle from "./styles/global";
 function App() {
   return (
-    <div>
+    <div className="App">
       <GlobalStyle />
-      <VoluntariesLogin />
     </div>
   );
 }
