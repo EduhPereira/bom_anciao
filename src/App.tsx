@@ -1,9 +1,9 @@
 import React from "react";
-import InstitutionSearch from "./pages/InstitutionSearch";
+import GlobalStyle from "./styles/global";
 function App() {
   return (
     <div className="App">
-      <InstitutionSearch />
+      <GlobalStyle />
     </div>
   );
 }
