@@ -26,7 +26,7 @@ export const LandingPage = () => {
         </div>
         <div className="func__col-2">
           <h1>Lorem Ipsum</h1>
-          <p>Lorem Ipsum</p>
+          <p>Lorem Ipsum Lorem Ipsum</p>
           <button>Começe Agora</button>
         </div>
       </Functionalities>
