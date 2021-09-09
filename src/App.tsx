@@ -1,8 +1,14 @@
 import React from "react";
-import "./App.css";
+import VoluntariesLogin from "./components/Login-Voluntaries";
+import GlobalStyle from "./Style/GlobalStyle";
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <div>
+      <GlobalStyle />
+      <VoluntariesLogin />
+    </div>
+  );
 }
 
 export default App;
