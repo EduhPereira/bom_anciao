@@ -7,11 +7,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
-<<<<<<< HEAD
-    "@types/axios": "^0.14.0",
-=======
     "@types/history": "^4.7.9",
->>>>>>> 6095e73a9596dbe8f6aa1c6ff249a89dd228a347
     "@types/jest": "^26.0.15",
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
