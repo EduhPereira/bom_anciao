@@ -1,9 +1,11 @@
 import React from "react";
-import { DashboardVoluntary } from "./pages/dashboardVoluntary";
+import GlobalStyle from "./styles/global";
 function App() {
-  return <div className="App">
-    <DashboardVoluntary></DashboardVoluntary>
-  </div>;
+  return (
+    <div className="App">
+      <GlobalStyle />
+    </div>
+  );
 }
 
 export default App;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { number } from "yup/lib/locale"
 import { EventListUser } from "../../components/eventListUser"
-import { api } from "../../services/api"
+import api from "../../services/api"
 
 interface iEventUser {
     id: number,
