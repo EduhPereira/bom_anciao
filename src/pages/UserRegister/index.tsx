@@ -2,29 +2,27 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { RegisterStyled } from "./styles";
+import api from "../../services/api";
 interface IRegister {
   user: string;
   email: string;
   cpf: number;
-  adress: string;
+  address: string;
   password: string;
   confirmPassword: string;
 }
 
-const RegisterForm = () => {
+const UserRegister = () => {
   const schema = yup.object().shape({
     user: yup
       .string()
       .required("Campo obrigatório")
       .matches(/^[aA-zZ\s]+$/, "Somente letras são permitidas"),
     email: yup.string().email("email inválido").required("Campo obrigatório"),
-    cpf: yup
-      .string()
-      .required("Campo obrigatório")
-      .min(11, "O CPF deve ter 11 números")
-      .matches(/^[0-9]+$/, "Somente números são permitidos"),
-    adress: yup.string().required("Campo obrigatório"),
+
+    address: yup.string().required("Campo obrigatório"),
     password: yup
       .string()
       .min(6, "Mínimo de oito caracteres")
@@ -37,43 +35,52 @@ const RegisterForm = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const handleRegister = (registerData: IRegister) => {
-    console.log(registerData);
+  const handleRegister = ({ user, email, address, password }: IRegister) => {
+    api
+      .post("/register", { user, email, address, password })
+      .then(() => {
+        reset();
+        toast.success("Conta criada com sucesso!");
+      })
+      .catch((err) => {
+        if (err) {
+          toast.error("Erro ao cadastrar usuário");
+        }
+      });
   };
   return (
     <div className="register-form-container">
+      <h2>Crie sua conta</h2>
       <RegisterStyled onSubmit={handleSubmit(handleRegister)}>
-        <input type="text" placeholder="Nome completo" {...register("user")} />
+        <label>Nome completo</label>
+        <input type="text" {...register("user")} />
         <span className="span-error">{errors.user?.message}</span>
-        <input type="email" placeholder="Email" {...register("email")} />
+
+        <label>Email</label>
+        <input type="email" {...register("email")} />
         <span className="span-error">{errors.email?.message}</span>
 
-        <input
-          type="text"
-          placeholder="CPF (somente números)"
-          {...register("cpf")}
-        />
-        <span className="span-error">{errors.cpf?.message}</span>
+        <label>Endereço</label>
+        <input type="text" {...register("address")} />
+        <span className="span-error">{errors.address?.message}</span>
 
-        <input type="text" placeholder="Endereço" {...register("adress")} />
-        <span className="span-error">{errors.adress?.message}</span>
-
-        <input type="text" placeholder="Senha" {...register("password")} />
-
+        <label>Senha</label>
+        <input type="text" {...register("password")} />
         <span className="span-error">{errors.password?.message}</span>
 
-        <input
-          type="text"
-          placeholder="Confirme a senha"
-          {...register("confirmPassword")}
-        />
+        <label>Confirme sua senha</label>
+        <input type="text" {...register("confirmPassword")} />
         <span className="span-error">{errors.confirmPassword?.message}</span>
-        <button type="submit">Cadastre-se</button>
+        <button type="submit">Enviar</button>
       </RegisterStyled>
+      <div>
+        <ToastContainer />
+      </div>
     </div>
   );
 };
-export default RegisterForm;
+export default UserRegister;
