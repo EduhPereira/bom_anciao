@@ -1,3 +1,4 @@
+import DonationsList from "../../components/donationsList";
 import NewDonationForm from "../../components/newDonationForm";
 const Solicitations = () => {
   return (
@@ -5,6 +6,7 @@ const Solicitations = () => {
       <div>
         <h2>Nome da Instituição</h2>
         <NewDonationForm />
+        <DonationsList />
       </div>
     </>
   );

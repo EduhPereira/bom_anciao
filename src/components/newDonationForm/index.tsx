@@ -8,6 +8,7 @@ import { useState } from "react";
 interface ISolicitation {
   name: string;
   quantity: number;
+  received?: number;
   description?: string;
   idInstitution: number;
 }
@@ -26,13 +27,14 @@ const NewDonationForm = () => {
   const handleSolicitation = ({
     name,
     quantity,
+    received,
     description,
     idInstitution = 9,
   }: ISolicitation) => {
     api
       .post(
         "/donations",
-        { name, quantity, description, idInstitution },
+        { name, quantity, description, received, idInstitution },
         {
           headers: {
             Authorization: `Bearer ${token}`,
