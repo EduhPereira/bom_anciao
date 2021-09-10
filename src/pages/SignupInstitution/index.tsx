@@ -1,11 +1,13 @@
+import { useHistory } from "react-router";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { ToastContainer, toast } from "react-toastify";
 import { Input, Button, RegisterStyled } from "./styles";
 import { Link } from "react-router-dom";
+import { useAuthInstitution } from "../../Providers/Institution-Provider";
 
-interface IRegisterInstitution {
+interface ISignup {
   name: string;
   email: string;
   address: string;
@@ -16,12 +18,13 @@ interface IRegisterInstitution {
 }
 
 const RegisterInstitution = () => {
+  const { signUp } = useAuthInstitution();
+
+  const history = useHistory();
+  const [error, setError] = useState(false);
   const schema = yup.object().shape({
     name: yup.string().required("Campo obrigatório."),
-    /* .matches(/^[aA-zZ\s]+$/, "Somente letras são permitidas"), */ email: yup
-      .string()
-      .email("Email inválido")
-      .required("Campo obrigatório."),
+    email: yup.string().email("Email inválido").required("Campo obrigatório."),
     cnpj: yup
       .string()
       .required("Campo obrigatório.")
@@ -41,11 +44,10 @@ const RegisterInstitution = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+  } = useForm<ISignup>({ resolver: yupResolver(schema) });
 
-  const handleRegister = (registerData: IRegisterInstitution) => {
-    console.log(registerData);
-    toast.success("Conta criada com sucesso!");
+  const handleRegister = (registerData: ISignup) => {
+    signUp(registerData, setError, history);
   };
 
   return (
@@ -94,7 +96,7 @@ const RegisterInstitution = () => {
 
         <Button type="submit">Enviar</Button>
         <span>
-          Já possui conta? <Link to="/login">Entre</Link>
+          Já possui conta? <Link to="/login-institution">Entre</Link>
         </span>
       </RegisterStyled>
     </div>
