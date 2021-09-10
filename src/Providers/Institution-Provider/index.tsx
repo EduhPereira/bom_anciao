@@ -1,3 +1,4 @@
+import React from "react";
 import {
   createContext,
   Dispatch,
@@ -7,7 +8,7 @@ import {
   useState,
 } from "react";
 import { History } from "history";
-import api from "../../Services/api";
+import api from "../../services/api";
 import { toast } from "react-toastify";
 
 type FormValues = {
@@ -27,7 +28,7 @@ interface ISignup {
 
 interface AuthProviderData {
   token: string;
-  setAuth: Dispatch<SetStateAction<string>>;
+  setAuth: React.Dispatch<SetStateAction<string>>;
   signIn: (
     userData: FormValues,
     setError: Dispatch<SetStateAction<boolean>>,
@@ -50,7 +51,7 @@ const AuthInstitutionContext = createContext<AuthProviderData>(
 );
 
 export const AuthInstitutionProvider = ({ children }: AuthProviderProps) => {
-  const token = localStorage.getItem("accessToken") || "";
+  const token = localStorage.getItem("@Bom ancião: token") || "";
 
   const [auth, setAuth] = useState<string>(token);
 
@@ -62,9 +63,9 @@ export const AuthInstitutionProvider = ({ children }: AuthProviderProps) => {
     api
       .post("/login", userData)
       .then((response) => {
-        localStorage.setItem("accessToken", response.data.access);
-        setAuth(response.data.access);
-        history.push("/institutional-dashboard");
+        localStorage.setItem("@Bom ancião: token", response.data.accessToken);
+        setAuth(response.data.accessToken);
+        history.push("/dashboard-institution");
       })
       .catch((err) => setError(true));
   };
