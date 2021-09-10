@@ -8,7 +8,7 @@ import {
   useCallback,
 } from "react";
 import { History } from "history";
-import api from "../../Services/api"
+import api from "../../services/api";
 
 interface AuthProviderProps {
   children: ReactNode;

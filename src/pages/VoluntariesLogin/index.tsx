@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Button, Content, Form, Input } from "./style";
 import * as yup from "yup";
-import { useLogin } from "../../Providers/Login-Voluntaries/index";
+import { useLogin } from "../../Providers/Login-Voluntaries";
 import { useHistory } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 
