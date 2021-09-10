@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 import { History } from "history";
-import api from "../../Services/api";
+import api from "../../services/api";
 import { toast } from "react-toastify";
 
 type FormValues = {
