@@ -24,7 +24,7 @@ interface iInstitute{
 }
 
 
-export const DashboardVoluntary = () => {
+export const EventsVoluntary = () => {
 
     
     const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNvbGFyZXNAbWFpbC5jb20iLCJpYXQiOjE2MzExOTI5NjQsImV4cCI6MTYzMTE5NjU2NCwic3ViIjoiNCJ9.pCGeTKOysrksuhVkXxnTN1wEERYk0VopnoTenUu9A-A"
