@@ -1,4 +1,5 @@
 import React from "react";
+import Solicitations from "./pages/solicitations";
 import Routes from "./routes";
 import GlobalStyle from "./styles/global";
 function App() {
@@ -6,6 +7,7 @@ function App() {
     <div className="App">
       <Routes />
       <GlobalStyle />
+      <Solicitations />
     </div>
   );
 }
