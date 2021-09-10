@@ -41,6 +41,7 @@ interface AuthProviderData {
     history: History
   ) => void;
   signOut: () => void;
+  institutionId: string;
 }
 
 interface AuthProviderProps {
@@ -98,7 +99,7 @@ export const AuthInstitutionProvider = ({ children }: AuthProviderProps) => {
 
   return (
     <AuthInstitutionContext.Provider
-      value={{ token: auth, setAuth, signIn, signOut, signUp }}
+      value={{ token: auth, setAuth, signIn, signOut, signUp, institutionId }}
     >
       {children}
     </AuthInstitutionContext.Provider>
