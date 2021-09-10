@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { AuthInstitutionProvider } from "./Institution-Provider";
 import LoginProvider from "./Login-Voluntaries";
 
 interface AppProviderProps {
@@ -6,7 +7,11 @@ interface AppProviderProps {
 }
 
 const AppProvider = ({ children }: AppProviderProps) => {
-  return <LoginProvider>{children}</LoginProvider>;
+  return (
+    <LoginProvider>
+      <AuthInstitutionProvider>{children}</AuthInstitutionProvider>
+    </LoginProvider>
+  );
 };
 
 export default AppProvider;
