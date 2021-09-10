@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useAuthInstitution } from "../../Providers/Institution-Provider";
 import api from "../../services/api";
 import { CardEvents, Container, Event, TitleEvent, Button } from "./styles";
 
@@ -10,34 +11,71 @@ interface Event {
   duration: string;
   name: string;
   describe: string;
-  id?: number;
+  id: number;
   idInstitution?: number;
+}
+
+interface InstituitionName {
+  name: string;
 }
 
 const DashboardInstitution = () => {
   const [events, setEvents] = useState<Event[]>([] as Event[]);
+  const [nameIns, setNameIns] = useState<InstituitionName[]>(
+    [] as InstituitionName[]
+  );
+
+  const { token } = useAuthInstitution();
+
+  const institutionID =
+    localStorage.getItem("@Bom ancião: institutionID") || "";
 
   async function loadEvents() {
-    const response = await api.get("/events");
-
+    const response = await api.get(`events?idInstitution=${institutionID}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const data = response.data;
-
     setEvents(data);
-    console.log(data);
+  }
+
+  async function loadNameInstitution() {
+    const response = await api.get(
+      `users?type=Institution&&id=${institutionID}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    const data = response.data;
+    setNameIns(data);
+  }
+
+  async function deleteEvent(id: number) {
+    const response = await api.delete(`events/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    loadEvents();
+    console.log(response);
   }
 
   useEffect(() => {
     loadEvents();
+    loadNameInstitution();
   }, []);
 
   return (
     <Container>
-      {events.map((event) => (
-        <h2>{event.nameInstitution}</h2>
+      {nameIns.map((event) => (
+        <h2>{event.name}</h2>
       ))}
       <CardEvents>
         <TitleEvent>
-          <h2>Eventos e atividades</h2>
+          <h2>Eventos</h2>
         </TitleEvent>
         {events.map((event) => (
           <Event>
@@ -48,7 +86,7 @@ const DashboardInstitution = () => {
               </p>
               <p>Duração: {event.duration}</p>
               <div className="button">
-                <Button>Remover</Button>
+                <Button onClick={() => deleteEvent(event.id)}>Remover</Button>
               </div>
             </div>
           </Event>

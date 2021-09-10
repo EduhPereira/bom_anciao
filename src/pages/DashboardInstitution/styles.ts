@@ -10,11 +10,15 @@ export const Container = styled.div`
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
+  h2 {
+    color: #000;
+  }
 `;
 
 export const CardEvents = styled.div`
   width: 300px;
-  height: 100%;
+  height: 450px;
   background-color: #fff;
   box-shadow: 0px 7px 10px -4px rgba(0, 0, 0, 0.75);
 
@@ -25,14 +29,14 @@ export const CardEvents = styled.div`
 
   border-radius: 10px;
   margin: 5px;
+
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
 `;
 
 export const Event = styled.div`
-  border-bottom: 1px solid #59a5a5;
-
-  display: flex;
-  flex-direction: column;
-
   width: 100%;
   height: 100%;
 
@@ -40,9 +44,13 @@ export const Event = styled.div`
 
   .card-event {
     display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #59a5a5;
+    padding: 10px;
   }
 
   .button {
+    text-align: right;
   }
 `;
 
@@ -53,6 +61,7 @@ export const TitleEvent = styled.div`
 
   h2 {
     text-align: center;
+    color: #fff;
   }
 
   border-top-left-radius: 10px;

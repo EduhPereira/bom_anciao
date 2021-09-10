@@ -10,6 +10,7 @@ import {
 import { History } from "history";
 import api from "../../services/api";
 import { toast } from "react-toastify";
+import jwt_decode from "jwt-decode";
 
 type FormValues = {
   email: string;
@@ -52,8 +53,11 @@ const AuthInstitutionContext = createContext<AuthProviderData>(
 
 export const AuthInstitutionProvider = ({ children }: AuthProviderProps) => {
   const token = localStorage.getItem("@Bom ancião: token") || "";
+  const institutionID =
+    localStorage.getItem("@Bom ancião: institutionID") || "";
 
   const [auth, setAuth] = useState<string>(token);
+  const [institutionId, setInstitutionId] = useState<string>(institutionID);
 
   const signIn = (
     userData: FormValues,
@@ -65,6 +69,9 @@ export const AuthInstitutionProvider = ({ children }: AuthProviderProps) => {
       .then((response) => {
         localStorage.setItem("@Bom ancião: token", response.data.accessToken);
         setAuth(response.data.accessToken);
+        const institutionsID: any = jwt_decode(response.data.accessToken);
+        setInstitutionId(institutionsID.sub);
+        localStorage.setItem("@Bom ancião: institutionID", institutionsID.sub);
         history.push("/dashboard-institution");
       })
       .catch((err) => setError(true));
