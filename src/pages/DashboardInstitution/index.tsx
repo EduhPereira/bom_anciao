@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import AddEvents from "../../components/InstitutionAddEvents";
 import { useAuthInstitution } from "../../Providers/Institution-Provider";
 import api from "../../services/api";
 import { CardEvents, Container, Event, TitleEvent, Button } from "./styles";
@@ -73,6 +74,7 @@ const DashboardInstitution = () => {
       {nameIns.map((event) => (
         <h2>{event.name}</h2>
       ))}
+      <AddEvents nameInst={nameIns} />
       <CardEvents>
         <TitleEvent>
           <h2>Eventos</h2>
