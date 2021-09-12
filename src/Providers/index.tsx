@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import AddEventsProvider from "./Events-Institution";
 import { AuthInstitutionProvider } from "./Institution-Provider";
 import LoginProvider from "./Login-Voluntaries";
 
@@ -9,7 +10,9 @@ interface AppProviderProps {
 const AppProvider = ({ children }: AppProviderProps) => {
   return (
     <LoginProvider>
-      <AuthInstitutionProvider>{children}</AuthInstitutionProvider>
+      <AuthInstitutionProvider>
+        <AddEventsProvider>{children}</AddEventsProvider>
+      </AuthInstitutionProvider>
     </LoginProvider>
   );
 };

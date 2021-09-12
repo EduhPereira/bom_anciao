@@ -1,6 +1,9 @@
 import { Suspense, useEffect, useState } from "react"
 import api from "../../services/api"
 import ProgressBar from '@ramonak/react-progress-bar'
+import { useParams } from "react-router"
+import { useLogin } from "../../Providers/Login-Voluntaries"
+import { Container } from './styles'
 
 interface iEvents {
     date: string,
@@ -44,35 +47,52 @@ interface iSubscribe {
 
 }
 
+interface iParams {
+    id: string
+}
+
 export const InstitutionDetails = () => {
+
+    const { id } = useParams<iParams>()
+    const { userId, token } = useLogin()
 
     useEffect(() => {
         reqInstitutionEvents()
         reqDonationsInstitution()
         reqInstitution()
+        reqVerifyIdUser()
     }, [])
 
     const reqInstitutionEvents = async () => {
-        const response = await api.get('events?idInstitution=1')
+        const response = await api.get(`events?idInstitution=${id}`)
         setListEvents(response.data)
     }
 
     const reqInstitution = async () => {
-        const response = await api.get('users?type=Institution&&id=1')
+        const response = await api.get(`users?type=Institution&&id=${id}`)
         setInstitution(response.data)
     }
 
     const reqDonationsInstitution = async () => {
-        const response = await api.get("donations?idInstitution=1")
+        const response = await api.get(`donations?idInstitution=${id}`)
         setListDonations(response.data)
+    }
+
+    const reqVerifyIdUser = async () => {
+        const response = await api.get(`subscribeEvents?idUser=${userId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        setVerifyUserSubscribe(response.data)
     }
 
     const reqSubscribeEvent = async (event: iEvents) => {
         const { nameInstitution, idInstitution, id, name, local, date, hour, duration, describe } = event
-        const subscribe: iSubscribe = {
+        const response = await api.post("subscribeEvents", {
             idInstitution,
             nameInstitution,
-            idUser: 1,
+            idUser: userId,
             idEvent: id,
             event: {
                 local,
@@ -81,21 +101,35 @@ export const InstitutionDetails = () => {
                 duration,
                 name,
                 describe
-            }
-        }
-        console.log(subscribe)
-        const response = await api.get("subscribeEvents/")
-        console.log(response.data)
+            },
+
+        }, {
+            headers: {
+
+                Authorization: `Bearer ${token}`,
+            },
+        })
     }
 
+    const reqUnsubscribe = async (id: number) => {
+        const response = await api.delete(`subscribeEvents/${id}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        )
+        console.log(response.data)
+    }
 
     const [listEvents, setListEvents] = useState<iEvents[]>([] as iEvents[])
     const [listDonations, setListDonations] = useState<iDonations[]>([] as iDonations[])
     const [institution, setInstitution] = useState<iInstitution[]>([] as iInstitution[])
-    console.log(listEvents)
+    const [verifyUserSubscribe, setVerifyUserSubscribe] = useState<iSubscribe[]>([] as iSubscribe[])
+    console.log(verifyUserSubscribe.length)
 
     return (
-        <div>
+        <Container>
             {institution.map((i) => {
                 return <h1>{i.name}</h1>
             })}
@@ -108,7 +142,7 @@ export const InstitutionDetails = () => {
                     <p>Quando: {event.date} às {event.hour}</p>
                     <p>Duração: {event.duration}</p>
                     <p>Atividade: {event.name}</p>
-                    <button onClick={() => reqSubscribeEvent(event)}>Participar</button>
+                        <button onClick={() => reqSubscribeEvent(event)}>Participar</button>
                 </section>
             })}
 
@@ -139,6 +173,6 @@ export const InstitutionDetails = () => {
             })}
 
 
-        </div>
+        </Container>
     )
 }

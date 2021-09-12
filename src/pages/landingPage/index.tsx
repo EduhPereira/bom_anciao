@@ -7,13 +7,15 @@ import {
   InstitutionsCard,
   Footer,
 } from "./styles";
+
+import { Link } from "react-router-dom";
 export const LandingPage = () => {
   return (
     <>
       <Header>
         <span>bom ancião</span>
         <div>
-          <button>Entrar</button>
+          <button><Link to="/login-voluntary">Entrar</Link></button>
           <button>Cadastrar</button>
         </div>
       </Header>
