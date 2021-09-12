@@ -49,23 +49,29 @@ const AddEvents = ({ nameInst }: any) => {
       <Forms onSubmit={handleSubmit(handleOnSubmit)}>
         <p>Nome evento</p>
         <span>{errors.name && errors.name?.message}</span>
-        <Input type="text" {...register("name")} />
+        <Input data-testid="name-field" type="text" {...register("name")} />
         <p>Local</p>
         <span>{errors.local && errors.local?.message}</span>
-        <Input type="text" {...register("local")} />
+        <Input data-testid="local-field" type="text" {...register("local")} />
         <p>Data</p>
         <span>{errors.date && errors.date?.message}</span>
-        <Input type="text" {...register("date")} />
+        <Input data-testid="date-field" type="text" {...register("date")} />
         <p>Hora</p>
         <span>{errors.hour && errors.hour?.message}</span>
-        <Input type="text" {...register("hour")} />
+        <Input data-testid="hour-field" type="text" {...register("hour")} />
         <p>Duração</p>
         <span>{errors.duration && errors.duration?.message}</span>
-        <Input type="text" {...register("duration")} />
+        <Input
+          data-testid="duration-field"
+          type="text"
+          {...register("duration")}
+        />
         <p>Descrição</p>
         <span>{errors.describe && errors.describe?.message}</span>
-        <TextArea {...register("describe")} />
-        <Button type="submit">Salvar</Button>
+        <TextArea data-testid="describe-field" {...register("describe")} />
+        <Button data-testid="form-button" type="submit">
+          Salvar
+        </Button>
       </Forms>
     </Container>
   );
