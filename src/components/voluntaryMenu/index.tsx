@@ -1,24 +1,32 @@
+import { Dispatch, SetStateAction } from "react";
 import { NavLink } from "react-router-dom";
-const VoluntaryMenu = () => {
+import { Container, Contents } from './styles'
+import { AiOutlineClose } from 'react-icons/ai'
+
+interface iVoluntaryProps {
+  visible: boolean,
+  setVisible: Dispatch<SetStateAction<boolean>>
+}
+
+
+
+const VoluntaryMenu = ({ visible, setVisible }: iVoluntaryProps) => {
+
+  const showMenu = () => {
+    setVisible(false)
+  }
+
   return (
     <>
-      <div>
-        <div className="user-img">
-          <img src="" alt="user pic" />
-        </div>
-        <details>
-          <summary>Meus dados</summary>
-          <NavLink to="#">Nome completo</NavLink> <br />
-          <NavLink to="#">Email</NavLink> <br />
-          <NavLink to="#">Telefone</NavLink>
-          <button>alterar</button>
-        </details>
-        <hr className="divisor" />
-        <NavLink to="#">Minhas Instituições</NavLink>
-        <hr className="divisor" />
-        <NavLink to="#">Buscar Instituições</NavLink>
-        <hr className="divisor" />
-      </div>
+      <Container visible={visible}>
+        <Contents visible={visible}>
+          <AiOutlineClose className="Close" onClick={showMenu}/>
+          <NavLink activeClassName="selected" exact to="/profile">Meus dados</NavLink>
+          <NavLink activeClassName="selected" exact to="/my-events">Eventos</NavLink>
+          <NavLink activeClassName="selected" exact to="/search-institutions">Buscar Instituições</NavLink>
+        </Contents>
+
+      </Container>
     </>
   );
 };

@@ -50,7 +50,7 @@ const LoginProvider = ({ children }: AuthProviderProps) => {
         setUserId(usersID.sub);
         localStorage.setItem("@Bom ancião: userID", usersID.sub);
       })
-      .then((response) => history.push("/dashboardVol"))
+      .then((response) => history.push("/my-events"))
       .catch((err) => console.log("login e senha invalidos!"));
   }, []);
   return (

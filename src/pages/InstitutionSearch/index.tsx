@@ -1,16 +1,26 @@
 import { useState, useEffect } from "react";
+import VoluntaryMenu from "../../components/voluntaryMenu";
 import api from "../../services/api";
+import { BiMenuAltLeft } from 'react-icons/bi'
+import { Container } from './styles'
+import { useHistory } from "react-router";
 
 interface Institution {
   name: string;
   address: string;
+  id: number
 }
+
 const InstitutionSearch = () => {
+
+  const history = useHistory()
+
   const [searched, setSearched] = useState<string>("");
   const [isSearched, setIsSearched] = useState<boolean>(false);
   const [results, setResults] = useState<Institution[]>([]);
-
+  const [visible, setVisible] = useState(false)
   const [institutions, setInstitutions] = useState<Institution[]>([]);
+
   useEffect(() => {
     api
       .get(`/users?type=Institution`)
@@ -35,8 +45,18 @@ const InstitutionSearch = () => {
       .catch((err) => console.log(err));
   };
 
+  const showMenu = () => {
+    setVisible(true)
+  }
+
+  const handleInstituteDetails = (id: number) => {
+    history.push(`/institution/${id}`)
+  }
+
   return (
-    <>
+    <Container>
+      <VoluntaryMenu visible={visible} setVisible={setVisible}/>
+      <BiMenuAltLeft className="Open" onClick={showMenu} />
       <input
         value={searched}
         onChange={(e) => setSearched(e.target.value)}
@@ -49,7 +69,7 @@ const InstitutionSearch = () => {
             ? results?.map((inst, index) => {
                 return (
                   <li key={index}>
-                    <span>{inst.name}</span> <br />
+                    <span onClick={() => handleInstituteDetails(inst.id)}>{inst.name}</span> <br />
                     <span>{inst.address}</span>
                   </li>
                 );
@@ -57,14 +77,14 @@ const InstitutionSearch = () => {
             : institutions?.map((inst, index) => {
                 return (
                   <li key={index}>
-                    <span>{inst.name}</span> <br />
+                    <span onClick={() => handleInstituteDetails(inst.id)}>{inst.name}</span> <br />
                     <span>{inst.address}</span>
                   </li>
                 );
               })}
         </ul>
       </div>
-    </>
+    </Container>
   );
 };
 

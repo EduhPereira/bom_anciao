@@ -7,7 +7,6 @@ function App() {
     <div className="App">
       <Routes />
       <GlobalStyle />
-      <LoginInstitution />
     </div>
   );
 }
