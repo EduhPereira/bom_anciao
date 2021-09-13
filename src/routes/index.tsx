@@ -13,7 +13,7 @@ const Routes = () => {
   return (
     <Switch>
       <Route path="/" exact>
-        <LandingPage/>
+        <LandingPage />
       </Route>
       <Route path="/login-institution">
         <LoginInstitution />
@@ -21,27 +21,25 @@ const Routes = () => {
       <Route path="/signup-institution">
         <RegisterInstitution />
       </Route>
-      <Route path="/dashboard-institution">
+      <Route path="/events-institution">
         <DashboardInstitution />
       </Route>
       <Route path="/login-voluntary">
-        <VoluntariesLogin/>
+        <VoluntariesLogin />
       </Route>
-
 
       <Route path="/my-events">
-        <EventsVoluntary/>
+        <EventsVoluntary />
       </Route>
       <Route path="/profile">
-        <ProfileUpdate/>
+        <ProfileUpdate />
       </Route>
       <Route path="/search-institutions">
-        <InstitutionSearch/>
+        <InstitutionSearch />
       </Route>
       <Route path="/institution/:id">
-        <InstitutionDetails/>
+        <InstitutionDetails />
       </Route>
-
     </Switch>
   );
 };

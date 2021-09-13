@@ -1,14 +1,14 @@
 import { Dispatch, SetStateAction } from "react";
 import { NavLink } from "react-router-dom";
-import { Container, Contents } from "./styles";
+import { Avatar, Container, Contents } from "./styles";
 import { AiOutlineClose } from "react-icons/ai";
 
-interface iVoluntaryProps {
+interface iInstitutionProps {
   visible: boolean;
   setVisible: Dispatch<SetStateAction<boolean>>;
 }
 
-const VoluntaryMenu = ({ visible, setVisible }: iVoluntaryProps) => {
+const InstitutionMenu = ({ visible, setVisible }: iInstitutionProps) => {
   const showMenu = () => {
     setVisible(false);
   };
@@ -18,14 +18,15 @@ const VoluntaryMenu = ({ visible, setVisible }: iVoluntaryProps) => {
       <Container visible={visible}>
         <Contents visible={visible}>
           <AiOutlineClose className="Close" onClick={showMenu} />
-          <NavLink activeClassName="selected" exact to="/profile">
+          {/* <Avatar /> */}
+          <NavLink activeClassName="selected" exact to="/institution-data">
             Meus dados
           </NavLink>
-          <NavLink activeClassName="selected" exact to="/my-events">
-            Eventos
+          <NavLink activeClassName="selected" exact to="/events-institution">
+            Meus Eventos
           </NavLink>
-          <NavLink activeClassName="selected" exact to="/search-institutions">
-            Buscar Instituições
+          <NavLink activeClassName="selected" exact to="/donations">
+            Doações
           </NavLink>
         </Contents>
       </Container>
@@ -33,4 +34,4 @@ const VoluntaryMenu = ({ visible, setVisible }: iVoluntaryProps) => {
   );
 };
 
-export default VoluntaryMenu;
+export default InstitutionMenu;
