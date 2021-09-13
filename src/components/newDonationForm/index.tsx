@@ -3,46 +3,53 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import api from "../../services/api";
 import { useAuthInstitution } from "../../Providers/Institution-Provider";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface ISolicitation {
+  nameInstitution: string;
   name: string;
   quantity: number;
   received?: number;
   description?: string;
-  idInstitution: number;
+  institutionId: number;
 }
-
+//fazer get em users usando id da instituicao como parametro e pega o nome da instituicao
 const NewDonationForm = () => {
-  // const { token } = useAuthInstitution();
-  //chumbei um token para testes antes de poder usar a autenticação do provider
-  const [token, setToken] = useState(
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imlkb3Nvc0BtYWlsLmNvbSIsImlhdCI6MTYzMTI5OTA5MywiZXhwIjoxNjMxMzAyNjkzLCJzdWIiOiI5In0.06cP3h6mNrud-dWZhat7VMJpmAPcaCsM3LRSLsBjQwY"
-  );
-  console.log(token);
-
+  const { token, institutionId } = useAuthInstitution();
+  console.log(institutionId);
   const { register, handleSubmit, reset } = useForm<ISolicitation>();
 
-  //POST para criar doações. Chumbei um valor para idInstitution
+  async function loadNameInstitution() {
+    const response = await api.get(
+      `users?type=Institution&&id=${institutionId}`
+    );
+    const data = response.data;
+    console.log(data);
+  }
+
+  useEffect(() => {
+    loadNameInstitution();
+  }, []);
+
   const handleSolicitation = ({
     name,
     quantity,
     received,
     description,
-    idInstitution = 9,
   }: ISolicitation) => {
     api
       .post(
-        "/donations",
-        { name, quantity, description, received, idInstitution },
+        `/donations`,
+        { name, quantity, description, received, institutionId },
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       )
-      .then(() => {
+      .then((res) => {
         reset();
+        console.log(res);
         toast.success("Solicitação criada!");
       })
       .catch((err) => {

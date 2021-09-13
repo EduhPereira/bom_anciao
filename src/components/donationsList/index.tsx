@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useAuthInstitution } from "../../Providers/Institution-Provider";
 import api from "../../services/api";
 import DonationCard from "../donationCard";
 
@@ -10,10 +11,10 @@ interface IDonation {
 
 const DonationsList = () => {
   const [donations, setDonations] = useState<IDonation[]>([]);
-  //id da instituição chumbado por enquanto
+  const { institutionId } = useAuthInstitution();
   useEffect(() => {
     api
-      .get(`donations?idInstitution_like=1`)
+      .get(`donations?idInstitution=${institutionId}`)
       .then((res) => setDonations(res.data))
       .catch((err) => console.log(err));
   }, []);
