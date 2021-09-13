@@ -8,6 +8,7 @@ import { LandingPage } from "../pages/landingPage";
 import InstitutionSearch from "../pages/InstitutionSearch";
 import { EventsVoluntary } from "../pages/eventsVoluntary";
 import Profiles from "../pages/profileUpdate";
+import Solicitations from "../pages/Solicitations";
 
 const Routes = () => {
   return (
@@ -39,6 +40,10 @@ const Routes = () => {
       </Route>
       <Route path="/institution/:id">
         <InstitutionDetails />
+      </Route>
+
+      <Route path="/solicitations">
+        <Solicitations />
       </Route>
     </Switch>
   );
