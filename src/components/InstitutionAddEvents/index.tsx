@@ -55,10 +55,10 @@ const AddEvents = ({ nameInst }: any) => {
         <Input data-testid="local-field" type="text" {...register("local")} />
         <p>Data</p>
         <span>{errors.date && errors.date?.message}</span>
-        <Input data-testid="date-field" type="text" {...register("date")} />
+        <Input data-testid="date-field" type="date" {...register("date")} />
         <p>Hora</p>
         <span>{errors.hour && errors.hour?.message}</span>
-        <Input data-testid="hour-field" type="text" {...register("hour")} />
+        <Input data-testid="hour-field" type="time" {...register("hour")} />
         <p>Duração</p>
         <span>{errors.duration && errors.duration?.message}</span>
         <Input
