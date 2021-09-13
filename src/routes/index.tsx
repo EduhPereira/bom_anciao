@@ -7,7 +7,9 @@ import { InstitutionDetails } from "../pages/institutionDetails";
 import { LandingPage } from "../pages/landingPage";
 import InstitutionSearch from "../pages/InstitutionSearch";
 import { EventsVoluntary } from "../pages/eventsVoluntary";
-import Profiles from "../pages/profileUpdate";
+
+import InstitutionProfile from "../pages/institutionsProfile";
+import VoluntariesProfile from "../pages/voluntariesProfile";
 import Solicitations from "../pages/Solicitations";
 
 const Routes = () => {
@@ -33,7 +35,10 @@ const Routes = () => {
         <EventsVoluntary />
       </Route>
       <Route path="/profile">
-        <Profiles />
+        <VoluntariesProfile />
+      </Route>
+      <Route path="/institution-data">
+        <InstitutionProfile />
       </Route>
       <Route path="/search-institutions">
         <InstitutionSearch />

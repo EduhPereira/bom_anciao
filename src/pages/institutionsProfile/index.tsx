@@ -2,20 +2,22 @@ import { useEffect, useState } from "react";
 import { BiMenuAltLeft } from "react-icons/bi";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import VoluntaryMenu from "../voluntaryMenu";
+import InstitutionMenu from "../../components/institutionMenu";
 
 import { Container, Contents } from "./style";
-import { useLogin } from "../../Providers/Login-Voluntaries";
-import api from "../../services/api";
 
-interface userInputData {
+import api from "../../services/api";
+import { useAuthInstitution } from "../../Providers/Institution-Provider";
+
+interface InputData {
   name: string;
   email: string;
   address: string;
   city: string;
+  about: string;
 }
 
-const VoluntariesProfile = () => {
+const InstitutionProfile = () => {
   const showMenu = () => {
     setVisible(true);
   };
@@ -28,15 +30,15 @@ const VoluntariesProfile = () => {
 
   const { register, handleSubmit, reset } = useForm();
 
-  const { userId, token } = useLogin();
+  const { institutionId, token } = useAuthInstitution();
 
   const userInfoData = async () => {
-    const response = await api.get(`/users?id=${userId}`);
+    const response = await api.get(`/users?id=${institutionId}`);
     setUserInfo(response.data);
   };
 
-  const updateUserInfo = (data: userInputData) => {
-    api.patch(`/users/${userId}`, data, {
+  const updateUserInfo = (data: InputData) => {
+    api.patch(`/users/${institutionId}`, data, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -54,7 +56,7 @@ const VoluntariesProfile = () => {
   const cancel = () => {
     setEditable(false);
   };
-  const handleSave: SubmitHandler<userInputData> = (data: userInputData) => {
+  const handleSave: SubmitHandler<InputData> = (data: InputData) => {
     updateUserInfo(data);
     setEditable(false);
     reset();
@@ -64,7 +66,7 @@ const VoluntariesProfile = () => {
 
   return (
     <Container>
-      <VoluntaryMenu visible={visible} setVisible={setVisible} />
+      <InstitutionMenu visible={visible} setVisible={setVisible} />
       <BiMenuAltLeft className="Open" onClick={showMenu} />
       <Contents>
         {!editable ? (
@@ -77,7 +79,8 @@ const VoluntariesProfile = () => {
                   <p>Email: {elem.email}</p>
                   <p>Endereço: {elem.address}</p>
                   <p>Cidade: {elem.city}</p>
-                  <p>CPF: {elem.cpf}</p>
+                  <p>CNPJ: {elem.cnpj}</p>
+                  <p>Sobre: {elem.about}</p>
                 </div>
               ))}
             </section>
@@ -94,6 +97,8 @@ const VoluntariesProfile = () => {
               <input type="text" {...register("address")} />
               <p>Cidade</p>
               <input type="text" {...register("city")} />
+              <p>Sobre</p>
+              <textarea {...register("about")} />
               <button onClick={cancel}>Cancelar</button>
               <button type="submit">Salvar</button>
             </form>
@@ -103,4 +108,4 @@ const VoluntariesProfile = () => {
     </Container>
   );
 };
-export default VoluntariesProfile;
+export default InstitutionProfile;
