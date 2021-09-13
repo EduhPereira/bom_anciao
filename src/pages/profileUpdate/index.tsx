@@ -1,12 +1,6 @@
-import VoluntaryMenu from "../../components/voluntaryMenu"
-import { useState } from "react"
+import VoluntariesProfile from "../../components/voluntariesProfile";
 
-export const ProfileUpdate = () => {
-    const [visible, setVisible] = useState(false)
-    return (
-        <>
-        
-        <div>Ola</div>
-        </>
-    )
-}
+const Profiles = () => {
+  return <VoluntariesProfile />;
+};
+export default Profiles;
