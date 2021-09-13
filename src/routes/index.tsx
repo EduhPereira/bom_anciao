@@ -7,8 +7,7 @@ import { InstitutionDetails } from "../pages/institutionDetails";
 import { LandingPage } from "../pages/landingPage";
 import InstitutionSearch from "../pages/InstitutionSearch";
 import { EventsVoluntary } from "../pages/eventsVoluntary";
-import { ProfileUpdate } from "../pages/profileUpdate";
-import Solicitations from "../pages/Solicitations";
+import Profiles from "../pages/profileUpdate";
 
 const Routes = () => {
   return (
@@ -22,7 +21,7 @@ const Routes = () => {
       <Route path="/signup-institution">
         <RegisterInstitution />
       </Route>
-      <Route path="/dashboard-institution">
+      <Route path="/events-institution">
         <DashboardInstitution />
       </Route>
       <Route path="/login-voluntary">
@@ -33,17 +32,13 @@ const Routes = () => {
         <EventsVoluntary />
       </Route>
       <Route path="/profile">
-        <ProfileUpdate />
+        <Profiles />
       </Route>
       <Route path="/search-institutions">
         <InstitutionSearch />
       </Route>
       <Route path="/institution/:id">
         <InstitutionDetails />
-      </Route>
-
-      <Route path="/solicitations">
-        <Solicitations />
       </Route>
     </Switch>
   );
