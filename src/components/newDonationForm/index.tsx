@@ -5,6 +5,17 @@ import api from "../../services/api";
 import { useAuthInstitution } from "../../Providers/Institution-Provider";
 import { useEffect, useState } from "react";
 
+interface InstituitionName {
+  name: string;
+}
+interface IUser {
+  email: string;
+  password: string;
+  name: string;
+  address: string;
+  type: string;
+  id: number;
+}
 interface ISolicitation {
   nameInstitution: string;
   name: string;
@@ -13,18 +24,24 @@ interface ISolicitation {
   description?: string;
   institutionId: number;
 }
-//fazer get em users usando id da instituicao como parametro e pega o nome da instituicao
-const NewDonationForm = () => {
+
+interface ISolicitationProps {
+  setModal: React.Dispatch<React.SetStateAction<boolean>>;
+  modal: boolean;
+}
+const NewDonationForm = ({ setModal, modal }: ISolicitationProps) => {
+  const [nameInstitution, setNameInstitution] = useState<string>("");
   const { token, institutionId } = useAuthInstitution();
-  console.log(institutionId);
   const { register, handleSubmit, reset } = useForm<ISolicitation>();
 
   async function loadNameInstitution() {
     const response = await api.get(
       `users?type=Institution&&id=${institutionId}`
     );
-    const data = response.data;
-    console.log(data);
+    const data = response.data.map((inst: IUser) => {
+      return inst.name;
+    });
+    setNameInstitution(data[0]);
   }
 
   useEffect(() => {
@@ -34,13 +51,19 @@ const NewDonationForm = () => {
   const handleSolicitation = ({
     name,
     quantity,
-    received,
     description,
   }: ISolicitation) => {
     api
       .post(
         `/donations`,
-        { name, quantity, description, received, institutionId },
+        {
+          nameInstitution,
+          name,
+          quantity: Number(quantity),
+          description,
+          received: 0,
+          institutionId: Number(institutionId),
+        },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -51,6 +74,7 @@ const NewDonationForm = () => {
         reset();
         console.log(res);
         toast.success("Solicitação criada!");
+        setModal(false);
       })
       .catch((err) => {
         if (err) {
@@ -62,21 +86,24 @@ const NewDonationForm = () => {
 
   return (
     <>
-      <div className="main-container">
-        <div className="form-container">
-          <h3>Nova Solicitação</h3>
-          <form onSubmit={handleSubmit(handleSolicitation)}>
-            <label>Nome do item</label>
-            <input type="text" required {...register("name")} />
-            <label>Meta | Quantidade</label>
-            <input type="text" required {...register("quantity")} />
-            <label>Descrição</label>
-            <input type="text" {...register("description")} />
-            <button type="submit">Salvar</button>
-          </form>
+      {modal && (
+        <div className="main-container">
+          <div className="form-container">
+            <h3>Nova Solicitação</h3>
+            <form onSubmit={handleSubmit(handleSolicitation)}>
+              <label>Nome do item</label>
+              <input type="text" required {...register("name")} />
+              <label>Meta | Quantidade</label>
+              <input type="text" required {...register("quantity")} />
+              <label>Descrição</label>
+              <input type="text" {...register("description")} />
+              <button onClick={() => setModal(false)}>Cancelar</button>
+              <button type="submit">Salvar</button>
+            </form>
+          </div>
+          <ToastContainer />
         </div>
-      </div>
-      <ToastContainer />
+      )}
     </>
   );
 };

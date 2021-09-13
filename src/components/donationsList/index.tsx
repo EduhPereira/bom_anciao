@@ -11,13 +11,14 @@ interface IDonation {
 
 const DonationsList = () => {
   const [donations, setDonations] = useState<IDonation[]>([]);
+  console.log(donations);
   const { institutionId } = useAuthInstitution();
   useEffect(() => {
     api
-      .get(`donations?idInstitution=${institutionId}`)
+      .get(`donations?institutionId=${institutionId}`)
       .then((res) => setDonations(res.data))
       .catch((err) => console.log(err));
-  }, []);
+  }, [donations]);
 
   return (
     <>
