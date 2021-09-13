@@ -3,7 +3,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Input, Button, RegisterStyled } from "./styles";
+import { Input, Button, RegisterStyled, Content } from "./styles";
 import { Link } from "react-router-dom";
 import { useAuthInstitution } from "../../Providers/Institution-Provider";
 
@@ -53,51 +53,55 @@ const RegisterInstitution = () => {
   return (
     <div>
       <RegisterStyled onSubmit={handleSubmit(handleRegister)}>
-        <h2>Crie sua conta</h2>
-        <label htmlFor="name">
-          Nome da instituição:
-          <span className="error">{errors.name && errors.name?.message}</span>
-        </label>
-        <Input type="text" {...register("name")} />
+        <Content>
+          <h2>Cadastro</h2>
+          <label htmlFor="name">
+            Nome da instituição:
+            <span className="error">{errors.name && errors.name?.message}</span>
+          </label>
+          <Input type="text" {...register("name")} />
 
-        <label htmlFor="email">
-          Email da instituição:
-          <span className="error">{errors.email && errors.email?.message}</span>
-        </label>
-        <Input type="text" {...register("email")} />
+          <label htmlFor="email">
+            Email da instituição:
+            <span className="error">
+              {errors.email && errors.email?.message}
+            </span>
+          </label>
+          <Input type="text" {...register("email")} />
 
-        <label htmlFor="address">
-          Endereço da instituição:
-          <span className="error">
-            {errors.address && errors.address?.message}
+          <label htmlFor="address">
+            Endereço da instituição:
+            <span className="error">
+              {errors.address && errors.address?.message}
+            </span>
+          </label>
+          <Input type="text" {...register("address")} />
+
+          <label htmlFor="city">
+            Cidade da instituição:
+            <span className="error">{errors.city && errors.city?.message}</span>
+          </label>
+          <Input type="text" {...register("city")} />
+
+          <label htmlFor="cnpj">
+            CNPJ:
+            <span className="error">{errors.cnpj && errors.cnpj?.message}</span>
+          </label>
+          <Input type="text" {...register("cnpj")} />
+
+          <label htmlFor="password">
+            Senha:
+            <span className="error">
+              {errors.password && errors.password?.message}
+            </span>
+          </label>
+          <Input type="password" {...register("password")} />
+
+          <Button type="submit">Enviar</Button>
+          <span>
+            Já possui conta? <Link to="/login-institution">Entre</Link>
           </span>
-        </label>
-        <Input type="text" {...register("address")} />
-
-        <label htmlFor="city">
-          Cidade da instituição:
-          <span className="error">{errors.city && errors.city?.message}</span>
-        </label>
-        <Input type="text" {...register("city")} />
-
-        <label htmlFor="cnpj">
-          CNPJ:
-          <span className="error">{errors.cnpj && errors.cnpj?.message}</span>
-        </label>
-        <Input type="text" {...register("cnpj")} />
-
-        <label htmlFor="password">
-          Senha:
-          <span className="error">
-            {errors.password && errors.password?.message}
-          </span>
-        </label>
-        <Input type="password" {...register("password")} />
-
-        <Button type="submit">Enviar</Button>
-        <span>
-          Já possui conta? <Link to="/login-institution">Entre</Link>
-        </span>
+        </Content>
       </RegisterStyled>
     </div>
   );

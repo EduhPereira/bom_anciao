@@ -7,13 +7,13 @@ import { InstitutionDetails } from "../pages/institutionDetails";
 import { LandingPage } from "../pages/landingPage";
 import InstitutionSearch from "../pages/InstitutionSearch";
 import { EventsVoluntary } from "../pages/eventsVoluntary";
-import { ProfileUpdate } from "../pages/profileUpdate";
+import Profiles from "../pages/profileUpdate";
 
 const Routes = () => {
   return (
     <Switch>
       <Route path="/" exact>
-        <LandingPage/>
+        <LandingPage />
       </Route>
       <Route path="/login-institution">
         <LoginInstitution />
@@ -21,27 +21,25 @@ const Routes = () => {
       <Route path="/signup-institution">
         <RegisterInstitution />
       </Route>
-      <Route path="/dashboard-institution">
+      <Route path="/events-institution">
         <DashboardInstitution />
       </Route>
       <Route path="/login-voluntary">
-        <VoluntariesLogin/>
+        <VoluntariesLogin />
       </Route>
-
 
       <Route path="/my-events">
-        <EventsVoluntary/>
+        <EventsVoluntary />
       </Route>
       <Route path="/profile">
-        <ProfileUpdate/>
+        <Profiles />
       </Route>
       <Route path="/search-institutions">
-        <InstitutionSearch/>
+        <InstitutionSearch />
       </Route>
       <Route path="/institution/:id">
-        <InstitutionDetails/>
+        <InstitutionDetails />
       </Route>
-
     </Switch>
   );
 };

@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { BiMenuAltLeft } from "react-icons/bi";
 import AddEvents from "../../components/InstitutionAddEvents";
+import InstitutionMenu from "../../components/institutionMenu";
 import { useAuthInstitution } from "../../Providers/Institution-Provider";
 import api from "../../services/api";
 import { CardEvents, Container, Event, TitleEvent, Button } from "./styles";
 
-interface Event {
+interface EventInstitution {
   nameInstitution: string;
   local: string;
   date: string;
@@ -21,10 +23,13 @@ interface InstituitionName {
 }
 
 const DashboardInstitution = () => {
-  const [events, setEvents] = useState<Event[]>([] as Event[]);
+  const [events, setEvents] = useState<EventInstitution[]>(
+    [] as EventInstitution[]
+  );
   const [nameIns, setNameIns] = useState<InstituitionName[]>(
     [] as InstituitionName[]
   );
+  const [visible, setVisible] = useState(false);
 
   const { token } = useAuthInstitution();
 
@@ -69,10 +74,16 @@ const DashboardInstitution = () => {
     loadNameInstitution();
   }, []);
 
+  const showMenu = () => {
+    setVisible(true);
+  };
+
   return (
     <Container>
+      <InstitutionMenu visible={visible} setVisible={setVisible} />
+      <BiMenuAltLeft className="Open" onClick={showMenu} />
       {nameIns.map((event) => (
-        <h2>{event.name}</h2>
+        <h4>{event.name}</h4>
       ))}
       <AddEvents nameInst={nameIns} />
       <CardEvents>
