@@ -1,12 +1,5 @@
-import {
-  createContext,
-  ReactNode,
-  SetStateAction,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, ReactNode, useCallback, useContext } from "react";
+import { toast } from "react-toastify";
 import api from "../../services/api";
 import { useAuthInstitution } from "../Institution-Provider";
 
@@ -15,8 +8,6 @@ interface AddEventsProps {
 }
 interface AddEventsData {
   CreateEvent: any;
-  //   loggedUser: string;
-  //   setLoggedUser: React.Dispatch<SetStateAction<string>>;
 }
 
 const AddEventsContext = createContext<AddEventsData>({} as AddEventsData);
@@ -24,16 +15,9 @@ const AddEventsContext = createContext<AddEventsData>({} as AddEventsData);
 const AddEventsProvider = ({ children }: AddEventsProps) => {
   const { token, institutionId } = useAuthInstitution();
 
-  //   const [loggedUser, setLoggedUser] = useState<string>("");
-
-  //   useEffect(() => {
-  //     api
-  //       .get(`/users/${institutionId}`)
-  //       .then((response) => setLoggedUser(response.data.name))
-  //       .catch((err) => console.log(err));
-  //   }, []);
-
   const CreateEvent = useCallback(async (data, nameIns) => {
+    const date = data.date.split("-").reverse().join("/");
+
     api
       .post(
         "/events",
@@ -41,7 +25,7 @@ const AddEventsProvider = ({ children }: AddEventsProps) => {
           nameInstitution: nameIns,
           idInstitution: Number(institutionId),
           local: data.local,
-          date: data.date,
+          date: date,
           hour: data.hour,
           duration: data.duration,
           name: data.name,
@@ -50,11 +34,11 @@ const AddEventsProvider = ({ children }: AddEventsProps) => {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxkbEBtYWlsLmNvbSIsImlhdCI6MTYzMTMwOTMzNiwiZXhwIjoxNjMxMzEyOTM2LCJzdWIiOiI3In0.QyQIzkaeIdxCD6aarlMsDxLZj4GGAbV5vc9bW8p0Gnw`,
+            Authorization: `Bearer ${token}`,
           },
         }
       )
-      .then((response) => console.log("criado"))
+      .then((response) => toast.success("Evento criado com sucesso!"))
       .catch((err) => console.log(err));
   }, []);
 

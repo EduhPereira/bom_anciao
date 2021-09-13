@@ -1,9 +1,11 @@
-import { Suspense, useEffect, useState } from "react"
+import { Suspense, useEffect, useState, Dispatch, SetStateAction } from "react"
 import api from "../../services/api"
 import ProgressBar from '@ramonak/react-progress-bar'
 import { useParams } from "react-router"
 import { useLogin } from "../../Providers/Login-Voluntaries"
 import { Container } from './styles'
+import VoluntaryMenu from "../../components/voluntaryMenu"
+import { BiMenuAltLeft } from 'react-icons/bi'
 
 interface iEvents {
     date: string,
@@ -50,6 +52,11 @@ interface iSubscribe {
 interface iParams {
     id: string
 }
+
+interface iVisible {
+    visible: boolean,
+    setVisible: Dispatch<SetStateAction<boolean>>
+  }
 
 export const InstitutionDetails = () => {
 
@@ -122,14 +129,22 @@ export const InstitutionDetails = () => {
         console.log(response.data)
     }
 
+    const showMenu = () => {
+        setVisible(true)
+    }
+
     const [listEvents, setListEvents] = useState<iEvents[]>([] as iEvents[])
     const [listDonations, setListDonations] = useState<iDonations[]>([] as iDonations[])
     const [institution, setInstitution] = useState<iInstitution[]>([] as iInstitution[])
     const [verifyUserSubscribe, setVerifyUserSubscribe] = useState<iSubscribe[]>([] as iSubscribe[])
-    console.log(verifyUserSubscribe.length)
+    const [visible, setVisible] = useState(false)
 
     return (
         <Container>
+
+            <VoluntaryMenu visible={visible} setVisible={setVisible}/>
+            <BiMenuAltLeft className="Open" onClick={showMenu} />
+
             {institution.map((i) => {
                 return <h1>{i.name}</h1>
             })}
