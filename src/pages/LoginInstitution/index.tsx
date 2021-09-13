@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useAuthInstitution } from "../../Providers/Institution-Provider";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { RegisterStyled, Input, Button } from "./styles";
+import { RegisterStyled, Input, Button, Content } from "./styles";
 import { Link } from "react-router-dom";
 
 interface Institution {
@@ -40,26 +40,30 @@ const LoginInstitution = () => {
   return (
     <div>
       <RegisterStyled onSubmit={handleSubmit(onSubmit)}>
-        <h2>Entre em sua conta</h2>
-        <label htmlFor="email">
-          Email:
-          <span className="error">{errors.email && errors.email?.message}</span>
-        </label>
-        <Input type="text" {...register("email")} />
+        <Content>
+          <h2>Entre em sua conta</h2>
+          <label htmlFor="email">
+            Email:
+            <span className="error">
+              {errors.email && errors.email?.message}
+            </span>
+          </label>
+          <Input type="text" {...register("email")} />
 
-        <label htmlFor="password">
-          Senha:
-          <span className="error">
-            {errors.password && errors.password?.message}
+          <label htmlFor="password">
+            Senha:
+            <span className="error">
+              {errors.password && errors.password?.message}
+            </span>
+          </label>
+          <Input type="password" {...register("password")} />
+
+          <Button type="submit">Entrar</Button>
+          <span>
+            Não possui conta?
+            <Link to="/signup-institution"> Cadastre-se</Link>
           </span>
-        </label>
-        <Input type="password" {...register("password")} />
-
-        <Button type="submit">Entrar</Button>
-        <span>
-          Não possui conta?
-          <Link to="/signup-institution"> Cadastre-se</Link>
-        </span>
+        </Content>
       </RegisterStyled>
     </div>
   );

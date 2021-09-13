@@ -14,6 +14,27 @@ export const Container = styled.div`
   h2 {
     color: #000;
   }
+
+  svg.Open {
+    width: 30px;
+    height: 30px;
+    color: black;
+  }
+
+  @media (min-width: 768px) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .Open {
+      display: none;
+    }
+
+    h4 {
+      text-align: center;
+      padding: 15px 0px;
+    }
+  }
 `;
 
 export const CardEvents = styled.div`

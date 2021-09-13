@@ -21,7 +21,7 @@ const Routes = () => {
       <Route path="/signup-institution">
         <RegisterInstitution />
       </Route>
-      <Route path="/dashboard-institution">
+      <Route path="/events-institution">
         <DashboardInstitution />
       </Route>
       <Route path="/login-voluntary">

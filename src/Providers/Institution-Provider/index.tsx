@@ -73,9 +73,9 @@ export const AuthInstitutionProvider = ({ children }: AuthProviderProps) => {
         const institutionsID: any = jwt_decode(response.data.accessToken);
         setInstitutionId(institutionsID.sub);
         localStorage.setItem("@Bom ancião: institutionID", institutionsID.sub);
-        history.push("/dashboard-institution");
+        history.push("/events-institution");
       })
-      .catch((err) => setError(true));
+      .catch((err) => toast.error(`${err}`));
   };
 
   const signUp = (
