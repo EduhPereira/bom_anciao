@@ -49,7 +49,8 @@ export const LandingPage = () => {
         </div>
       </Institutions>
       <Footer>
-        <h3>Footer</h3>
+        <h3>Footer</h3><br/>
+        <Link to="/login-institution"><h3>Sou instituição</h3></Link>
       </Footer>
     </>
   );
