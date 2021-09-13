@@ -8,12 +8,13 @@ import { LandingPage } from "../pages/landingPage";
 import InstitutionSearch from "../pages/InstitutionSearch";
 import { EventsVoluntary } from "../pages/eventsVoluntary";
 import { ProfileUpdate } from "../pages/profileUpdate";
+import Solicitations from "../pages/Solicitations";
 
 const Routes = () => {
   return (
     <Switch>
       <Route path="/" exact>
-        <LandingPage/>
+        <LandingPage />
       </Route>
       <Route path="/login-institution">
         <LoginInstitution />
@@ -25,23 +26,25 @@ const Routes = () => {
         <DashboardInstitution />
       </Route>
       <Route path="/login-voluntary">
-        <VoluntariesLogin/>
+        <VoluntariesLogin />
       </Route>
-
 
       <Route path="/my-events">
-        <EventsVoluntary/>
+        <EventsVoluntary />
       </Route>
       <Route path="/profile">
-        <ProfileUpdate/>
+        <ProfileUpdate />
       </Route>
       <Route path="/search-institutions">
-        <InstitutionSearch/>
+        <InstitutionSearch />
       </Route>
       <Route path="/institution/:id">
-        <InstitutionDetails/>
+        <InstitutionDetails />
       </Route>
 
+      <Route path="/solicitations">
+        <Solicitations />
+      </Route>
     </Switch>
   );
 };

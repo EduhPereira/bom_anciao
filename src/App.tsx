@@ -1,4 +1,5 @@
 import React from "react";
+import Solicitations from "./pages/Solicitations";
 import Routes from "./routes";
 import GlobalStyle from "./styles/global";
 

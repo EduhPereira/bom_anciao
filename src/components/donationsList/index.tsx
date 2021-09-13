@@ -7,17 +7,23 @@ interface IDonation {
   name: string;
   quantity: string;
   received: number;
+  id: number;
 }
 
 const DonationsList = () => {
   const [donations, setDonations] = useState<IDonation[]>([]);
   console.log(donations);
   const { institutionId } = useAuthInstitution();
-  useEffect(() => {
+
+  const getDonations = () => {
     api
       .get(`donations?institutionId=${institutionId}`)
       .then((res) => setDonations(res.data))
       .catch((err) => console.log(err));
+  };
+  //não consegui fazer funcionar sem incluir donations como dependencia
+  useEffect(() => {
+    getDonations();
   }, [donations]);
 
   return (

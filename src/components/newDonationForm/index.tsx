@@ -5,9 +5,6 @@ import api from "../../services/api";
 import { useAuthInstitution } from "../../Providers/Institution-Provider";
 import { useEffect, useState } from "react";
 
-interface InstituitionName {
-  name: string;
-}
 interface IUser {
   email: string;
   password: string;
@@ -21,7 +18,6 @@ interface ISolicitation {
   name: string;
   quantity: number;
   received?: number;
-  description?: string;
   institutionId: number;
 }
 
@@ -48,11 +44,7 @@ const NewDonationForm = ({ setModal, modal }: ISolicitationProps) => {
     loadNameInstitution();
   }, []);
 
-  const handleSolicitation = ({
-    name,
-    quantity,
-    description,
-  }: ISolicitation) => {
+  const handleSolicitation = ({ name, quantity }: ISolicitation) => {
     api
       .post(
         `/donations`,
@@ -60,7 +52,6 @@ const NewDonationForm = ({ setModal, modal }: ISolicitationProps) => {
           nameInstitution,
           name,
           quantity: Number(quantity),
-          description,
           received: 0,
           institutionId: Number(institutionId),
         },
@@ -95,8 +86,6 @@ const NewDonationForm = ({ setModal, modal }: ISolicitationProps) => {
               <input type="text" required {...register("name")} />
               <label>Meta | Quantidade</label>
               <input type="text" required {...register("quantity")} />
-              <label>Descrição</label>
-              <input type="text" {...register("description")} />
               <button onClick={() => setModal(false)}>Cancelar</button>
               <button type="submit">Salvar</button>
             </form>
