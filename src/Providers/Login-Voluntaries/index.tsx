@@ -20,6 +20,8 @@ interface AuthProviderData {
   setAuth: React.Dispatch<SetStateAction<string>>;
   singIn: any;
   token: string;
+  userId: string;
+  setUserId: React.Dispatch<SetStateAction<string>>;
 }
 
 interface userData {
@@ -48,11 +50,13 @@ const LoginProvider = ({ children }: AuthProviderProps) => {
         setUserId(usersID.sub);
         localStorage.setItem("@Bom ancião: userID", usersID.sub);
       })
-      .then((response) => history.push("/dashboardVol"))
+      .then((response) => history.push("/my-events"))
       .catch((err) => console.log("login e senha invalidos!"));
   }, []);
   return (
-    <LoginContext.Provider value={{ singIn, token: auth, auth, setAuth }}>
+    <LoginContext.Provider
+      value={{ singIn, token: auth, auth, setAuth, userId, setUserId }}
+    >
       {children}
     </LoginContext.Provider>
   );

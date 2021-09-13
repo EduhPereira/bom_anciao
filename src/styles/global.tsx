@@ -15,8 +15,6 @@ export default createGlobalStyle`
         color: white;
         height: 100vh;
         font-family: 'Red Hat Display', sans-serif;
-          background-image: linear-gradient(117.06deg, #59A5A5 26.74%, #3F8E8E 72.27%, #227475 98.23%);
-          background-repeat: no-repeat;
     }
 
     input, button {
