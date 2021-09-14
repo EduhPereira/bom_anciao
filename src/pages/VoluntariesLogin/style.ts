@@ -1,5 +1,19 @@
 import styled from "styled-components";
-import loginImg from "../../Assets/img/loginImg.png";
+
+export const Container = styled.div`
+  height: 100vh;
+  background: linear-gradient(
+    117.06deg,
+    #59a5a5 26.74%,
+    #3f8e8e 72.27%,
+    #227475 98.23%
+  );
+  color: #70cccc;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 export const Content = styled.div`
   width: 350px;
@@ -9,7 +23,20 @@ export const Content = styled.div`
   border-radius: 15px;
 
   display: flex;
+  flex-direction: column;
+
   justify-content: center;
+  align-items: center;
+
+  a {
+    text-decoration: none;
+    color: #8fa7b2;
+    font-weight: bold;
+  }
+
+  a:hover {
+    color: #227475;
+  }
   @media (max-width: 800px) {
     align-self: center;
     width: 80%;
@@ -19,7 +46,7 @@ export const Content = styled.div`
 
 export const Form = styled.form`
   width: 70%;
-  height: 100%;
+  height: 70%;
 
   color: black;
 
@@ -46,6 +73,7 @@ export const Button = styled.button`
   border-radius: 15px;
   width: 100%;
   height: 44px;
+  margin-bottom: 15px;
   border: none;
 
   color: white;
@@ -54,19 +82,4 @@ export const Button = styled.button`
   font-size: 1.3rem;
 
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-`;
-
-export const SideImg = styled.div`
-  background-image: url(${loginImg});
-  background-size: 90%;
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 50%;
-  height: 100%;
-
-  @media (max-width: 800px) {
-    background-image: none;
-    width: 0%;
-    height: 0%;
-  }
 `;
