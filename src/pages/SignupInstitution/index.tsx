@@ -46,8 +46,20 @@ const RegisterInstitution = () => {
     formState: { errors },
   } = useForm<ISignup>({ resolver: yupResolver(schema) });
 
-  const handleRegister = (registerData: ISignup) => {
-    signUp(registerData, setError, history);
+  const handleRegister = ({
+    name,
+    email,
+    address,
+    password,
+    cnpj,
+    city,
+    type = "Institution",
+  }: ISignup) => {
+    signUp(
+      { name, email, address, password, cnpj, city, type },
+      setError,
+      history
+    );
   };
 
   return (
