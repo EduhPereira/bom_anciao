@@ -7,7 +7,10 @@ import { InstitutionDetails } from "../pages/institutionDetails";
 import { LandingPage } from "../pages/landingPage";
 import InstitutionSearch from "../pages/InstitutionSearch";
 import { EventsVoluntary } from "../pages/eventsVoluntary";
-import { ProfileUpdate } from "../pages/profileUpdate";
+
+import InstitutionProfile from "../pages/institutionsProfile";
+import VoluntariesProfile from "../pages/voluntariesProfile";
+import Solicitations from "../pages/Solicitations";
 
 const Routes = () => {
   return (
@@ -32,13 +35,20 @@ const Routes = () => {
         <EventsVoluntary />
       </Route>
       <Route path="/profile">
-        <ProfileUpdate />
+        <VoluntariesProfile />
+      </Route>
+      <Route path="/institution-data">
+        <InstitutionProfile />
       </Route>
       <Route path="/search-institutions">
         <InstitutionSearch />
       </Route>
       <Route path="/institution/:id">
         <InstitutionDetails />
+      </Route>
+
+      <Route path="/solicitations">
+        <Solicitations />
       </Route>
     </Switch>
   );

@@ -37,7 +37,7 @@ const UserRegister = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+  } = useForm<IRegister>({ resolver: yupResolver(schema) });
 
   const handleRegister = ({ user, email, address, password }: IRegister) => {
     api

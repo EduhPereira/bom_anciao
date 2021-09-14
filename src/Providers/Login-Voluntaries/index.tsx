@@ -19,7 +19,7 @@ interface AuthProviderData {
   auth: string;
   setAuth: React.Dispatch<SetStateAction<string>>;
   singIn: any;
-  token: string;
+  userToken: string;
   userId: string;
   setUserId: React.Dispatch<SetStateAction<string>>;
 }
@@ -32,10 +32,10 @@ interface userData {
 const LoginContext = createContext<AuthProviderData>({} as AuthProviderData);
 
 const LoginProvider = ({ children }: AuthProviderProps) => {
-  const token = localStorage.getItem("@Bom ancião: token") || "";
+  const userToken = localStorage.getItem("@Bom ancião: token") || "";
   const userID = localStorage.getItem("@Bom ancião: userID") || "";
 
-  const [auth, setAuth] = useState<string>(token);
+  const [auth, setAuth] = useState<string>(userToken);
   const [userId, setUserId] = useState<string>(userID);
 
   const singIn = useCallback(async (data: userData, history: History) => {
@@ -55,7 +55,7 @@ const LoginProvider = ({ children }: AuthProviderProps) => {
   }, []);
   return (
     <LoginContext.Provider
-      value={{ singIn, token: auth, auth, setAuth, userId, setUserId }}
+      value={{ singIn, userToken: auth, auth, setAuth, userId, setUserId }}
     >
       {children}
     </LoginContext.Provider>

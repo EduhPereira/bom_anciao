@@ -8,49 +8,48 @@ import VoluntaryMenu from "../../components/voluntaryMenu"
 import { BiMenuAltLeft } from 'react-icons/bi'
 
 interface iEvents {
-    date: string,
-    describe: string,
-    duration: string,
-    name: string,
-    nameInstitution: string
-    local: string
-    hour: string
-    idInstitution: number,
-    id: number
+  date: string;
+  describe: string;
+  duration: string;
+  name: string;
+  nameInstitution: string;
+  local: string;
+  hour: string;
+  idInstitution: number;
+  id: number;
 }
 
 interface iDonations {
-    name: string,
-    quantity: number,
-    received: number
+  name: string;
+  quantity: number;
+  received: number;
 }
 
 interface iInstitution {
-    about: string,
-    address: string,
-    city: string,
-    name: string,
-    cnpj: string
+  about: string;
+  address: string;
+  city: string;
+  name: string;
+  cnpj: string;
 }
 
 interface iSubscribe {
-    idInstitution: number,
-    nameInstitution: string,
-    idUser: number,
-    idEvent: number,
-    event: {
-        local: string,
-        date: string,
-        hour: string,
-        duration: string,
-        name: string,
-        describe: string,
-    }
-
+  idInstitution: number;
+  nameInstitution: string;
+  idUser: number;
+  idEvent: number;
+  event: {
+    local: string;
+    date: string;
+    hour: string;
+    duration: string;
+    name: string;
+    describe: string;
+  };
 }
 
 interface iParams {
-    id: string
+  id: string;
 }
 
 interface iVisible {
@@ -61,7 +60,7 @@ interface iVisible {
 export const InstitutionDetails = () => {
 
     const { id } = useParams<iParams>()
-    const { userId, token } = useLogin()
+    const { userId, userToken: token } = useLogin()
 
     useEffect(() => {
         reqInstitutionEvents()
