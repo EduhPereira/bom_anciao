@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import myImage from "../../Assets/img/institution-icon.jpg";
 
 interface iContainerProps {
   visible: boolean;
@@ -89,10 +90,21 @@ export const Contents = styled.div<iContainerProps>`
       right: 50%;
     }
   }
-`;
 
-export const Avatar = styled.img`
-  width: 100px;
-  height: 100px;
-  src: local("src/Assets/img/institution_icon.png");
+  .avatar {
+    display: flex;
+    width: 100%;
+    height: 30%;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid black;
+    background-color: #fff;
+  }
 `;

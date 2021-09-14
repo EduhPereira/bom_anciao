@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -13,7 +14,7 @@ import {
   TextArea,
   EventTitle,
   Content,
-} from "./style";
+} from "./styles";
 import { Dispatch, SetStateAction } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { toast } from "react-toastify";
@@ -30,24 +31,23 @@ interface inputData {
   id: number;
 }
 
-interface IAddEventsProps {
+interface IEditEventsProps {
   nameInst: any;
-  setModalVisible: Dispatch<SetStateAction<boolean>>;
-  modalVisible: boolean;
+  setModalAtt: Dispatch<SetStateAction<boolean>>;
+  modalAtt: boolean;
   loadEvents: () => void;
+  id: number;
 }
 
-const AddEvents = ({
+const EditEvents = ({
   nameInst,
-  setModalVisible,
-  modalVisible,
+  setModalAtt,
+  modalAtt,
   loadEvents,
-}: IAddEventsProps) => {
+  id,
+}: IEditEventsProps) => {
   const { CreateEvent } = useAddEvents();
   const { token } = useAuthInstitution();
-  const showMenu = () => {
-    setModalVisible(false);
-  };
 
   const Schema = yup.object().shape({
     name: yup.string().required("Campo obrigatório."),
@@ -58,6 +58,62 @@ const AddEvents = ({
     describe: yup.string(),
   });
 
+  const handleOnSubmit: SubmitHandler<inputData> = (data: inputData) => {
+    const nameFinder = nameInst.map((elem: any) => elem.name);
+    const nameInstitution = nameFinder.join();
+    CreateEvent(data, nameInstitution);
+    toast.success("Evento criado com sucesso!");
+    setModalAtt(false);
+    loadEvents();
+  };
+
+  const getOneEvent = async (id: number) => {
+    const response = await api.get(`events/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  };
+  const eventUpdate = async (editEvent: inputData) => {
+    const {
+      nameInstitution,
+      idInstitution,
+      name,
+      local,
+      date,
+      hour,
+      duration,
+      describe,
+    } = editEvent;
+    const response = await api
+      .patch(
+        `events/${id}`,
+        {
+          nameInstitution,
+          idInstitution,
+          name,
+          local,
+          date,
+          hour,
+          duration,
+          describe,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((_) => toast.success("✅ Evento alterado com sucesso!"));
+    console.log(response);
+    loadEvents();
+    setModalAtt(true);
+  };
+
+  useEffect(() => {
+    getOneEvent(id);
+  }, [id]);
+
   const {
     register,
     handleSubmit,
@@ -65,22 +121,18 @@ const AddEvents = ({
     formState: { errors },
   } = useForm({ resolver: yupResolver(Schema) });
 
-  const handleOnSubmit: SubmitHandler<inputData> = (data: inputData) => {
-    const nameFinder = nameInst.map((elem: any) => elem.name);
-    const nameInstitution = nameFinder.join();
-    CreateEvent(data, nameInstitution);
-    toast.success("Evento criado com sucesso!");
-    setModalVisible(false);
-    loadEvents();
+  const showMenu = () => {
+    setModalAtt(false);
   };
 
   const closeModal = () => {
-    setModalVisible(false);
+    setModalAtt(false);
     reset();
   };
+
   return (
-    <Container visible={modalVisible}>
-      <Content visible={modalVisible}>
+    <Container visible={modalAtt}>
+      <Content visible={modalAtt}>
         <AiOutlineClose className="Close" onClick={showMenu} />
         <EventTitle>
           <h2>Cadastrar Evento</h2>
@@ -123,7 +175,7 @@ const AddEvents = ({
               Cancelar
             </ButtonCancel>
             <ButtonSave data-testid="form-button" type="submit">
-              Salvar
+              Atualizar
             </ButtonSave>
           </div>
         </Forms>
@@ -131,4 +183,4 @@ const AddEvents = ({
     </Container>
   );
 };
-export default AddEvents;
+export default EditEvents;
