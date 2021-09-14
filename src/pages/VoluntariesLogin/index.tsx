@@ -46,7 +46,7 @@ const VoluntariesLogin = () => {
           <Button type="submit">Enviar</Button>
           <div>
             Não possui conta?
-            <Link to="/signup-voluntaries"> Cadastre-se</Link>
+            <Link to="/signup-voluntary"> Cadastre-se</Link>
           </div>
         </Form>
       </Content>
