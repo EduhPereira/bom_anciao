@@ -1,8 +1,8 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Button, Content, Form, Input } from "./style";
+import { Button, Content, Form, Input, Container } from "./style";
 import * as yup from "yup";
 import { useLogin } from "../../Providers/Login-Voluntaries";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 type LoginData = {
@@ -31,18 +31,26 @@ const VoluntariesLogin = () => {
   };
 
   return (
-    <Content>
-      <Form onSubmit={handleSubmit(handleLogin)}>
-        <p>Email</p>
-        <span>{errors.email?.message}</span>
-        <Input type="email" {...register("email")} />
+    <Container>
+      <Content>
+        <h2>Entre em sua conta</h2>
 
-        <p>Senha</p>
-        <span>{errors.password?.message}</span>
-        <Input type="password" {...register("password")} />
-        <Button type="submit">Enviar</Button>
-      </Form>
-    </Content>
+        <Form onSubmit={handleSubmit(handleLogin)}>
+          <p>Email</p>
+          <span>{errors.email?.message}</span>
+          <Input type="email" {...register("email")} />
+
+          <p>Senha</p>
+          <span>{errors.password?.message}</span>
+          <Input type="password" {...register("password")} />
+          <Button type="submit">Enviar</Button>
+          <div>
+            Não possui conta?
+            <Link to="/signup-voluntaries"> Cadastre-se</Link>
+          </div>
+        </Form>
+      </Content>
+    </Container>
   );
 };
 export default VoluntariesLogin;

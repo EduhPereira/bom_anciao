@@ -4,7 +4,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 import VoluntaryMenu from "../../components/voluntaryMenu";
 
-import { Container, Contents } from "./style";
+import { Container, Contents, ContainerUpdate, FormUpdate } from "./style";
 import { useLogin } from "../../Providers/Login-Voluntaries";
 import api from "../../services/api";
 
@@ -23,6 +23,7 @@ const VoluntariesProfile = () => {
   const [visible, setVisible] = useState(false);
 
   const [userInfo, setUserInfo] = useState([]);
+  const [userUpdateData, setUpdateData] = useState<any>([]);
 
   const [editable, setEditable] = useState(false);
 
@@ -84,20 +85,32 @@ const VoluntariesProfile = () => {
             <button onClick={edit}>Editar</button>
           </>
         ) : (
-          <div>
-            <form onSubmit={handleSubmit(handleSave)}>
-              <p>Nome</p>
-              <input type="text" {...register("name")} />
-              <p>Email</p>
-              <input type="email" {...register("email")} />
-              <p>Endereço</p>
-              <input type="text" {...register("address")} />
-              <p>Cidade</p>
-              <input type="text" {...register("city")} />
-              <button onClick={cancel}>Cancelar</button>
-              <button type="submit">Salvar</button>
-            </form>
-          </div>
+          <ContainerUpdate>
+            <FormUpdate onSubmit={handleSubmit(handleSave)}>
+              <div>
+                <p>Nome</p>
+                <input type="text" {...register("name")} />
+              </div>
+              <div>
+                <p>Email</p>
+                <input type="email" {...register("email")} />
+              </div>
+              <div>
+                <p>Endereço</p>
+                <input type="text" {...register("address")} />
+              </div>
+              <div>
+                <p>Cidade</p>
+                <input type="text" {...register("city")} />
+              </div>
+              <div className="btns">
+                <button className="cancel" onClick={cancel}>
+                  Cancelar
+                </button>
+                <button type="submit">Atualizar</button>
+              </div>
+            </FormUpdate>
+          </ContainerUpdate>
         )}
       </Contents>
     </Container>
