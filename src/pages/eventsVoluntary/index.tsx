@@ -5,6 +5,7 @@ import api from "../../services/api";
 import { Container, Contents } from "./styles";
 import { useLogin } from "../../Providers/Login-Voluntaries";
 import { BiMenuAltLeft } from "react-icons/bi";
+import { Loading } from "../../components/loading";
 
 interface iEventUser {
   id: number;
@@ -80,37 +81,39 @@ export const EventsVoluntary = () => {
   const [userName, setUseName] = useState<iUserName[]>([] as iUserName[]);
 
   console.log(institutionId);
-  console.log(eventsUser);
+  console.log(eventsUser.length);
   console.log(userName);
 
   return (
     <Container>
-      <VoluntaryMenu visible={visible} setVisible={setVisible} />
-      <BiMenuAltLeft className="Open" onClick={showMenu} />
-      <Contents>
-        {userName.map((user) => {
-          return (
-            <>
-              <h4>Seja bem vindo {user.name}</h4>
-            </>
-          );
-        })}
-
-        <section className="Card">
-          <h2>Meus Eventos</h2>
-          {eventsUser.map((e, index) => {
+        <>
+        <VoluntaryMenu visible={visible} setVisible={setVisible} />
+        <BiMenuAltLeft className="Open" onClick={showMenu} />
+        <Contents>
+          {userName.map((user) => {
             return (
-              <section className="Event">
-                <EventListUser
-                  key={index}
-                  event={e.event}
-                  instituteName={e.nameInstitution}
-                />
-              </section>
+              <>
+                <h4>Seja bem vindo {user.name}</h4>
+              </>
             );
           })}
-        </section>
-      </Contents>
+  
+          <section className="Card">
+            <h2>Meus Eventos</h2>
+            {eventsUser.map((e, index) => {
+              return (
+                <section className="Event">
+                  <EventListUser
+                    key={index}
+                    event={e.event}
+                    instituteName={e.nameInstitution}
+                  />
+                </section>
+              );
+            })}
+          </section>
+        </Contents>
+        </>
     </Container>
   );
 };
