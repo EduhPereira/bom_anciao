@@ -36,6 +36,7 @@ const DonationCard = ({ key, donation }: IDonationCardProps) => {
         <span>Recebido: {donation.received}</span>
         <button onClick={() => deleteDonation(donation.id)}>Remover</button>
         <button onClick={() => setShowUpdateModal(true)}>Atualizar</button>
+        <hr />
       </li>
 
       {showUpdateModal && (
