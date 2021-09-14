@@ -9,6 +9,7 @@ import InstitutionSearch from "../pages/InstitutionSearch";
 import { EventsVoluntary } from "../pages/eventsVoluntary";
 import Solicitations from "../pages/Solicitations";
 import VoluntariesProfile from "../pages/voluntariesProfile";
+import InstitutionProfile from "../pages/institutionsProfile";
 
 const Routes = () => {
   return (
@@ -35,14 +36,16 @@ const Routes = () => {
       <Route path="/profile">
         <VoluntariesProfile />
       </Route>
+      <Route path="/institution-data">
+        <InstitutionProfile />
+      </Route>
       <Route path="/search-institutions">
         <InstitutionSearch />
       </Route>
       <Route path="/institution/:id">
         <InstitutionDetails />
       </Route>
-
-      <Route path="/solicitations">
+      <Route path="/donations">
         <Solicitations />
       </Route>
     </Switch>

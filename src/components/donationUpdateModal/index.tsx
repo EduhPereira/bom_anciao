@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuthInstitution } from "../../Providers/Institution-Provider";
 import api from "../../services/api";
+import { Container } from "./style";
 
 interface IDonation {
   name: string;
@@ -36,19 +37,23 @@ const DonationUpdateModal = ({
 
   return (
     <>
-      <div className="donation-update-modal">
+      <Container>
         <span>Item: {donation.name} </span> <br />
         <span>Quantidade: {donation.quantity}</span> <br />
         <span>Quantidade recebida: {donation.received}</span> <br />
-        <label>Insira o quanto recebeu:</label> <br />
+        <label>Insira o quanto recebeu:</label>
         <input
           type="number"
           value={userInput}
           onChange={(e) => setUserInput(e.target.value)}
         />
-        <button onClick={() => showModal(false)}>Cancelar</button>
-        <button onClick={() => updateReceived(donation.id)}>Atualizar</button>
-      </div>
+        <div>
+          <button className="cancel" onClick={() => showModal(false)}>
+            Cancelar
+          </button>
+          <button onClick={() => updateReceived(donation.id)}>Atualizar</button>
+        </div>
+      </Container>
     </>
   );
 };

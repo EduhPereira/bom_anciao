@@ -3,7 +3,12 @@ import DonationsList from "../../components/donationsList";
 import NewDonationForm from "../../components/newDonationForm";
 import api from "../../services/api";
 import { useAuthInstitution } from "../../Providers/Institution-Provider";
-import { Container, DonationsListStyled, SubContainer } from "./styles";
+import {
+  Container,
+  DonationsListStyled,
+  SubContainer,
+  Contents,
+} from "./styles";
 import InstitutionMenu from "../../components/institutionMenu";
 import { BiMenuAltLeft } from "react-icons/bi";
 interface IUser {
@@ -35,7 +40,7 @@ const Solicitations = () => {
     });
     setNameInstitution(data[0]);
   }
-  console.log(nameInstitution);
+
   useEffect(() => {
     loadNameInstitution();
   }, []);
@@ -47,17 +52,19 @@ const Solicitations = () => {
         <BiMenuAltLeft className="Open" onClick={showMenu} />
         <SubContainer>
           <h2>{nameInstitution}</h2>
-          <div className="card-top">
-            <span>Doações</span>
-            <button onClick={() => setNewDonation(true)}>Criar doação</button>
-          </div>
+          <Contents>
+            <div className="card-top">
+              <span>Doações</span>
+              <button onClick={() => setNewDonation(true)}>Criar doação</button>
+            </div>
 
-          {newDonation && (
-            <NewDonationForm modal={newDonation} setModal={setNewDonation} />
-          )}
-          <DonationsListStyled>
-            <DonationsList />
-          </DonationsListStyled>
+            {newDonation && (
+              <NewDonationForm modal={newDonation} setModal={setNewDonation} />
+            )}
+            <DonationsListStyled>
+              <DonationsList />
+            </DonationsListStyled>
+          </Contents>
         </SubContainer>
       </Container>
     </>
