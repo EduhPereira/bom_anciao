@@ -3,7 +3,7 @@ import DonationsList from "../../components/donationsList";
 import NewDonationForm from "../../components/newDonationForm";
 import api from "../../services/api";
 import { useAuthInstitution } from "../../Providers/Institution-Provider";
-import { Container, DonationsListStyled, SubContainer } from "./styles";
+import { Container, SubContainer } from "./styles";
 import InstitutionMenu from "../../components/institutionMenu";
 import { BiMenuAltLeft } from "react-icons/bi";
 interface IUser {
@@ -55,9 +55,7 @@ const Solicitations = () => {
           {newDonation && (
             <NewDonationForm modal={newDonation} setModal={setNewDonation} />
           )}
-          <DonationsListStyled>
-            <DonationsList />
-          </DonationsListStyled>
+          <DonationsList />
         </SubContainer>
       </Container>
     </>
