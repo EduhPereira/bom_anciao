@@ -44,9 +44,4 @@ export const SubContainer = styled.div`
   }
 `;
 
-export const DonationsListStyled = styled.div`
-  ul {
-      width: fit-content;
-  }
-  }
-`;
+export const DonationsListStyled = styled.div``;
