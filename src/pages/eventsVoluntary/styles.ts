@@ -5,6 +5,7 @@ export const Container = styled.section`
     height: 100vh;
     background: #F5F8FA;
     color: black;
+    box-sizing: border-box;
 
     svg.Open{
         width: 30px;
@@ -12,9 +13,7 @@ export const Container = styled.section`
     }
 
     @media(min-width: 768px){
-        width: 100%;
         display: flex;
-        justify-content: center;
 
         .Open{
             display: none;
@@ -40,9 +39,11 @@ export const Contents = styled.div`
     h4{
         text-align: center;
         padding: 15px 0px;
+        font-family: 'Red Hat Display',sans-serif;
     }
+
     h2{
-        text-align: center;
+        text-align: left;
         font-size: 1rem;
         width: 100%;
         background: #59A5A5;
@@ -65,12 +66,16 @@ export const Contents = styled.div`
 
     .Event{
         border-bottom: 1px solid #59A5A5;
-        padding-bottom: 10px;
+        padding: 10px 10px;
     }
 
     @media(min-width: 768px){
-        width: 600px;
-        height: 780px;
+        height: 680px;
         margin: auto 0 auto 0;
+
+        section{
+            width: 480px;
+        }
+        
     }
 `

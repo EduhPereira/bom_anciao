@@ -3,7 +3,7 @@ import api from "../../services/api"
 import ProgressBar from '@ramonak/react-progress-bar'
 import { useParams } from "react-router"
 import { useLogin } from "../../Providers/Login-Voluntaries"
-import { Container } from './styles'
+import { Container, Contents } from './styles'
 import VoluntaryMenu from "../../components/voluntaryMenu"
 import { BiMenuAltLeft } from 'react-icons/bi'
 
@@ -56,7 +56,7 @@ interface iParams {
 interface iVisible {
     visible: boolean,
     setVisible: Dispatch<SetStateAction<boolean>>
-  }
+}
 
 export const InstitutionDetails = () => {
 
@@ -138,54 +138,73 @@ export const InstitutionDetails = () => {
     const [institution, setInstitution] = useState<iInstitution[]>([] as iInstitution[])
     const [verifyUserSubscribe, setVerifyUserSubscribe] = useState<iSubscribe[]>([] as iSubscribe[])
     const [visible, setVisible] = useState(false)
+    console.log(listDonations)
 
     return (
         <Container>
 
-            <VoluntaryMenu visible={visible} setVisible={setVisible}/>
+            <VoluntaryMenu visible={visible} setVisible={setVisible} />
             <BiMenuAltLeft className="Open" onClick={showMenu} />
 
-            {institution.map((i) => {
-                return <h1>{i.name}</h1>
-            })}
-            <br />
-            <br />
-            <h1>Eventos</h1>
-            {listEvents.map((event) => {
-                return <section>
-                    <p>Local: {event.local}</p>
-                    <p>Quando: {event.date} às {event.hour}</p>
-                    <p>Duração: {event.duration}</p>
-                    <p>Atividade: {event.name}</p>
-                        <button onClick={() => reqSubscribeEvent(event)}>Participar</button>
+            <Contents>
+
+                <div className="Name">{institution.map((i) => {
+                    return <h1>{i.name}</h1>
+                })}
+                </div>
+
+                <section>
+
+
+                    <section className="Events">
+                        <h1>Eventos</h1>
+                        {listEvents.map((event) => {
+                            return <section className="Events-details">
+                                <h4>Atividade: {event.name}</h4>
+                                <p>Quando: {event.date} às {event.hour}</p>
+                                <p>Duração: {event.duration}</p>
+                                <p>Local: {event.local}</p>
+                                <h4>Descrição:</h4>
+                                <p>{event.describe}</p>
+                                <button onClick={() => reqSubscribeEvent(event)}>Participar</button>
+                            </section>
+                        })}
+                    </section>
+
+                    <section className="Donations">
+                        <h1>Doações</h1>
+                        {listDonations.map((donation) => {
+                            return <section className="Donations-details">
+                                <p className="Donations-title"><span>{donation.quantity}</span> {donation.name}</p>
+                                <div className="ProgressBar">
+                                    <ProgressBar bgColor={"#227475"} isLabelVisible={false} height={'15px'} width={'200px'} completed={(donation.received * 100 / donation.quantity).toFixed(0)} />
+                                    <span>{(donation.received * 100 / donation.quantity).toFixed(0)}%</span>
+                                </div>
+                            </section>
+                        })}
+
+
+                        <section className="Contact">
+                            <h1>Informações de contato:</h1>
+
+                            {institution.map((i) => {
+                                return <section className="Contact-details">
+                                    <p>Endereço: {i.address}</p>
+                                    <p>Localizado em {i.city}</p>
+                                    <p>CNPJ {i.cnpj}</p>
+                                    <p>Sobre nós: {i.about}</p>
+                                </section>
+                            })}
+
+                        </section>
+
+                    </section>
+
+
+
                 </section>
-            })}
 
-            <br />
-            <br />
-
-            <h1>Doações</h1>
-            {listDonations.map((donation) => {
-                return <section>
-                    <p><span>{donation.quantity}</span> {donation.name}</p>
-                    <ProgressBar width={'200px'} completed={(donation.received * 100 / donation.quantity).toFixed(0)} />
-
-                </section>
-            })}
-
-            <h1>Informações de contato:</h1>
-
-            <br />
-            <br />
-
-            {institution.map((i) => {
-                return <section>
-                    <p>Endereço: {i.address}</p>
-                    <p>Localizado em {i.city}</p>
-                    <p>CNPJ {i.cnpj}</p>
-                    <p>Sobre nós: {i.about}</p>
-                </section>
-            })}
+            </Contents>
 
 
         </Container>
