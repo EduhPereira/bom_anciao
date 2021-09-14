@@ -1,10 +1,22 @@
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { BiMenuAltLeft } from "react-icons/bi";
+import { toast } from "react-toastify";
 import AddEvents from "../../components/InstitutionAddEvents";
+import EditEvents from "../../components/InstitutionEditEvent";
 import InstitutionMenu from "../../components/institutionMenu";
 import { useAuthInstitution } from "../../Providers/Institution-Provider";
 import api from "../../services/api";
-import { CardEvents, Container, Event, TitleEvent, Button } from "./styles";
+import {
+  CardEvents,
+  Container,
+  Event,
+  TitleEvent,
+  ButtonCreateEvent,
+  ButtonRmv,
+  ButtonAtt,
+  Content,
+  ProfileImage,
+} from "./styles";
 
 interface EventInstitution {
   nameInstitution: string;
@@ -18,8 +30,28 @@ interface EventInstitution {
   idInstitution?: number;
 }
 
+interface EditEvent {
+  event: {
+    nameInstitution: string;
+    local: string;
+    date: string;
+    hour: string;
+    duration: string;
+    name: string;
+    describe: string;
+    id: number;
+    idInstitution?: number;
+  };
+}
+
 interface InstituitionName {
   name: string;
+}
+
+interface ModalVisible {
+  nameInst: any;
+  setModalVisible: Dispatch<SetStateAction<boolean>>;
+  modalVisible: boolean;
 }
 
 const DashboardInstitution = () => {
@@ -30,6 +62,9 @@ const DashboardInstitution = () => {
     [] as InstituitionName[]
   );
   const [visible, setVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalAtt, setModalAtt] = useState(false);
+  const [object, setObject] = useState<number>(1);
 
   const { token } = useAuthInstitution();
 
@@ -60,14 +95,25 @@ const DashboardInstitution = () => {
   }
 
   async function deleteEvent(id: number) {
-    const response = await api.delete(`events/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    loadEvents();
+    const response = await api
+      .delete(`events/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((_) => toast.success("✅ Evento deletado com sucesso!"));
     console.log(response);
+    loadEvents();
   }
+
+  const updateEvent = (id: number) => {
+    setObject(id);
+    setModalAtt(true);
+  };
+
+  const addNewEvent = () => {
+    setModalVisible(true);
+  };
 
   useEffect(() => {
     loadEvents();
@@ -82,29 +128,52 @@ const DashboardInstitution = () => {
     <Container>
       <InstitutionMenu visible={visible} setVisible={setVisible} />
       <BiMenuAltLeft className="Open" onClick={showMenu} />
-      {nameIns.map((event) => (
-        <h4>{event.name}</h4>
-      ))}
-      <AddEvents nameInst={nameIns} />
-      <CardEvents>
-        <TitleEvent>
-          <h2>Eventos</h2>
-        </TitleEvent>
-        {events.map((event) => (
-          <Event>
-            <div className="card-event" key={event.idInstitution}>
-              <p>Atividade: {event.name}</p>
-              <p>
-                Quando: {event.date} {event.hour}
-              </p>
-              <p>Duração: {event.duration}</p>
-              <div className="button">
-                <Button onClick={() => deleteEvent(event.id)}>Remover</Button>
-              </div>
-            </div>
-          </Event>
+      <AddEvents
+        nameInst={nameIns}
+        setModalVisible={setModalVisible}
+        modalVisible={modalVisible}
+        loadEvents={loadEvents}
+      />
+      <EditEvents
+        nameInst={nameIns}
+        setModalAtt={setModalAtt}
+        modalAtt={modalAtt}
+        loadEvents={loadEvents}
+        id={object}
+      />
+      <Content>
+        {nameIns.map((event) => (
+          <h4>{event.name}</h4>
         ))}
-      </CardEvents>
+        <CardEvents>
+          <TitleEvent>
+            <h2>Eventos</h2>
+            <ButtonCreateEvent onClick={addNewEvent}>
+              Criar evento
+            </ButtonCreateEvent>
+          </TitleEvent>
+          {events.map((event) => (
+            <Event>
+              <div className="card-event" key={event.idInstitution}>
+                <p>Atividade: {event.name}</p>
+                <p>
+                  Quando: {event.date} {event.hour}
+                </p>
+                <p>Duração: {event.duration}</p>
+                <p>Descrição: {event.describe}</p>
+                <div className="button">
+                  <ButtonAtt onClick={() => updateEvent(event.id)}>
+                    Atualizar
+                  </ButtonAtt>
+                  <ButtonRmv onClick={() => deleteEvent(event.id)}>
+                    Remover
+                  </ButtonRmv>
+                </div>
+              </div>
+            </Event>
+          ))}
+        </CardEvents>
+      </Content>
     </Container>
   );
 };

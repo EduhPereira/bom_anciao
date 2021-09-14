@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import api from "../../services/api";
 import { useAuthInstitution } from "../../Providers/Institution-Provider";
 import { useEffect, useState } from "react";
+import { Container } from "./style";
 
 interface IUser {
   email: string;
@@ -78,20 +79,28 @@ const NewDonationForm = ({ setModal, modal }: ISolicitationProps) => {
   return (
     <>
       {modal && (
-        <div className="main-container">
-          <div className="form-container">
-            <h3>Nova Solicitação</h3>
+        <Container>
+          <div>
+            <h2>Nova Solicitação</h2>
             <form onSubmit={handleSubmit(handleSolicitation)}>
-              <label>Nome do item</label>
-              <input type="text" required {...register("name")} />
-              <label>Meta | Quantidade</label>
-              <input type="text" required {...register("quantity")} />
-              <button onClick={() => setModal(false)}>Cancelar</button>
-              <button type="submit">Salvar</button>
+              <div>
+                <label>Nome do item</label>
+                <input type="text" required {...register("name")} />
+              </div>
+              <div>
+                <label>Quantidade</label>
+                <input type="text" required {...register("quantity")} />
+              </div>
+              <div className="btns">
+                <button className="cancel" onClick={() => setModal(false)}>
+                  Cancelar
+                </button>
+                <button type="submit">Salvar</button>
+              </div>
             </form>
           </div>
           <ToastContainer />
-        </div>
+        </Container>
       )}
     </>
   );

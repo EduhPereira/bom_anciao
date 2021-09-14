@@ -12,7 +12,7 @@ interface IDonation {
 
 const DonationsList = () => {
   const [donations, setDonations] = useState<IDonation[]>([]);
-  console.log(donations);
+
   const { institutionId } = useAuthInstitution();
 
   const getDonations = () => {

@@ -29,7 +29,7 @@ const AddEventsProvider = ({ children }: AddEventsProps) => {
           hour: data.hour,
           duration: data.duration,
           name: data.name,
-          describe: data.desciption,
+          describe: data.describe,
         },
         {
           headers: {
