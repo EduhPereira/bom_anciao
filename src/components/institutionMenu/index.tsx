@@ -1,7 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
 import { NavLink } from "react-router-dom";
-import { Avatar, Container, Contents } from "./styles";
+import { Container, Contents } from "./styles";
 import { AiOutlineClose } from "react-icons/ai";
+import myImage from "../../Assets/img/institution-icon.jpg";
 
 interface iInstitutionProps {
   visible: boolean;
@@ -18,7 +19,9 @@ const InstitutionMenu = ({ visible, setVisible }: iInstitutionProps) => {
       <Container visible={visible}>
         <Contents visible={visible}>
           <AiOutlineClose className="Close" onClick={showMenu} />
-          {/* <Avatar /> */}
+          <div className="avatar">
+            <img src={myImage} alt="not found" />
+          </div>
           <NavLink activeClassName="selected" exact to="/institution-data">
             Meus dados
           </NavLink>

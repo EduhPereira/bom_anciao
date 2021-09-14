@@ -4,15 +4,16 @@ export const Container = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
-  justify-content: space-around;
   background-color: #fff;
 
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  @media (min-width: 768px) {
+    width: 100%;
+    display: flex;
+    align-items: center;
 
-  h2 {
-    color: #000;
+    .Open {
+      display: none;
+    }
   }
 
   svg.Open {
@@ -20,33 +21,40 @@ export const Container = styled.div`
     height: 30px;
     color: black;
   }
+`;
+
+export const Content = styled.div`
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h2 {
+    color: #000;
+  }
+
+  h4 {
+    text-align: center;
+    font-size: 25px;
+    padding: 15px 0px;
+    color: #000;
+  }
 
   @media (min-width: 768px) {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-
-    .Open {
-      display: none;
-    }
-
-    h4 {
-      text-align: center;
-      padding: 15px 0px;
-    }
+    width: 100vw;
+    height: 100vh;
+    margin: auto 0 auto 0;
   }
 `;
 
 export const CardEvents = styled.div`
-  width: 300px;
+  width: 350px;
   height: 450px;
   background-color: #fff;
   box-shadow: 0px 7px 10px -4px rgba(0, 0, 0, 0.75);
 
   color: black;
-
-  display: flex;
-  flex-direction: column;
 
   border-radius: 10px;
   margin: 5px;
@@ -59,7 +67,7 @@ export const CardEvents = styled.div`
 
 export const Event = styled.div`
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
 
   padding: 10px;
 
@@ -72,6 +80,7 @@ export const Event = styled.div`
 
   .button {
     text-align: right;
+    margin-top: 10px;
   }
 `;
 
@@ -79,6 +88,9 @@ export const TitleEvent = styled.div`
   background-color: #59a5a5;
   color: #fff;
   padding: 10px;
+
+  display: flex;
+  justify-content: space-between;
 
   h2 {
     text-align: center;
@@ -89,12 +101,42 @@ export const TitleEvent = styled.div`
   border-top-right-radius: 10px;
 `;
 
-export const Button = styled.button`
+export const ButtonAtt = styled.button`
   background-color: #ffd666;
   color: #fff;
   font-size: 10px;
+  font-weight: bold;
+
+  padding: 5px;
+  margin-right: 20px;
+  border: none;
+  border-radius: 5px;
+`;
+
+export const ButtonRmv = styled.button`
+  background-color: #ff6666;
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
 
   padding: 5px;
   border: none;
   border-radius: 5px;
+`;
+
+export const ButtonCreateEvent = styled.button`
+  background-color: #fff;
+  color: #59a5a5;
+  font-size: 10px;
+  font-weight: bold;
+
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+`;
+
+export const ProfileImage = styled.img`
+  border-radius: 50%;
+  width: 150px;
+  padding: 5px;
 `;
