@@ -3,6 +3,7 @@ import DashboardInstitution from "../pages/DashboardInstitution";
 import LoginInstitution from "../pages/LoginInstitution";
 import RegisterInstitution from "../pages/SignupInstitution";
 import VoluntariesLogin from "../pages/VoluntariesLogin";
+import UserRegister from "../pages/UserRegister";
 import { InstitutionDetails } from "../pages/institutionDetails";
 import { LandingPage } from "../pages/landingPage";
 import InstitutionSearch from "../pages/InstitutionSearch";
@@ -29,6 +30,9 @@ const Routes = () => {
       </Route>
       <Route path="/login-voluntary">
         <VoluntariesLogin />
+      </Route>
+      <Route path="/signup-voluntary">
+        <UserRegister />
       </Route>
 
       <Route path="/my-events">
