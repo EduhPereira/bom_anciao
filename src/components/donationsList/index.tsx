@@ -28,7 +28,6 @@ const DonationsList = () => {
 
   return (
     <>
-      <h3>Lista de Doações</h3>
       <ul>
         {donations.map((donation, index) => {
           return <DonationCard key={index} donation={donation} />;
