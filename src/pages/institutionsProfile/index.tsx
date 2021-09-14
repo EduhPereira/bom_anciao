@@ -4,7 +4,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 import InstitutionMenu from "../../components/institutionMenu";
 
-import { Container, Contents } from "./style";
+import { Container, Contents, ContainerUpdate, FormUpdate } from "./style";
 
 import api from "../../services/api";
 import { useAuthInstitution } from "../../Providers/Institution-Provider";
@@ -87,22 +87,36 @@ const InstitutionProfile = () => {
             <button onClick={edit}>Editar</button>
           </>
         ) : (
-          <div>
-            <form onSubmit={handleSubmit(handleSave)}>
-              <p>Nome</p>
-              <input type="text" {...register("name")} />
-              <p>Email</p>
-              <input type="email" {...register("email")} />
-              <p>Endereço</p>
-              <input type="text" {...register("address")} />
-              <p>Cidade</p>
-              <input type="text" {...register("city")} />
-              <p>Sobre</p>
-              <textarea {...register("about")} />
-              <button onClick={cancel}>Cancelar</button>
-              <button type="submit">Salvar</button>
-            </form>
-          </div>
+          <ContainerUpdate>
+            <FormUpdate onSubmit={handleSubmit(handleSave)}>
+              <div>
+                <p>Nome</p>
+                <input type="text" {...register("name")} />
+              </div>
+              <div>
+                <p>Email</p>
+                <input type="email" {...register("email")} />
+              </div>
+              <div>
+                <p>Endereço</p>
+                <input type="text" {...register("address")} />
+              </div>
+              <div>
+                <p>Cidade</p>
+                <input type="text" {...register("city")} />
+              </div>
+              <div>
+                <p>Sobre</p>
+                <textarea {...register("about")} />
+              </div>
+              <div className="btns">
+                <button className="cancel" onClick={cancel}>
+                  Cancelar
+                </button>
+                <button type="submit">Salvar</button>
+              </div>
+            </FormUpdate>
+          </ContainerUpdate>
         )}
       </Contents>
     </Container>

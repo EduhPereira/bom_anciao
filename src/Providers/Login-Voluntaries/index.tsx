@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   createContext,
   ReactNode,
@@ -22,6 +22,7 @@ interface AuthProviderData {
   userToken: string;
   userId: string;
   setUserId: React.Dispatch<SetStateAction<string>>;
+  userName: string;
 }
 
 interface userData {
@@ -37,9 +38,9 @@ const LoginProvider = ({ children }: AuthProviderProps) => {
 
   const [auth, setAuth] = useState<string>(userToken);
   const [userId, setUserId] = useState<string>(userID);
+  const [userName, setUserName] = useState<string>("");
 
   const singIn = useCallback(async (data: userData, history: History) => {
-    console.log(data);
     api
       .post("/login", data)
       .then((response) => {
@@ -53,9 +54,25 @@ const LoginProvider = ({ children }: AuthProviderProps) => {
       .then((response) => history.push("/my-events"))
       .catch((err) => console.log("login e senha invalidos!"));
   }, []);
+
+  useEffect(() => {
+    api
+      .get(`/users/${userId}`)
+      .then((res) => setUserName(res.data.name))
+      .catch((err) => console.log(err));
+  }, [userId]);
+
   return (
     <LoginContext.Provider
-      value={{ singIn, userToken: auth, auth, setAuth, userId, setUserId }}
+      value={{
+        singIn,
+        userToken: auth,
+        auth,
+        setAuth,
+        userId,
+        setUserId,
+        userName,
+      }}
     >
       {children}
     </LoginContext.Provider>

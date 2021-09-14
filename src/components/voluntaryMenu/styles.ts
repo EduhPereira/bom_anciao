@@ -51,8 +51,9 @@ export const Contents = styled.div<iContainerProps>`
     height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    padding-left: 30px;
+    justify-content: flex-start;
     animation: ${props => props.visible ? 'menu 0.4s' : 'none'};
     opacity: ${(props) => `${props.visible ? "1" : "0"}`};
     transition: 0.3s;
@@ -82,7 +83,7 @@ export const Contents = styled.div<iContainerProps>`
             padding: 20px 0 10px 30px;
             width: 100%;
             position: relative;
-            color: white;
+            color: #ACF1E0;
             font-weight: bold;
         }
         a::before{
