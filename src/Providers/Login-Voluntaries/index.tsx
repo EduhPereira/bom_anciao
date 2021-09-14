@@ -62,7 +62,6 @@ const LoginProvider = ({ children }: AuthProviderProps) => {
       .catch((err) => console.log(err));
   }, [userId]);
 
-  console.log(userName);
   return (
     <LoginContext.Provider
       value={{
