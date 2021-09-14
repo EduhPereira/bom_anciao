@@ -33,19 +33,19 @@ const reqUser = async() => {
 }
 
 const[user, setUser] = useState<iUser[]>([] as iUser[])
-
+const {userName} = useLogin()
+console.log(userName)
 
   return (
     <>
       <Container visible={visible}>
         <Contents visible={visible}>
           <section className="User">
-            {user.map((user)=>{
-              return <div>
-                <h1>{user.name.substring(0, 1)}</h1>
-                <h2>{user.name}</h2>
-              </div>
-            })}
+            <div>
+                <h1>{userName.substring(0, 1)}</h1>
+                <h2>{userName}</h2>
+            </div>
+
           </section>
           <AiOutlineClose className="Close" onClick={showMenu} />
           <NavLink activeClassName="selected" exact to="/profile">
