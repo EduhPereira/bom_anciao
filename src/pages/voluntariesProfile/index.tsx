@@ -44,9 +44,11 @@ const VoluntariesProfile = () => {
       },
     });
   };
+
   useEffect(() => {
     userInfoData();
-  }, []);
+    const data = userInfo;
+  }, [userInfo]);
 
   const edit = () => {
     setEditable(true);
