@@ -94,7 +94,7 @@ export const AuthInstitutionProvider = ({ children }: AuthProviderProps) => {
 
   const signOut = () => {
     localStorage.clear();
-    setAuth("");
+    window.location.reload();
   };
 
   return (
