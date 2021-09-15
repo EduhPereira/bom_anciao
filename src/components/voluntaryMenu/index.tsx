@@ -17,12 +17,12 @@ interface iUser {
 
 
 const VoluntaryMenu = ({ visible, setVisible }: iVoluntaryProps) => {
-  const { userId } = useLogin()
-  useEffect(() => {
-    reqUser()
-  }, [])
+  const [user, setUser] = useState<iUser[]>([] as iUser[])
 
-  const { userId: id } = useLogin()
+  const { userId, userName } = useLogin()
+
+  const id = localStorage.getItem("@Bom ancião: userID") || ""
+
 
   const showMenu = () => {
     setVisible(false);
@@ -38,17 +38,24 @@ const VoluntaryMenu = ({ visible, setVisible }: iVoluntaryProps) => {
     window.location.reload()
   }
 
-  const [user, setUser] = useState<iUser[]>([] as iUser[])
 
-  console.log("Teste", user)
+  console.log(user)
+
+
 
   return (
     <>
       <Container visible={visible}>
         <Contents visible={visible}>
           <section className="User">
-            
-
+            <div>
+              <h1>
+                {userName.substring(0, 1)}
+              </h1>
+              <h2>
+                {userName}
+              </h2>
+            </div>
           </section>
           <AiOutlineClose className="Close" onClick={showMenu} />
           <NavLink activeClassName="selected" exact to="/profile">
@@ -77,11 +84,16 @@ export default VoluntaryMenu;
 
 
 /**
- *{user.map((n) => {
-              return <div>
-                <h1>{n.name.substring(0, 1)}</h1>
-                <h2>{n.name}</h2>
-              </div>
-            })}
+ *<h1>
+                {user.map((letter) => {
+                  return `${letter.name.substring(0, 1)}`
+                })}
+              </h1>
+
+              <h2>
+                {user.map((n) => {
+                  return `${n.name}`
+                })}
+              </h2>
  *
  */

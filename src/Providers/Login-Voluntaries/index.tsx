@@ -38,7 +38,14 @@ const LoginProvider = ({ children }: AuthProviderProps) => {
 
   const [auth, setAuth] = useState<string>(userToken);
   const [userId, setUserId] = useState<string>(userID);
-  const [userName, setUserName] = useState<string>("");
+  const userName = localStorage.getItem("name") || "";
+
+  const req = () => {
+    api
+      .get(`/users/${userId}`)
+      .then((res) => localStorage.setItem("name", res.data.name))
+      .catch((err) => console.log(err));
+  }
 
   const singIn = useCallback(async (data: userData, history: History) => {
     api
@@ -55,14 +62,14 @@ const LoginProvider = ({ children }: AuthProviderProps) => {
         history.push("/my-events")
       })
       .catch((err) => console.log("login e senha invalidos!"));
+      req()
   }, []);
 
   useEffect(() => {
-    api
-      .get(`/users/${userId}`)
-      .then((res) => setUserName(res.data.name))
-      .catch((err) => console.log(err));
+    
   }, [userId]);
+
+  
 
   return (
     <LoginContext.Provider
