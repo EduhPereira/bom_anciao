@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const Container = styled.div`
   height: 100vh;
@@ -13,11 +13,15 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (min-width: 728px) {
+    justify-content: space-between;
+  }
 `;
 
 export const Content = styled.div`
-  width: 45%;
-  height: 70%;
+  width: 300px;
+  height: 550px;
 
   background-color: white;
   border-radius: 15px;
@@ -27,6 +31,10 @@ export const Content = styled.div`
 
   justify-content: space-around;
   align-items: center;
+
+  box-shadow: 7px 7px 5px 0px rgba(49, 48, 48, 0.75);
+  -webkit-box-shadow: 7px 7px 5px 0px rgba(49, 48, 48, 0.75);
+  -moz-box-shadow: 7px 7px 5px 0px rgba(49, 48, 48, 0.75);
 
   a {
     text-decoration: none;
@@ -41,10 +49,10 @@ export const Content = styled.div`
   div {
     align-self: center;
   }
-  @media (max-width: 800px) {
+  @media (min-width: 728px) {
     align-self: center;
-    width: 80%;
-    height: 80%;
+    width: 40%;
+    height: 90%;
   }
 `;
 
@@ -76,7 +84,7 @@ export const Button = styled.button`
   background: #70cccc;
   border-radius: 10px;
   width: 100%;
-  height: 44px;
+  padding: 8px 10px;
   margin-bottom: 15px;
   border: none;
 
@@ -86,4 +94,30 @@ export const Button = styled.button`
   font-size: 1.3rem;
 
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+`;
+
+const Appear = keyframes`
+  from{
+    opacity:0;
+  }
+  to{
+    opacity:1;
+  }
+`;
+
+export const Aside = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100%;
+  width: 35%;
+  animation: ${Appear} 1s linear;
+  img {
+    width: 100%;
+    height: 60%;
+  }
+
+  @media (max-width: 700px) {
+    display: none;
+  }
 `;
