@@ -17,6 +17,7 @@ interface iUser{
 
 
 const VoluntaryMenu = ({ visible, setVisible }: iVoluntaryProps) => {
+  const {userId} = useLogin()
   useEffect(()=>{
     reqUser()
   }, [])
@@ -28,18 +29,18 @@ const VoluntaryMenu = ({ visible, setVisible }: iVoluntaryProps) => {
   };
 
 const reqUser = async() => {
-  const response = await api.get(`users?type=Voluntary&&id=${id}`)
+  const response = await api.get(`users/${id}`)
   setUser(response.data)
 }
 
-const handleLogout = () => {
-  localStorage.clear()
+const handleLogout = async() => {
+  await localStorage.clear()
   window.location.reload()
 }
 
 const[user, setUser] = useState<iUser[]>([] as iUser[])
-const {userName} = useLogin()
-console.log(userName)
+
+console.log("Teste", user)
 
   return (
     <>
@@ -47,8 +48,7 @@ console.log(userName)
         <Contents visible={visible}>
           <section className="User">
             <div>
-                <h1>{userName.substring(0, 1)}</h1>
-                <h2>{userName}</h2>
+                
             </div>
 
           </section>
@@ -76,3 +76,10 @@ console.log(userName)
 };
 
 export default VoluntaryMenu;
+
+
+/**
+ * 
+ * <h1>{name.substring(0, 1)}</h1>
+                <h2>{name}</h2>
+ */

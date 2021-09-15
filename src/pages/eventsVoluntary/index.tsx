@@ -91,9 +91,6 @@ export const EventsVoluntary = () => {
   const [visible, setVisible] = useState(false);
   const [userName, setUseName] = useState<iUserName[]>([] as iUserName[]);
 
-  console.log(institutionId);
-  console.log(eventsUser.length);
-  console.log(userName);
 
   return (
     <Container>

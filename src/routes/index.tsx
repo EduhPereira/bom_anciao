@@ -16,7 +16,7 @@ import { useAuthInstitution } from "../Providers/Institution-Provider";
 
 const Routes = () => {
 
-  const { userToken } = useLogin()
+  const { userToken: token } = useLogin()
 
   const { institutionId } = useAuthInstitution()
 
@@ -25,28 +25,33 @@ const Routes = () => {
       <Route path="/" exact>
         <LandingPage />
       </Route>
+
       <Route path="/login-institution">
         <LoginInstitution />
       </Route>
+
       <Route path="/signup-institution">
         <RegisterInstitution />
       </Route>
+
       <Route path="/events-institution">
         <DashboardInstitution />
       </Route>
+
       <Route path="/login-voluntary">
-        <VoluntariesLogin />
+        {token ? <EventsVoluntary /> : <VoluntariesLogin/>}
       </Route>
+
       <Route path="/signup-voluntary">
         <UserRegister />
       </Route>
 
       <Route path="/my-events">
-        <EventsVoluntary />
+        {token ? <EventsVoluntary /> : <Redirect to="/login-voluntary"/>}
       </Route>
 
       <Route path="/profile">
-        <VoluntariesProfile />
+        {token ? <VoluntariesProfile/> : <Redirect to="/login-voluntary"/>}
       </Route>
 
       <Route path="/institution-data">
@@ -54,7 +59,7 @@ const Routes = () => {
       </Route>
 
       <Route path="/search-institutions">
-        <InstitutionSearch />
+        {token ? <InstitutionSearch/> : <Redirect to="/search-institutions"/>}
       </Route>
 
       <Route path="/institution/:id">
