@@ -32,6 +32,11 @@ const reqUser = async() => {
   setUser(response.data)
 }
 
+const handleLogout = () => {
+  localStorage.clear()
+  window.location.reload()
+}
+
 const[user, setUser] = useState<iUser[]>([] as iUser[])
 const {userName} = useLogin()
 console.log(userName)
@@ -58,7 +63,7 @@ console.log(userName)
             Buscar Instituições
           </NavLink>
           
-          <Logout>
+          <Logout onClick={handleLogout}>
 
           <FiLogOut />
           <p>Sair</p>

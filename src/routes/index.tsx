@@ -1,4 +1,4 @@
-import { Switch, Route } from "react-router";
+import { Switch, Route, Redirect } from "react-router";
 import DashboardInstitution from "../pages/DashboardInstitution";
 import LoginInstitution from "../pages/LoginInstitution";
 import RegisterInstitution from "../pages/SignupInstitution";
@@ -11,8 +11,15 @@ import { EventsVoluntary } from "../pages/eventsVoluntary";
 import Solicitations from "../pages/Solicitations";
 import VoluntariesProfile from "../pages/voluntariesProfile";
 import InstitutionProfile from "../pages/institutionsProfile";
+import { useLogin } from "../Providers/Login-Voluntaries";
+import { useAuthInstitution } from "../Providers/Institution-Provider";
 
 const Routes = () => {
+
+  const { userToken } = useLogin()
+
+  const { institutionId } = useAuthInstitution()
+
   return (
     <Switch>
       <Route path="/" exact>
@@ -37,21 +44,27 @@ const Routes = () => {
       <Route path="/my-events">
         <EventsVoluntary />
       </Route>
+
       <Route path="/profile">
         <VoluntariesProfile />
       </Route>
+
       <Route path="/institution-data">
         <InstitutionProfile />
       </Route>
+
       <Route path="/search-institutions">
         <InstitutionSearch />
       </Route>
+
       <Route path="/institution/:id">
         <InstitutionDetails />
       </Route>
+
       <Route path="/donations">
         <Solicitations />
       </Route>
+
     </Switch>
   );
 };
