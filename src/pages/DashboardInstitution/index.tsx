@@ -119,9 +119,6 @@ const DashboardInstitution = () => {
         id={object}
       />
       <Content>
-        {nameIns.map((event) => (
-          <h4>{event.name}</h4>
-        ))}
         <CardEvents>
           <TitleEvent>
             <h2>Eventos</h2>
