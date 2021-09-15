@@ -1,4 +1,4 @@
-import { Switch, Route } from "react-router";
+import { Switch, Route, Redirect } from "react-router";
 import DashboardInstitution from "../pages/DashboardInstitution";
 import LoginInstitution from "../pages/LoginInstitution";
 import RegisterInstitution from "../pages/SignupInstitution";
@@ -11,47 +11,65 @@ import { EventsVoluntary } from "../pages/eventsVoluntary";
 import Solicitations from "../pages/Solicitations";
 import VoluntariesProfile from "../pages/voluntariesProfile";
 import InstitutionProfile from "../pages/institutionsProfile";
+import { useLogin } from "../Providers/Login-Voluntaries";
+import { useAuthInstitution } from "../Providers/Institution-Provider";
 
 const Routes = () => {
+
+  const { userToken: token } = useLogin()
+
+  const { institutionId } = useAuthInstitution()
+
   return (
     <Switch>
       <Route path="/" exact>
         <LandingPage />
       </Route>
+
       <Route path="/login-institution">
         <LoginInstitution />
       </Route>
+
       <Route path="/signup-institution">
         <RegisterInstitution />
       </Route>
+
       <Route path="/events-institution">
         <DashboardInstitution />
       </Route>
+
       <Route path="/login-voluntary">
-        <VoluntariesLogin />
+        {token ? <Redirect to="/my-events"/> : <VoluntariesLogin/>}
       </Route>
+
       <Route path="/signup-voluntary">
         <UserRegister />
       </Route>
 
       <Route path="/my-events">
-        <EventsVoluntary />
+        {token ? <EventsVoluntary /> : <Redirect to="/login-voluntary"/>}
       </Route>
+
       <Route path="/profile">
-        <VoluntariesProfile />
+        {token ? <VoluntariesProfile/> : <Redirect to="/login-voluntary"/>}
       </Route>
+
       <Route path="/institution-data">
         <InstitutionProfile />
       </Route>
+
       <Route path="/search-institutions">
-        <InstitutionSearch />
+        {token ? <InstitutionSearch/> : <Redirect to="/search-institutions"/>}
       </Route>
+
       <Route path="/institution/:id">
         <InstitutionDetails />
       </Route>
+
       <Route path="/donations">
         <Solicitations />
       </Route>
+
     </Switch>
   );
 };

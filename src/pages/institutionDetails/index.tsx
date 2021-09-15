@@ -176,7 +176,7 @@ export const InstitutionDetails = () => {
                             return <section className="Donations-details">
                                 <p className="Donations-title"><span>{donation.quantity}</span> {donation.name}</p>
                                 <div className="ProgressBar">
-                                    <ProgressBar bgColor={"#227475"} isLabelVisible={false} height={'15px'} width={'200px'} completed={(donation.received * 100 / donation.quantity).toFixed(0)} />
+                                    <ProgressBar bgColor={"#227475"} isLabelVisible={false} height={'15px'} width={'150px'} completed={(donation.received * 100 / donation.quantity).toFixed(0)} />
                                     <span>{(donation.received * 100 / donation.quantity).toFixed(0)}%</span>
                                 </div>
                             </section>

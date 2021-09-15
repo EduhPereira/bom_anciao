@@ -6,6 +6,7 @@ export const Container = styled.div`
     height: 100vh;
     background: #F5F8FA;
     box-sizing: border-box;
+    
 
     .Open{
         width: 30px;
@@ -33,6 +34,7 @@ export const Container = styled.div`
         border-radius: 20px;
         color: white;
         font-weight: bold;
+        width: 100%;
     }
     h1{
         text-align: center;
@@ -89,7 +91,7 @@ export const Container = styled.div`
         align-items: center;
 
 
-        svg{
+        .Open{
             display: none;
         }
         .Events-details{
@@ -107,9 +109,13 @@ export const Contents = styled.div`
     width: 90vw;
     background: white;
     margin: auto;
-    overflow: auto;
+    overflow: scroll;
     border-radius: 20px;
     padding: 10px;
+
+    ::-webkit-scrollbar {
+            width: 0px;
+    }
 
 
 
@@ -132,11 +138,25 @@ export const Contents = styled.div`
         }
         height: 680px;
         margin: auto;
+        .Events-details{
+            width: 200px;
+        }
+
+        .Donations-details{
+            width: 200px;
+        }
+        .Contact-details{
+            width: 200px;
+        }
     }
 
     @media(min-width: 1024px){
         > section {
             width: 700px;
+        }
+
+        .Events-details{
+            width: 270px;
         }
     }
 

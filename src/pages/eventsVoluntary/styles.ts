@@ -7,6 +7,10 @@ export const Container = styled.section`
     color: black;
     box-sizing: border-box;
 
+    ::-webkit-scrollbar {
+        width: 0px;
+    }
+
     svg.Open{
         width: 30px;
         height: 30px;
@@ -29,6 +33,8 @@ export const Contents = styled.div`
     background: white;
     margin: auto;
     overflow: auto;
+
+    
     
 
     ::-webkit-scrollbar {
@@ -57,7 +63,12 @@ export const Contents = styled.div`
         margin: auto;
         background: #F5F8FA;
         
+        
     }
+
+    ::-webkit-scrollbar {
+            width: 0px;
+        }
 
     .Event h3{
         margin-top: 20px;
@@ -69,6 +80,17 @@ export const Contents = styled.div`
         padding: 10px 10px;
     }
 
+    .Cancel{
+        margin: 10px 0;
+        border: none;
+        background: #FF6666;
+        color: white;
+        font-weight: bold;
+        padding: 10px;
+        border-radius: 20px;
+
+    }
+
     @media(min-width: 768px){
         height: 680px;
         margin: auto 0 auto 0;
@@ -77,5 +99,19 @@ export const Contents = styled.div`
             width: 480px;
         }
         
+    }
+
+    @media(min-width: 1024px){
+        section{
+            width: 700px;
+        }
+
+        overflow: auto;
+
+        
+
+        .Event{
+            padding: 10px 50px;
+        }
     }
 `

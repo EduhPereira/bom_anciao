@@ -5,6 +5,8 @@ import api from "../../services/api";
 import { Container, Contents } from "./styles";
 import { useLogin } from "../../Providers/Login-Voluntaries";
 import { BiMenuAltLeft } from "react-icons/bi";
+import { Loading } from "../../components/loading";
+import { toast } from "react-toastify";
 
 interface iEventUser {
   id: number;
@@ -32,12 +34,20 @@ interface iUserName {
 
 export const EventsVoluntary = () => {
   const { userToken, userId } = useLogin();
+  const [visible, setVisible] = useState(false);
+  const [userName, setUseName] = useState<iUserName[]>([] as iUserName[]);
+  const [eventsUser, setUserEvents] = useState<iEventUser[]>(
+    [] as iEventUser[]
+  );
+  const [institutionId, setInstitutionId] = useState<iInstitute[]>(
+    [] as iInstitute[]
+  );
 
   useEffect(() => {
     reqEventUser();
     reqInstitutionId();
     reqUserName();
-  }, []);
+  }, [eventsUser]);
 
   const reqInstitutionId = async () => {
     const response = await api.get("/users?type=Institution", {
@@ -70,46 +80,54 @@ export const EventsVoluntary = () => {
     setVisible(true);
   };
 
-  const [eventsUser, setUserEvents] = useState<iEventUser[]>(
-    [] as iEventUser[]
-  );
-  const [institutionId, setInstitutionId] = useState<iInstitute[]>(
-    [] as iInstitute[]
-  );
-  const [visible, setVisible] = useState(false);
-  const [userName, setUseName] = useState<iUserName[]>([] as iUserName[]);
+  const cancelEvent = async (id: number) => {
+    const response = await api.delete(`subscribeEvents/${id}`, {
+      headers: {
+        Authorization: `Bearer ${userToken}`
+      }
+    })
+    reqEventUser();
+    toast.success("Você deixou de participar do evento")
+  }
 
-  console.log(institutionId);
-  console.log(eventsUser);
-  console.log(userName);
+
+
+
 
   return (
     <Container>
       <VoluntaryMenu visible={visible} setVisible={setVisible} />
       <BiMenuAltLeft className="Open" onClick={showMenu} />
       <Contents>
-        {userName.map((user) => {
-          return (
-            <>
-              <h4>Seja bem vindo {user.name}</h4>
-            </>
-          );
-        })}
 
-        <section className="Card">
-          <h2>Meus Eventos</h2>
-          {eventsUser.map((e, index) => {
+        <>
+          {userName.map((user) => {
             return (
-              <section className="Event">
-                <EventListUser
-                  key={index}
-                  event={e.event}
-                  instituteName={e.nameInstitution}
-                />
-              </section>
+              <>
+                <h4>Seja bem vindo {user.name}</h4>
+              </>
             );
           })}
-        </section>
+
+          <section className="Card">
+            <h2>Meus Eventos</h2>
+            {eventsUser.map((e, index) => {
+              return (
+                <section className="Event">
+                  <EventListUser
+                    key={index}
+                    event={e.event}
+                    instituteName={e.nameInstitution}
+                  />
+                  <button className="Cancel" onClick={() => cancelEvent(e.id)}>Cancelar</button>
+                </section>
+              );
+            })}
+          </section>
+        </>
+
+
+
       </Contents>
     </Container>
   );
