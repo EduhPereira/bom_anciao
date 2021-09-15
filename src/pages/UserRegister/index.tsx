@@ -3,8 +3,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { RegisterStyled } from "./styles";
+import { Container, Content, Form, Input, Button } from "./styles";
 import api from "../../services/api";
+import { Link } from "react-router-dom";
 interface IRegister {
   user: string;
   email: string;
@@ -53,34 +54,39 @@ const UserRegister = () => {
       });
   };
   return (
-    <div className="register-form-container">
-      <h2>Crie sua conta</h2>
-      <RegisterStyled onSubmit={handleSubmit(handleRegister)}>
-        <label>Nome completo</label>
-        <input type="text" {...register("user")} />
-        <span className="span-error">{errors.user?.message}</span>
+    <Container>
+      <Content>
+        <h2>Crie sua conta</h2>
+        <Form onSubmit={handleSubmit(handleRegister)}>
+          <label>Nome completo</label>
+          <Input type="text" {...register("user")} />
+          <span className="span-error">{errors.user?.message}</span>
 
-        <label>Email</label>
-        <input type="email" {...register("email")} />
-        <span className="span-error">{errors.email?.message}</span>
+          <label>Email</label>
+          <Input type="email" {...register("email")} />
+          <span className="span-error">{errors.email?.message}</span>
 
-        <label>Endereço</label>
-        <input type="text" {...register("address")} />
-        <span className="span-error">{errors.address?.message}</span>
+          <label>Endereço</label>
+          <Input type="text" {...register("address")} />
+          <span className="span-error">{errors.address?.message}</span>
 
-        <label>Senha</label>
-        <input type="text" {...register("password")} />
-        <span className="span-error">{errors.password?.message}</span>
+          <label>Senha</label>
+          <Input type="text" {...register("password")} />
+          <span className="span-error">{errors.password?.message}</span>
 
-        <label>Confirme sua senha</label>
-        <input type="text" {...register("confirmPassword")} />
-        <span className="span-error">{errors.confirmPassword?.message}</span>
-        <button type="submit">Enviar</button>
-      </RegisterStyled>
-      <div>
-        <ToastContainer />
-      </div>
-    </div>
+          <label>Confirme sua senha</label>
+          <Input type="text" {...register("confirmPassword")} />
+          <span className="span-error">{errors.confirmPassword?.message}</span>
+          <Button type="submit">Enviar</Button>
+          <div>
+            Já possui conta? <Link to="/login-voluntary">Entre</Link>
+          </div>
+        </Form>
+        <div>
+          <ToastContainer />
+        </div>
+      </Content>
+    </Container>
   );
 };
 export default UserRegister;
