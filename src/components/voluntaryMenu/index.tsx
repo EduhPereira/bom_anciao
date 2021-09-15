@@ -16,27 +16,34 @@ interface iUser {
 }
 
 const VoluntaryMenu = ({ visible, setVisible }: iVoluntaryProps) => {
-  const [user, setUser] = useState<iUser[]>([] as iUser[]);
 
-  const { userId, userName } = useLogin();
+  const id = localStorage.getItem("@Bom ancião: userID") || ""
 
-  const id = localStorage.getItem("@Bom ancião: userID") || "";
+  const [user, setUser] = useState<iUser[]>([] as iUser[])
+  const { userId, userName } = useLogin()
+
+
+
+  useEffect(() => {
+    reqUser()
+  }, [id])
+
 
   const showMenu = () => {
     setVisible(false);
   };
 
   const reqUser = async () => {
-    const response = await api.get(`users/${id}`);
-    setUser([response.data]);
-  };
+    const response = await api.get(`users?id=${id}`)
+    setUser(response.data)
+  }
 
   const handleLogout = async () => {
-    await localStorage.clear();
-    window.location.reload();
-  };
+    await localStorage.clear()
+    window.location.reload()
+  }
 
-  console.log(user);
+
 
   return (
     <>
@@ -44,8 +51,17 @@ const VoluntaryMenu = ({ visible, setVisible }: iVoluntaryProps) => {
         <Contents visible={visible}>
           <section className="User">
             <div>
-              <h1>{userName.substring(0, 1)}</h1>
-              <h2>{userName}</h2>
+              <h1>
+                {user.map((letter) => {
+                  return `${letter.name.substring(0, 1)}`
+                })}
+              </h1>
+
+              <h2>
+                {user.map((n) => {
+                  return `${n.name}`
+                })}
+              </h2>
             </div>
           </section>
           <AiOutlineClose className="Close" onClick={showMenu} />
@@ -67,21 +83,8 @@ const VoluntaryMenu = ({ visible, setVisible }: iVoluntaryProps) => {
       </Container>
     </>
   );
-};
+
+}
+
 
 export default VoluntaryMenu;
-
-/**
- *<h1>
-                {user.map((letter) => {
-                  return `${letter.name.substring(0, 1)}`
-                })}
-              </h1>
-
-              <h2>
-                {user.map((n) => {
-                  return `${n.name}`
-                })}
-              </h2>
- *
- */
