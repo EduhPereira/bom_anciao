@@ -130,7 +130,7 @@ const DashboardInstitution = () => {
             </ButtonCreateEvent>
           </TitleEvent>
           {events.map((event) => (
-            <Event>
+            <Event key={event.id}>
               <div className="card-event" key={event.idInstitution}>
                 <p>Atividade: {event.name}</p>
                 <p>
