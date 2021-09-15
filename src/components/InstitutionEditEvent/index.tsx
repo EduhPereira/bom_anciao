@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { useAddEvents } from "../../Providers/Events-Institution";
+import { useForm } from "react-hook-form";
 import { useAuthInstitution } from "../../Providers/Institution-Provider";
 import api from "../../services/api";
 import {
@@ -46,8 +45,11 @@ const EditEvents = ({
   loadEvents,
   id,
 }: IEditEventsProps) => {
-  const { CreateEvent } = useAddEvents();
   const { token } = useAuthInstitution();
+  const [resposta, setResposta] = useState<inputData[]>([] as inputData[]);
+
+  const institutionID =
+    localStorage.getItem("@Bom ancião: institutionID") || "";
 
   const Schema = yup.object().shape({
     name: yup.string().required("Campo obrigatório."),
@@ -58,61 +60,46 @@ const EditEvents = ({
     describe: yup.string(),
   });
 
-  const handleOnSubmit: SubmitHandler<inputData> = (data: inputData) => {
-    const nameFinder = nameInst.map((elem: any) => elem.name);
-    const nameInstitution = nameFinder.join();
-    CreateEvent(data, nameInstitution);
-    toast.success("Evento criado com sucesso!");
-    setModalAtt(false);
-    loadEvents();
-  };
-
   const getOneEvent = async (id: number) => {
-    const response = await api.get(`events/${id}`, {
+    const response = await api.get(`/events/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
+
+    const res = response.data;
+    setResposta([res]);
   };
-  const eventUpdate = async (editEvent: inputData) => {
-    const {
-      nameInstitution,
-      idInstitution,
-      name,
-      local,
-      date,
-      hour,
-      duration,
-      describe,
-    } = editEvent;
-    const response = await api
-      .patch(
-        `events/${id}`,
-        {
-          nameInstitution,
-          idInstitution,
-          name,
-          local,
-          date,
-          hour,
-          duration,
-          describe,
+
+  const eventUpdate = async (data: inputData) => {
+    const { name, local, describe, duration, hour, date } = data;
+    const response = await api.patch(
+      `events/${id}`,
+      {
+        nameInstitution: nameInst,
+        local,
+        date,
+        hour,
+        duration,
+        name,
+        idInstitution: institutionID,
+        describe,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((_) => toast.success("✅ Evento alterado com sucesso!"));
+      }
+    );
+    toast.success("✅ Evento alterado com sucesso!");
     console.log(response);
     loadEvents();
-    setModalAtt(true);
+    setModalAtt(false);
   };
 
   useEffect(() => {
     getOneEvent(id);
-  }, [id]);
+  }, []);
 
   const {
     register,
@@ -135,50 +122,77 @@ const EditEvents = ({
       <Content visible={modalAtt}>
         <AiOutlineClose className="Close" onClick={showMenu} />
         <EventTitle>
-          <h2>Cadastrar Evento</h2>
+          <h2>Atualizar Evento</h2>
         </EventTitle>
-        <Forms onSubmit={handleSubmit(handleOnSubmit)}>
-          <p>
-            Nome evento <span>{errors.name && errors.name?.message}</span>
-          </p>
+        {resposta.map((evento) => (
+          <Forms onSubmit={handleSubmit(eventUpdate)}>
+            <p>
+              Nome evento: <span>{errors.name && errors.name?.message}</span>
+            </p>
 
-          <Input data-testid="name-field" type="text" {...register("name")} />
-          <p>
-            Local <span>{errors.local && errors.local?.message}</span>
-          </p>
+            <Input
+              data-testid="name-field"
+              type="text"
+              placeholder={evento.name}
+              {...register("name")}
+            />
+            <p>
+              Local <span>{errors.local && errors.local?.message}</span>
+            </p>
 
-          <Input data-testid="local-field" type="text" {...register("local")} />
-          <p>
-            Data <span>{errors.date && errors.date?.message}</span>
-          </p>
+            <Input
+              data-testid="local-field"
+              type="text"
+              placeholder={evento.local}
+              {...register("local")}
+            />
+            <p>
+              Data <span>{errors.date && errors.date?.message}</span>
+            </p>
 
-          <Input data-testid="date-field" type="date" {...register("date")} />
-          <p>
-            Hora <span>{errors.hour && errors.hour?.message}</span>
-          </p>
+            <Input
+              data-testid="date-field"
+              type="date"
+              placeholder={evento.date}
+              {...register("date")}
+            />
+            <p>
+              Hora <span>{errors.hour && errors.hour?.message}</span>
+            </p>
 
-          <Input data-testid="hour-field" type="time" {...register("hour")} />
-          <p>
-            Duração <span>{errors.duration && errors.duration?.message}</span>
-          </p>
+            <Input
+              data-testid="hour-field"
+              type="time"
+              placeholder={evento.hour}
+              {...register("hour")}
+            />
+            <p>
+              Duração <span>{errors.duration && errors.duration?.message}</span>
+            </p>
 
-          <Input
-            data-testid="duration-field"
-            type="text"
-            {...register("duration")}
-          />
-          <p>Descrição</p>
-          <span>{errors.describe && errors.describe?.message}</span>
-          <TextArea data-testid="describe-field" {...register("describe")} />
-          <div className="btn-div">
-            <ButtonCancel onClick={closeModal} type="button">
-              Cancelar
-            </ButtonCancel>
-            <ButtonSave data-testid="form-button" type="submit">
-              Atualizar
-            </ButtonSave>
-          </div>
-        </Forms>
+            <Input
+              data-testid="duration-field"
+              type="text"
+              placeholder={evento.duration}
+              {...register("duration")}
+            />
+            <p>Descrição</p>
+            <span>{errors.describe && errors.describe?.message}</span>
+            <TextArea
+              data-testid="describe-field"
+              placeholder={evento.describe}
+              {...register("describe")}
+            />
+            <div className="btn-div">
+              <ButtonCancel onClick={closeModal} type="button">
+                Cancelar
+              </ButtonCancel>
+              <ButtonSave data-testid="form-button" type="submit">
+                Atualizar
+              </ButtonSave>
+            </div>
+          </Forms>
+        ))}
       </Content>
     </Container>
   );
