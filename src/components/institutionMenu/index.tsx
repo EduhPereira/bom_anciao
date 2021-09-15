@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { Container, Contents, Logout } from "./styles";
 import { AiOutlineClose } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
@@ -23,6 +23,8 @@ const InstitutionMenu = ({ visible, setVisible }: iInstitutionProps) => {
   const institutionID =
     localStorage.getItem("@Bom ancião: institutionID") || "";
 
+  const history = useHistory()
+
   const showMenu = () => {
     setVisible(false);
   };
@@ -39,6 +41,12 @@ const InstitutionMenu = ({ visible, setVisible }: iInstitutionProps) => {
   useEffect(() => {
     reqInst();
   }, [institutionID]);
+
+  const logout = async () => {
+    await localStorage.clear()
+    await history.push("/")
+    window.location.reload()
+  }
 
   return (
     <>
@@ -63,7 +71,7 @@ const InstitutionMenu = ({ visible, setVisible }: iInstitutionProps) => {
             Doações
           </NavLink>
 
-          <Logout onClick={signOut}>
+          <Logout onClick={logout}>
             <FiLogOut />
             <p>Sair</p>
           </Logout>
