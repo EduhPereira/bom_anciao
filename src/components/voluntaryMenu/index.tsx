@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { Container, Contents, Logout } from "./styles";
 import { AiOutlineClose } from "react-icons/ai";
 import api from "../../services/api";
@@ -22,6 +22,7 @@ const VoluntaryMenu = ({ visible, setVisible }: iVoluntaryProps) => {
   const [user, setUser] = useState<iUser[]>([] as iUser[])
   const { userId, userName } = useLogin()
 
+  const history = useHistory()
 
 
   useEffect(() => {
@@ -40,6 +41,7 @@ const VoluntaryMenu = ({ visible, setVisible }: iVoluntaryProps) => {
 
   const handleLogout = async () => {
     await localStorage.clear()
+    await history.push("/")
     window.location.reload()
   }
 
