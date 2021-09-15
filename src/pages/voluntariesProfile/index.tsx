@@ -67,7 +67,6 @@ const VoluntariesProfile = () => {
     reset();
   };
 
-  console.log(editable);
 
   return (
     <Container>
