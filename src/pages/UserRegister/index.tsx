@@ -78,11 +78,11 @@ const UserRegister = () => {
           <span className="span-error">{errors.address?.message}</span>
 
           <label>Senha</label>
-          <Input type="text" {...register("password")} />
+          <Input type="password" {...register("password")} />
           <span className="span-error">{errors.password?.message}</span>
 
           <label>Confirme sua senha</label>
-          <Input type="text" {...register("confirmPassword")} />
+          <Input type="password" {...register("confirmPassword")} />
           <span className="span-error">{errors.confirmPassword?.message}</span>
           <Button type="submit">Enviar</Button>
           <div>
