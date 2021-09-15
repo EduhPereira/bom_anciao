@@ -9,14 +9,12 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 import oldman from "../../Assets/img/oldman.svg";
 import grandma from "../../Assets/img/grandma.svg";
-import { Redirect } from "react-router";
 interface IRegister {
   name: string;
   email: string;
   cpf: string;
   city: string;
   address: string;
-  about: string;
   type: string;
   password: string;
   confirmPassword: string;
@@ -35,7 +33,6 @@ const UserRegister = () => {
       .required("Campo obrigatório"),
     city: yup.string().required("Campo obrigatório"),
     address: yup.string().required("Campo obrigatório"),
-    about: yup.string().required("Campo obrigatório"),
     password: yup
       .string()
       .min(6, "Mínimo de oito caracteres")
@@ -102,10 +99,6 @@ const UserRegister = () => {
           <label>Endereço</label>
           <Input type="text" {...register("address")} />
           <span className="span-error">{errors.address?.message}</span>
-
-          <label>Sobre você</label>
-          <Input type="text" {...register("about")} />
-          <span className="span-error">{errors.about?.message}</span>
 
           <label>Senha</label>
           <Input type="password" {...register("password")} />
