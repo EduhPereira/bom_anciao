@@ -5,7 +5,7 @@ import api from "../../services/api";
 import { Container, Contents } from "./styles";
 import { useLogin } from "../../Providers/Login-Voluntaries";
 import { BiMenuAltLeft } from "react-icons/bi";
-import { Loading } from "../../components/loading";
+import { Loading } from "../../components/loadoing";
 import { toast } from "react-toastify";
 
 interface iEventUser {
@@ -83,23 +83,18 @@ export const EventsVoluntary = () => {
   const cancelEvent = async (id: number) => {
     const response = await api.delete(`subscribeEvents/${id}`, {
       headers: {
-        Authorization: `Bearer ${userToken}`
-      }
-    })
+        Authorization: `Bearer ${userToken}`,
+      },
+    });
     reqEventUser();
-    toast.success("Você deixou de participar do evento")
-  }
-
-
-
-
+    toast.success("Você deixou de participar do evento");
+  };
 
   return (
     <Container>
       <VoluntaryMenu visible={visible} setVisible={setVisible} />
       <BiMenuAltLeft className="Open" onClick={showMenu} />
       <Contents>
-
         <>
           <h4>
           {userName.map((user) => {
@@ -117,15 +112,14 @@ export const EventsVoluntary = () => {
                     event={e.event}
                     instituteName={e.nameInstitution}
                   />
-                  <button className="Cancel" onClick={() => cancelEvent(e.id)}>Cancelar</button>
+                  <button className="Cancel" onClick={() => cancelEvent(e.id)}>
+                    Cancelar
+                  </button>
                 </section>
               );
             })}
           </section>
         </>
-
-
-
       </Contents>
     </Container>
   );
