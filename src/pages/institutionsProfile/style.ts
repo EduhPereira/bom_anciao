@@ -121,6 +121,16 @@ export const ContainerUpdate = styled.div`
       height: 40px;
     }
   }
+
+  animation: background 0.3s;
+  @keyframes background {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `;
 
 export const FormUpdate = styled.form`
@@ -163,6 +173,15 @@ export const FormUpdate = styled.form`
     background-color: #d4f8ec;
     color: #227475;
   }
+
+  animation: Forms 0.3s;
+  @keyframes Forms {
+    from {
+      opacity: 0;
+      transform: translateX(400%);
+    }
+  }
+
   @media (min-width: 768px) {
     width: 40%;
     height: 80%;
