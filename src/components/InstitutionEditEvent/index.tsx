@@ -125,7 +125,7 @@ const EditEvents = ({
           <h2>Atualizar Evento</h2>
         </EventTitle>
         {resposta.map((evento) => (
-          <Forms onSubmit={handleSubmit(eventUpdate)}>
+          <Forms onSubmit={handleSubmit(eventUpdate)} key={evento.id}>
             <p>
               Nome evento: <span>{errors.name && errors.name?.message}</span>
             </p>

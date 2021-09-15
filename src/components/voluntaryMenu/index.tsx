@@ -4,7 +4,7 @@ import { Container, Contents, Logout } from "./styles";
 import { AiOutlineClose } from "react-icons/ai";
 import api from "../../services/api";
 import { useLogin } from "../../Providers/Login-Voluntaries";
-import { FiLogOut } from 'react-icons/fi'
+import { FiLogOut } from "react-icons/fi";
 
 interface iVoluntaryProps {
   visible: boolean;
@@ -12,19 +12,17 @@ interface iVoluntaryProps {
 }
 
 interface iUser {
-  name: string
+  name: string;
 }
-
 
 const VoluntaryMenu = ({ visible, setVisible }: iVoluntaryProps) => {
 
-
+  const id = localStorage.getItem("@Bom ancião: userID") || ""
 
   const [user, setUser] = useState<iUser[]>([] as iUser[])
-
   const { userId, userName } = useLogin()
 
-  const id = localStorage.getItem("@Bom ancião: userID") || ""
+
 
   useEffect(() => {
     reqUser()
@@ -78,28 +76,15 @@ const VoluntaryMenu = ({ visible, setVisible }: iVoluntaryProps) => {
           </NavLink>
 
           <Logout onClick={handleLogout}>
-
             <FiLogOut />
             <p>Sair</p>
-
           </Logout>
         </Contents>
       </Container>
     </>
   );
-};
+
+}
+
 
 export default VoluntaryMenu;
-
-
-/**
- *
-
-              <h1>
-                {userName.substring(0, 1)}
-              </h1>
-              <h2>
-                {userName}
-              </h2>
- *
- */
