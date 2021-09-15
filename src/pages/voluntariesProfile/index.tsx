@@ -49,6 +49,7 @@ const VoluntariesProfile = () => {
       },
     });
   };
+
   useEffect(() => {
     userInfoData();
   }, [userInfo]);

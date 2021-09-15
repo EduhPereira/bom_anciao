@@ -108,6 +108,8 @@ export const ContainerUpdate = styled.div`
   align-items: center;
   justify-content: center;
 
+  animation: background 0.3s;
+
   input {
     background: #f5f8fa;
     border-radius: 20px;
@@ -116,6 +118,15 @@ export const ContainerUpdate = styled.div`
     margin-bottom: 15px;
     border: none;
     padding: 10px;
+  }
+
+  @keyframes background {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 `;
 
@@ -134,6 +145,8 @@ export const FormUpdate = styled.form`
   align-items: center;
 
   border-radius: 20px;
+
+  animation: Forms 0.3s;
   div {
     width: 70%;
     margin: 10px;
@@ -158,6 +171,13 @@ export const FormUpdate = styled.form`
     }
     .btns {
       justify-content: space-around;
+    }
+  }
+
+  @keyframes Forms {
+    from {
+      opacity: 0;
+      transform: translateX(400%);
     }
   }
 `;
