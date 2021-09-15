@@ -13,6 +13,7 @@ import VoluntariesProfile from "../pages/voluntariesProfile";
 import InstitutionProfile from "../pages/institutionsProfile";
 import { useLogin } from "../Providers/Login-Voluntaries";
 import { useAuthInstitution } from "../Providers/Institution-Provider";
+import { PageNotFound } from "../components/pageNotFound";
 
 const Routes = () => {
 
@@ -73,6 +74,10 @@ const Routes = () => {
       <Route path="/donations">
         {institutionId ? <Solicitations />: <Redirect to="/login-institution"/>}
         
+      </Route>
+
+      <Route path="*">
+        <PageNotFound/>
       </Route>
 
     </Switch>
