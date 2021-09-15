@@ -21,7 +21,7 @@ export const Container = styled.div`
 
 export const Content = styled.div`
   width: 300px;
-  height: 550px;
+  height: 650px;
 
   background-color: white;
   border-radius: 15px;
@@ -52,7 +52,7 @@ export const Content = styled.div`
   @media (min-width: 728px) {
     align-self: center;
     width: 40%;
-    height: 90%;
+    height: 500px;
   }
 `;
 
@@ -69,12 +69,15 @@ export const Form = styled.form`
   span {
     color: red;
   }
+  label {
+    font-size: 0.7rem;
+  }
 `;
 export const Input = styled.input`
   background: #f5f8fa;
   border-radius: 10px;
   width: 100%;
-  height: 44px;
+  height: 10px;
   margin-bottom: 15px;
   border: none;
   padding: 10px;
@@ -84,14 +87,14 @@ export const Button = styled.button`
   background: #70cccc;
   border-radius: 10px;
   width: 100%;
-  padding: 8px 10px;
+  padding: 4px 6px;
   margin-bottom: 15px;
   border: none;
 
   color: white;
 
   font-weight: bolder;
-  font-size: 1.3rem;
+  font-size: 1.15rem;
 
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;

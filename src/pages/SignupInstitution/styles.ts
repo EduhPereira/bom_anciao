@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const RegisterStyled = styled.form`
   width: 100vw;
@@ -35,9 +35,19 @@ export const RegisterStyled = styled.form`
   }
 `;
 
+const Appear = keyframes`
+  from{
+    opacity:0;
+  }
+  to{
+    opacity:1;
+  }
+`;
+
 export const Content = styled.div`
-  width: 45%;
+  width: 90%;
   height: 95%;
+  padding: 10px;
 
   display: flex;
   flex-direction: column;
@@ -48,6 +58,12 @@ export const Content = styled.div`
   color: #8fa7b2;
 
   border-radius: 10px;
+
+  border-radius: 10px;
+  box-shadow: 7px 7px 5px 0px rgba(44, 44, 44, 0.75);
+  -webkit-box-shadow: 7px 7px 5px 0px rgba(44, 44, 44, 0.75);
+  -moz-box-shadow: 7px 7px 5px 0px rgba(44, 44, 44, 0.75);
+  animation: ${Appear} 1s linear;
 
   label {
     font-size: 16px;
@@ -61,11 +77,17 @@ export const Content = styled.div`
     color: #c1a487;
     width: 89%;
     height: 10%;
+    text-align: center;
+    font-size: 1.3rem;
+  }
+
+  @media (min-width: 728px) {
+    width: 35%;
   }
 `;
 
 export const Input = styled.input`
-  width: 40vw;
+  width: 90%;
   height: 4vh;
 
   margin-bottom: 15px;
@@ -84,7 +106,8 @@ export const Button = styled.button`
   font-size: 20px;
   font-weight: bold;
 
-  width: 20vw;
+  width: 65%;
+  padding: 6px 10px;
 
   background-color: #c1a487;
   color: #ffffff;
@@ -93,4 +116,9 @@ export const Button = styled.button`
   border: none;
   outline: none;
   cursor: pointer;
+  transition: all 0.35s linear;
+
+  :hover {
+    background-color: #c7ae91;
+  }
 `;
