@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import myImage from "../../Assets/img/institution-icon.jpg";
 
 interface iContainerProps {
   visible: boolean;
@@ -47,11 +46,19 @@ export const Contents = styled.div<iContainerProps>`
   height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding-left: 30px;
+  position: relative;
   animation: ${(props) => (props.visible ? "menu 0.4s" : "none")};
   opacity: ${(props) => `${props.visible ? "1" : "0"}`};
   transition: 0.3s;
+
+  a {
+    color: #acf1e0;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
 
   @keyframes menu {
     from {
@@ -60,13 +67,81 @@ export const Contents = styled.div<iContainerProps>`
     }
   }
 
+  .Institution div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+    transform: translateX(-35%);
+    margin-top: 40px;
+    background: #227475;
+    padding: 20px;
+    border-radius: 100px;
+  }
+
+  .Institution div h1 {
+    background: white;
+    color: #227475;
+    width: 70px;
+    height: 55px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 55px;
+    font-size: 2rem;
+  }
+
+  .Institution div h2 {
+    font-size: 1.2rem;
+    padding-left: 10px;
+    color: white;
+  }
+
+  .Close {
+    position: absolute;
+    right: 10px;
+    color: white;
+    width: 30px;
+    height: 30px;
+    transform: translate(-10%, 70%);
+  }
+
   @media (min-width: 768px) {
     width: 250px;
     height: 90vh;
     margin: auto 0 auto 20px;
-    align-items: flex-start;
+    align-items: center;
     justify-content: flex-start;
     opacity: 1;
+    padding: 0;
+
+    .Institution div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin-bottom: 40px;
+      transform: translateX(-35%);
+      margin: auto;
+      background: #227475;
+      padding: 0;
+      border-radius: 0;
+      transform: none;
+    }
+
+    .Institution div h1 {
+      margin-top: 20px;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 80px;
+      font-size: 3rem;
+    }
+
+    .Institution div h2 {
+      padding: 0;
+      margin-bottom: 40px;
+      margin-top: 10px;
+    }
 
     .Close {
       display: none;
@@ -78,6 +153,7 @@ export const Contents = styled.div<iContainerProps>`
       position: relative;
       color: white;
       font-weight: bold;
+      margin-bottom: 0;
     }
     a::before {
       position: absolute;
@@ -90,21 +166,32 @@ export const Contents = styled.div<iContainerProps>`
       right: 50%;
     }
   }
+`;
 
-  .avatar {
-    display: flex;
-    width: 100%;
-    height: 30%;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
+export const Logout = styled.div`
+  display: flex;
+  margin: 0 auto;
+  width: 100px;
+  background: #f5f8fa;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translate(50%, 100%);
+  right: 50%;
+  bottom: 50%;
+  padding: 10px;
+  color: #227475;
+  font-weight: bold;
+  border-radius: 30px;
+  cursor: pointer;
+  svg {
+    padding-right: 10px;
+    width: 30px;
+    height: 30px;
   }
 
-  img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    border: 2px solid black;
-    background-color: #fff;
+  @media (min-width: 768px) {
+    bottom: 30%;
   }
 `;
