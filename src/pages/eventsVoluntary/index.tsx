@@ -5,7 +5,7 @@ import api from "../../services/api";
 import { Container, Contents } from "./styles";
 import { useLogin } from "../../Providers/Login-Voluntaries";
 import { BiMenuAltLeft } from "react-icons/bi";
-// import { Loading } from "../../components/loading";
+import { Loading } from "../../components/loadoing";
 import { toast } from "react-toastify";
 
 interface iEventUser {
