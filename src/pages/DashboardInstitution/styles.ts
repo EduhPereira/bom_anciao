@@ -25,10 +25,12 @@ export const Container = styled.div`
 
 export const Content = styled.div`
   width: 100vw;
+
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  background-color: white;
 
   h2 {
     color: #000;
@@ -43,7 +45,7 @@ export const Content = styled.div`
 
   @media (min-width: 768px) {
     width: 100vw;
-    height: 100vh;
+    height: 72vh;
     margin: auto 0 auto 0;
   }
 `;
@@ -51,7 +53,7 @@ export const Content = styled.div`
 export const CardEvents = styled.div`
   width: 350px;
   height: 450px;
-  background-color: #fff;
+  background-color: #f5f8fa;
   box-shadow: 0px 7px 10px -4px rgba(0, 0, 0, 0.75);
 
   color: black;
@@ -62,6 +64,10 @@ export const CardEvents = styled.div`
   overflow-y: scroll;
   ::-webkit-scrollbar {
     width: 0px;
+  }
+  @media (min-width: 768px) {
+    width: 500px;
+    height: 450px;
   }
 `;
 

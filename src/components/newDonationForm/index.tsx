@@ -81,13 +81,13 @@ const NewDonationForm = ({ setModal, modal }: ISolicitationProps) => {
       {modal && (
         <Container>
           <div>
-            <h2>Nova Solicitação</h2>
             <form onSubmit={handleSubmit(handleSolicitation)}>
-              <div>
+              <h2>Nova Solicitação</h2>
+              <div className="updateForm">
                 <label>Nome do item</label>
                 <input type="text" required {...register("name")} />
               </div>
-              <div>
+              <div className="updateForm">
                 <label>Quantidade</label>
                 <input type="text" required {...register("quantity")} />
               </div>

@@ -45,9 +45,11 @@ const InstitutionProfile = () => {
       },
     });
   };
+
   useEffect(() => {
     userInfoData();
-  }, []);
+    const data = userInfo;
+  }, [userInfo]);
 
   const edit = () => {
     setEditable(true);
@@ -61,8 +63,6 @@ const InstitutionProfile = () => {
     setEditable(false);
     reset();
   };
-
-  console.log(editable);
 
   return (
     <Container>
