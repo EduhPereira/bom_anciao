@@ -1,9 +1,11 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Button, Content, Form, Input, Container } from "./style";
+import { Button, Content, Form, Input, Container, Aside } from "./style";
 import * as yup from "yup";
 import { useLogin } from "../../Providers/Login-Voluntaries";
 import { Link, useHistory } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
+import oldman from "../../Assets/img/oldman.svg";
+import grandma from "../../Assets/img/grandma.svg";
 
 type LoginData = {
   email: string;
@@ -32,6 +34,10 @@ const VoluntariesLogin = () => {
 
   return (
     <Container>
+      <Aside>
+        <img src={oldman} alt="" />
+      </Aside>
+
       <Content>
         <h2>Entre em sua conta</h2>
 
@@ -50,6 +56,9 @@ const VoluntariesLogin = () => {
           </div>
         </Form>
       </Content>
+      <Aside>
+        <img src={grandma} alt="" />
+      </Aside>
     </Container>
   );
 };

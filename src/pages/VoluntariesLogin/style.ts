@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const Container = styled.div`
   height: 100vh;
@@ -13,11 +13,15 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (min-width: 728px) {
+    justify-content: space-between;
+  }
 `;
 
 export const Content = styled.div`
-  width: 350px;
-  height: 400px;
+  width: 300px;
+  height: 450px;
 
   background-color: white;
   border-radius: 15px;
@@ -28,6 +32,10 @@ export const Content = styled.div`
   justify-content: center;
   align-items: center;
 
+  box-shadow: 7px 7px 5px 0px rgba(49, 48, 48, 0.75);
+  -webkit-box-shadow: 7px 7px 5px 0px rgba(49, 48, 48, 0.75);
+  -moz-box-shadow: 7px 7px 5px 0px rgba(49, 48, 48, 0.75);
+
   a {
     text-decoration: none;
     color: #8fa7b2;
@@ -37,10 +45,10 @@ export const Content = styled.div`
   a:hover {
     color: #227475;
   }
-  @media (max-width: 800px) {
+  @media (min-width: 728px) {
     align-self: center;
-    width: 80%;
-    height: 50%;
+    width: 30%;
+    height: 60%;
   }
 `;
 
@@ -54,6 +62,7 @@ export const Form = styled.form`
   flex-direction: column;
   justify-content: center;
   align-self: center;
+
   span {
     color: red;
   }
@@ -82,4 +91,30 @@ export const Button = styled.button`
   font-size: 1.3rem;
 
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+`;
+
+const Appear = keyframes`
+  from{
+    opacity:0;
+  }
+  to{
+    opacity:1;
+  }
+`;
+
+export const Aside = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100%;
+  width: 35%;
+  animation: ${Appear} 1s linear;
+  img {
+    width: 100%;
+    height: 60%;
+  }
+
+  @media (max-width: 700px) {
+    display: none;
+  }
 `;
