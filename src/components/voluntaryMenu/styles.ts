@@ -199,6 +199,7 @@ export const Logout = styled.div`
     color: #227475;
     font-weight: bold;
     border-radius: 30px;
+    cursor: pointer;
 
     svg{
         padding-right: 10px;
