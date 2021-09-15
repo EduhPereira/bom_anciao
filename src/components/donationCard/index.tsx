@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container, Content } from "./style";
+import { Container, Content, ReciveContent } from "./style";
 import { useAuthInstitution } from "../../Providers/Institution-Provider";
 import api from "../../services/api";
 import DonationUpdateModal from "../donationUpdateModal";
@@ -34,13 +34,20 @@ const DonationCard = ({ key, donation }: IDonationCardProps) => {
       <Content>
         <span>Item: {donation.name}</span> <br />
         <span>Quantidade: {donation.quantity}</span> <br />
-        <span>Recebido: {donation.received}</span>
-        <button className="delete" onClick={() => deleteDonation(donation.id)}>
-          Remover
-        </button>
-        <button className="update" onClick={() => setShowUpdateModal(true)}>
-          Atualizar
-        </button>
+        <ReciveContent>
+          <span>Recebido: {donation.received}</span>
+          <div>
+            <button
+              className="delete"
+              onClick={() => deleteDonation(donation.id)}
+            >
+              Remover
+            </button>
+            <button className="update" onClick={() => setShowUpdateModal(true)}>
+              Atualizar
+            </button>
+          </div>
+        </ReciveContent>
         <hr />
       </Content>
 
