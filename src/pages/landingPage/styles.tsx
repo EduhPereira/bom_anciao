@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const Header = styled.header`
   display: flex;
@@ -35,6 +35,28 @@ export const Header = styled.header`
   }
 `;
 
+const FromLeft = keyframes`
+  from{
+    opacity:0;
+    transform:translateX(-50px);
+  }
+  to{
+    opacity:1;
+    transform:translateX(0px);
+  }
+`;
+
+const FromRight = keyframes`
+  from{
+    opacity:0;
+    transform:translateX(50px);
+  }
+  to{
+    opacity:1;
+    transform:translateX(0px);
+  }
+`;
+
 export const Functionalities = styled.section`
   display: flex;
   justify-content: center;
@@ -47,6 +69,7 @@ export const Functionalities = styled.section`
     justify-content: center;
     align-items: center;
     width: 60%;
+    animation: ${FromLeft} 1s linear;
     img {
       width: 60%;
     }
@@ -58,6 +81,7 @@ export const Functionalities = styled.section`
     justify-content: center;
     align-items: center;
     width: 40%;
+    animation: ${FromRight} 1s linear;
 
     h1 {
       display: flex;
