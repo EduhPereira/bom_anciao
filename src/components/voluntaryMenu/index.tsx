@@ -4,7 +4,7 @@ import { Container, Contents, Logout } from "./styles";
 import { AiOutlineClose } from "react-icons/ai";
 import api from "../../services/api";
 import { useLogin } from "../../Providers/Login-Voluntaries";
-import { FiLogOut } from 'react-icons/fi'
+import { FiLogOut } from "react-icons/fi";
 
 interface iVoluntaryProps {
   visible: boolean;
@@ -12,36 +12,31 @@ interface iVoluntaryProps {
 }
 
 interface iUser {
-  name: string
+  name: string;
 }
 
-
 const VoluntaryMenu = ({ visible, setVisible }: iVoluntaryProps) => {
-  const [user, setUser] = useState<iUser[]>([] as iUser[])
+  const [user, setUser] = useState<iUser[]>([] as iUser[]);
 
-  const { userId, userName } = useLogin()
+  const { userId, userName } = useLogin();
 
-  const id = localStorage.getItem("@Bom ancião: userID") || ""
-
+  const id = localStorage.getItem("@Bom ancião: userID") || "";
 
   const showMenu = () => {
     setVisible(false);
   };
 
   const reqUser = async () => {
-    const response = await api.get(`users/${id}`)
-    setUser([response.data])
-  }
+    const response = await api.get(`users/${id}`);
+    setUser([response.data]);
+  };
 
   const handleLogout = async () => {
-    await localStorage.clear()
-    window.location.reload()
-  }
+    await localStorage.clear();
+    window.location.reload();
+  };
 
-
-  console.log(user)
-
-
+  console.log(user);
 
   return (
     <>
@@ -49,12 +44,8 @@ const VoluntaryMenu = ({ visible, setVisible }: iVoluntaryProps) => {
         <Contents visible={visible}>
           <section className="User">
             <div>
-              <h1>
-                {userName.substring(0, 1)}
-              </h1>
-              <h2>
-                {userName}
-              </h2>
+              <h1>{userName.substring(0, 1)}</h1>
+              <h2>{userName}</h2>
             </div>
           </section>
           <AiOutlineClose className="Close" onClick={showMenu} />
@@ -69,10 +60,8 @@ const VoluntaryMenu = ({ visible, setVisible }: iVoluntaryProps) => {
           </NavLink>
 
           <Logout onClick={handleLogout}>
-
             <FiLogOut />
             <p>Sair</p>
-
           </Logout>
         </Contents>
       </Container>
@@ -81,7 +70,6 @@ const VoluntaryMenu = ({ visible, setVisible }: iVoluntaryProps) => {
 };
 
 export default VoluntaryMenu;
-
 
 /**
  *<h1>
