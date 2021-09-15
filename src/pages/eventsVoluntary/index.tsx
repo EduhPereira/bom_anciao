@@ -34,12 +34,20 @@ interface iUserName {
 
 export const EventsVoluntary = () => {
   const { userToken, userId } = useLogin();
+  const [visible, setVisible] = useState(false);
+  const [userName, setUseName] = useState<iUserName[]>([] as iUserName[]);
+  const [eventsUser, setUserEvents] = useState<iEventUser[]>(
+    [] as iEventUser[]
+  );
+  const [institutionId, setInstitutionId] = useState<iInstitute[]>(
+    [] as iInstitute[]
+  );
 
   useEffect(() => {
     reqEventUser();
     reqInstitutionId();
     reqUserName();
-  }, []);
+  }, [eventsUser]);
 
   const reqInstitutionId = async () => {
     const response = await api.get("/users?type=Institution", {
@@ -72,9 +80,9 @@ export const EventsVoluntary = () => {
     setVisible(true);
   };
 
-  const cancelEvent = async(id: number) => {
-    const response = await api.delete(`subscribeEvents/${id}`,{
-      headers:{
+  const cancelEvent = async (id: number) => {
+    const response = await api.delete(`subscribeEvents/${id}`, {
+      headers: {
         Authorization: `Bearer ${userToken}`
       }
     })
@@ -82,23 +90,17 @@ export const EventsVoluntary = () => {
     toast.success("Você deixou de participar do evento")
   }
 
-  const [eventsUser, setUserEvents] = useState<iEventUser[]>(
-    [] as iEventUser[]
-  );
-  const [institutionId, setInstitutionId] = useState<iInstitute[]>(
-    [] as iInstitute[]
-  );
-  const [visible, setVisible] = useState(false);
-  const [userName, setUseName] = useState<iUserName[]>([] as iUserName[]);
+
+
 
 
   return (
     <Container>
-        <VoluntaryMenu visible={visible} setVisible={setVisible} />
-        <BiMenuAltLeft className="Open" onClick={showMenu} />
-        <Contents>
+      <VoluntaryMenu visible={visible} setVisible={setVisible} />
+      <BiMenuAltLeft className="Open" onClick={showMenu} />
+      <Contents>
 
-          <>
+        <>
           {userName.map((user) => {
             return (
               <>
@@ -106,7 +108,7 @@ export const EventsVoluntary = () => {
               </>
             );
           })}
-  
+
           <section className="Card">
             <h2>Meus Eventos</h2>
             {eventsUser.map((e, index) => {
@@ -122,11 +124,11 @@ export const EventsVoluntary = () => {
               );
             })}
           </section>
-          </>
+        </>
 
-          
-         
-        </Contents>
+
+
+      </Contents>
     </Container>
   );
 };

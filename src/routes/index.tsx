@@ -39,7 +39,7 @@ const Routes = () => {
       </Route>
 
       <Route path="/login-voluntary">
-        {token ? <EventsVoluntary /> : <VoluntariesLogin/>}
+        {token ? <Redirect to="/my-events"/> : <VoluntariesLogin/>}
       </Route>
 
       <Route path="/signup-voluntary">

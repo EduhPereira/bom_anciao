@@ -11,45 +11,43 @@ interface iVoluntaryProps {
   setVisible: Dispatch<SetStateAction<boolean>>;
 }
 
-interface iUser{
+interface iUser {
   name: string
 }
 
 
 const VoluntaryMenu = ({ visible, setVisible }: iVoluntaryProps) => {
-  const {userId} = useLogin()
-  useEffect(()=>{
+  const { userId } = useLogin()
+  useEffect(() => {
     reqUser()
   }, [])
 
-  const {userId: id} = useLogin()
+  const { userId: id } = useLogin()
 
   const showMenu = () => {
     setVisible(false);
   };
 
-const reqUser = async() => {
-  const response = await api.get(`users/${id}`)
-  setUser(response.data)
-}
+  const reqUser = async () => {
+    const response = await api.get(`users/${id}`)
+    setUser([response.data])
+  }
 
-const handleLogout = async() => {
-  await localStorage.clear()
-  window.location.reload()
-}
+  const handleLogout = async () => {
+    await localStorage.clear()
+    window.location.reload()
+  }
 
-const[user, setUser] = useState<iUser[]>([] as iUser[])
+  const [user, setUser] = useState<iUser[]>([] as iUser[])
 
-console.log("Teste", user)
+  console.log("Teste", user)
 
   return (
     <>
       <Container visible={visible}>
         <Contents visible={visible}>
           <section className="User">
-            <div>
-                
-            </div>
+            
 
           </section>
           <AiOutlineClose className="Close" onClick={showMenu} />
@@ -62,11 +60,11 @@ console.log("Teste", user)
           <NavLink activeClassName="selected" exact to="/search-institutions">
             Buscar Instituições
           </NavLink>
-          
+
           <Logout onClick={handleLogout}>
 
-          <FiLogOut />
-          <p>Sair</p>
+            <FiLogOut />
+            <p>Sair</p>
 
           </Logout>
         </Contents>
@@ -79,7 +77,11 @@ export default VoluntaryMenu;
 
 
 /**
- * 
- * <h1>{name.substring(0, 1)}</h1>
-                <h2>{name}</h2>
+ *{user.map((n) => {
+              return <div>
+                <h1>{n.name.substring(0, 1)}</h1>
+                <h2>{n.name}</h2>
+              </div>
+            })}
+ *
  */
