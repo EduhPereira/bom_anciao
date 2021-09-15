@@ -54,7 +54,7 @@ const NewDonationForm = ({ setModal, modal }: ISolicitationProps) => {
           name,
           quantity: Number(quantity),
           received: 0,
-          institutionId: Number(institutionId),
+          idInstitution: Number(institutionId),
         },
         {
           headers: {

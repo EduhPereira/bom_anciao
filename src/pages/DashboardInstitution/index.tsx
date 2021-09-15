@@ -95,7 +95,7 @@ const DashboardInstitution = () => {
   useEffect(() => {
     loadEvents();
     loadNameInstitution();
-  }, []);
+  }, [events]);
 
   const showMenu = () => {
     setVisible(true);

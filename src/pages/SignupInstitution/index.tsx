@@ -66,7 +66,7 @@ const RegisterInstitution = () => {
     <div>
       <RegisterStyled onSubmit={handleSubmit(handleRegister)}>
         <Content>
-          <h2>Cadastro</h2>
+          <h2>Cadastro Institucional</h2>
           <label htmlFor="name">
             Nome da instituição:
             <span className="error">{errors.name && errors.name?.message}</span>
