@@ -26,24 +26,12 @@ const Routes = () => {
         <LandingPage />
       </Route>
 
-      <Route path="/login-institution">
-        <LoginInstitution />
-      </Route>
-
-      <Route path="/signup-institution">
-        <RegisterInstitution />
-      </Route>
-
-      <Route path="/events-institution">
-        <DashboardInstitution />
-      </Route>
-
       <Route path="/login-voluntary">
         {token ? <Redirect to="/my-events"/> : <VoluntariesLogin/>}
       </Route>
 
       <Route path="/signup-voluntary">
-        <UserRegister />
+        {token ? <Redirect to="/my-events"/> : <UserRegister />}
       </Route>
 
       <Route path="/my-events">
@@ -54,20 +42,37 @@ const Routes = () => {
         {token ? <VoluntariesProfile/> : <Redirect to="/login-voluntary"/>}
       </Route>
 
-      <Route path="/institution-data">
-        <InstitutionProfile />
+      <Route path="/institution/:id">
+        {token ? <InstitutionDetails /> : <Redirect to="/login-voluntary"/>}
       </Route>
 
       <Route path="/search-institutions">
-        {token ? <InstitutionSearch/> : <Redirect to="/search-institutions"/>}
+        {token ? <InstitutionSearch/> : <Redirect to="/login-voluntary"/>}
       </Route>
 
-      <Route path="/institution/:id">
-        <InstitutionDetails />
+      
+
+
+
+      <Route path="/login-institution">
+      {institutionId ? <Redirect to="/events-institution"/> : <LoginInstitution />}
+      </Route>
+
+      <Route path="/signup-institution">
+        {institutionId ? <Redirect to="/events-institution"/> : <RegisterInstitution />}
+      </Route>
+
+      <Route path="/events-institution">
+        {institutionId ? <DashboardInstitution /> : <Redirect to="/login-institution"/>}
+      </Route>
+
+      <Route path="/institution-data">
+        {institutionId ? <InstitutionProfile />: <Redirect to="/login-institution"/>}
       </Route>
 
       <Route path="/donations">
-        <Solicitations />
+        {institutionId ? <Solicitations />: <Redirect to="/login-institution"/>}
+        
       </Route>
 
     </Switch>

@@ -59,7 +59,7 @@ export const EventsVoluntary = () => {
   };
 
   const reqUserName = async () => {
-    const response = await api.get(`/users?id=${userId}`, {
+    const response = await api.get(`users?id=${userId}`, {
       headers: {
         Authorization: `Bearer ${userToken}`,
       },
@@ -68,7 +68,7 @@ export const EventsVoluntary = () => {
   };
 
   const reqEventUser = async () => {
-    const response = await api.get(`/subscribeEvents?idUser=${userId}`, {
+    const response = await api.get(`subscribeEvents?idUser=${userId}`, {
       headers: {
         Authorization: `Bearer ${userToken}`,
       },
@@ -101,13 +101,11 @@ export const EventsVoluntary = () => {
       <Contents>
 
         <>
+          <h4>
           {userName.map((user) => {
-            return (
-              <>
-                <h4>Seja bem vindo {user.name}</h4>
-              </>
-            );
+              return `Seja bem vindo ${user.name}`
           })}
+          </h4>
 
           <section className="Card">
             <h2>Meus Eventos</h2>
