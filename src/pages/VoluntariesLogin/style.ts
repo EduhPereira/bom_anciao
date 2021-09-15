@@ -66,6 +66,10 @@ export const Form = styled.form`
   span {
     color: red;
   }
+
+  div {
+    text-align: center;
+  }
 `;
 export const Input = styled.input`
   background: #f5f8fa;

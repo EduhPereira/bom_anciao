@@ -41,7 +41,7 @@ const LoginInstitution = () => {
     <div>
       <RegisterStyled onSubmit={handleSubmit(onSubmit)}>
         <Content>
-          <h2>Entre em sua conta</h2>
+          <h2>Entre em sua Conta Institucional</h2>
           <label htmlFor="email">
             Email:
             <span className="error">

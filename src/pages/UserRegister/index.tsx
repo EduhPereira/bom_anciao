@@ -3,9 +3,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Container, Content, Form, Input, Button } from "./styles";
+import { Container, Content, Form, Input, Button, Aside } from "./styles";
 import api from "../../services/api";
 import { Link } from "react-router-dom";
+import oldman from "../../Assets/img/oldman.svg";
+import grandma from "../../Assets/img/grandma.svg";
+
 interface IRegister {
   user: string;
   email: string;
@@ -55,6 +58,10 @@ const UserRegister = () => {
   };
   return (
     <Container>
+      <Aside>
+        <img src={oldman} alt="" />
+      </Aside>
+
       <Content>
         <h2>Crie sua conta</h2>
         <Form onSubmit={handleSubmit(handleRegister)}>
@@ -71,11 +78,11 @@ const UserRegister = () => {
           <span className="span-error">{errors.address?.message}</span>
 
           <label>Senha</label>
-          <Input type="text" {...register("password")} />
+          <Input type="password" {...register("password")} />
           <span className="span-error">{errors.password?.message}</span>
 
           <label>Confirme sua senha</label>
-          <Input type="text" {...register("confirmPassword")} />
+          <Input type="password" {...register("confirmPassword")} />
           <span className="span-error">{errors.confirmPassword?.message}</span>
           <Button type="submit">Enviar</Button>
           <div>
@@ -86,6 +93,10 @@ const UserRegister = () => {
           <ToastContainer />
         </div>
       </Content>
+
+      <Aside>
+        <img src={grandma} alt="" />
+      </Aside>
     </Container>
   );
 };
