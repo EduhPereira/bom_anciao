@@ -7,6 +7,7 @@ import VoluntaryMenu from "../../components/voluntaryMenu";
 import { Container, Contents, ContainerUpdate, FormUpdate } from "./style";
 import { useLogin } from "../../Providers/Login-Voluntaries";
 import api from "../../services/api";
+import { Loading } from "../../components/loading";
 
 interface userInputData {
   name: string;
@@ -27,13 +28,17 @@ const VoluntariesProfile = () => {
 
   const [editable, setEditable] = useState(false);
 
+  const [control, setControl] = useState<boolean>(false)
+
   const { register, handleSubmit, reset } = useForm();
 
   const { userId, userToken } = useLogin();
 
+
   const userInfoData = async () => {
     const response = await api.get(`/users?id=${userId}`);
-    setUserInfo(response.data);
+    await setUserInfo(response.data);
+    setControl(true)
   };
 
   const updateUserInfo = (data: userInputData) => {
@@ -46,7 +51,7 @@ const VoluntariesProfile = () => {
   };
   useEffect(() => {
     userInfoData();
-  }, []);
+  }, [userInfo]);
 
   const edit = () => {
     setEditable(true);
@@ -72,15 +77,28 @@ const VoluntariesProfile = () => {
           <>
             <section className="Card">
               <h2>Meus Dados</h2>
-              {userInfo.map((elem: any) => (
-                <div>
-                  <p>Nome: {elem.name}</p>
-                  <p>Email: {elem.email}</p>
-                  <p>Endereço: {elem.address}</p>
-                  <p>Cidade: {elem.city}</p>
-                  <p>CPF: {elem.cpf}</p>
-                </div>
-              ))}
+              <div>
+
+                {control ?
+                  <>
+                    {userInfo.map((elem: any) => (
+                      <>
+                        <p>Nome: {elem.name}</p>
+                        <p>Email: {elem.email}</p>
+                        <p>Endereço: {elem.address}</p>
+                        <p>Cidade: {elem.city}</p>
+                        <p>CPF: {elem.cpf}</p>
+                      </>
+                    ))}
+                  </>
+                  :
+
+                  <Loading/>
+                
+                }
+
+
+              </div>
             </section>
             <button onClick={edit}>Editar</button>
           </>
