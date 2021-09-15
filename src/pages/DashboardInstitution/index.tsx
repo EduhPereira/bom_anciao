@@ -15,7 +15,6 @@ import {
   ButtonRmv,
   ButtonAtt,
   Content,
-  ProfileImage,
 } from "./styles";
 
 interface EventInstitution {
@@ -30,28 +29,8 @@ interface EventInstitution {
   idInstitution?: number;
 }
 
-interface EditEvent {
-  event: {
-    nameInstitution: string;
-    local: string;
-    date: string;
-    hour: string;
-    duration: string;
-    name: string;
-    describe: string;
-    id: number;
-    idInstitution?: number;
-  };
-}
-
 interface InstituitionName {
   name: string;
-}
-
-interface ModalVisible {
-  nameInst: any;
-  setModalVisible: Dispatch<SetStateAction<boolean>>;
-  modalVisible: boolean;
 }
 
 const DashboardInstitution = () => {
@@ -95,14 +74,12 @@ const DashboardInstitution = () => {
   }
 
   async function deleteEvent(id: number) {
-    const response = await api
-      .delete(`events/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((_) => toast.success("✅ Evento deletado com sucesso!"));
-    console.log(response);
+    const response = await api.delete(`events/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    toast.success("✅ Evento deletado com sucesso!");
     loadEvents();
   }
 
