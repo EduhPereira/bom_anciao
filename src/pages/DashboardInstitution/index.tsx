@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import AddEvents from "../../components/InstitutionAddEvents";
 import EditEvents from "../../components/InstitutionEditEvent";
 import InstitutionMenu from "../../components/institutionMenu";
+import { Loading } from "../../components/loading";
 import { useAuthInstitution } from "../../Providers/Institution-Provider";
 import api from "../../services/api";
 import {
@@ -44,6 +45,7 @@ const DashboardInstitution = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalAtt, setModalAtt] = useState(false);
   const [object, setObject] = useState<number>(1);
+  const [control, setControl] = useState(false)
 
   const { token } = useAuthInstitution();
 
@@ -93,8 +95,13 @@ const DashboardInstitution = () => {
   };
 
   useEffect(() => {
-    loadEvents();
-    loadNameInstitution();
+    const loading = async () => {
+      await loadEvents();
+      await loadNameInstitution();
+      setControl(true)
+    }
+
+    loading()
   }, [events]);
 
   const showMenu = () => {
@@ -119,6 +126,7 @@ const DashboardInstitution = () => {
         id={object}
       />
       <Content>
+
         <CardEvents>
           <TitleEvent>
             <h2>Eventos</h2>
@@ -126,26 +134,48 @@ const DashboardInstitution = () => {
               Criar evento
             </ButtonCreateEvent>
           </TitleEvent>
-          {events.map((event) => (
-            <Event key={event.id}>
-              <div className="card-event" key={event.idInstitution}>
-                <p>Atividade: {event.name}</p>
-                <p>
-                  Quando: {event.date} {event.hour}
-                </p>
-                <p>Duração: {event.duration}</p>
-                <p>Descrição: {event.describe}</p>
-                <div className="button">
-                  <ButtonAtt onClick={() => updateEvent(event.id)}>
-                    Atualizar
-                  </ButtonAtt>
-                  <ButtonRmv onClick={() => deleteEvent(event.id)}>
-                    Remover
-                  </ButtonRmv>
-                </div>
-              </div>
+
+          {control ?
+
+            <>
+              {events.map((event) => (
+                <Event key={event.id}>
+
+
+                  <div className="card-event" key={event.idInstitution}>
+                    <p>Atividade: {event.name}</p>
+                    <p>
+                      Quando: {event.date} {event.hour}
+                    </p>
+                    <p>Duração: {event.duration}</p>
+                    <p>Descrição: {event.describe}</p>
+                    <div className="button">
+                      <ButtonAtt onClick={() => updateEvent(event.id)}>
+                        Atualizar
+                      </ButtonAtt>
+                      <ButtonRmv onClick={() => deleteEvent(event.id)}>
+                        Remover
+                      </ButtonRmv>
+                    </div>
+                  </div>
+
+
+                </Event>
+              ))}
+            </>
+
+
+            :
+            <Event>
+              <Loading />
             </Event>
-          ))}
+          }
+
+
+
+
+
+
         </CardEvents>
       </Content>
     </Container>

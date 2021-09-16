@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuthInstitution } from "../../Providers/Institution-Provider";
 import api from "../../services/api";
 import DonationCard from "../donationCard";
+import { Loading } from "../loading";
 
 interface IDonation {
   name: string;
@@ -21,17 +22,19 @@ const DonationsList = () => {
       .then((res) => setDonations(res.data))
       .catch((err) => console.log(err));
   };
-  //não consegui fazer funcionar sem incluir donations como dependencia
+
   useEffect(() => {
-    getDonations();
+      getDonations();
   }, [donations]);
 
   return (
     <>
       <ul>
-        {donations.map((donation, index) => {
-          return <DonationCard key={index} donation={donation} />;
-        })}
+          <>
+            {donations.map((donation, index) => {
+              return <DonationCard key={index} donation={donation} />;
+            })}
+          </>
       </ul>
     </>
   );

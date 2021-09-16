@@ -8,6 +8,7 @@ import { Container, Contents, ContainerUpdate, FormUpdate } from "./style";
 
 import api from "../../services/api";
 import { useAuthInstitution } from "../../Providers/Institution-Provider";
+import { Loading } from "../../components/loading";
 
 interface InputData {
   name: string;
@@ -32,6 +33,8 @@ const InstitutionProfile = () => {
 
   const { institutionId, token } = useAuthInstitution();
 
+  const [control, setControl] = useState(false)
+
   const userInfoData = async () => {
     const response = await api.get(`/users?id=${institutionId}`);
     setUserInfo(response.data);
@@ -47,7 +50,11 @@ const InstitutionProfile = () => {
   };
 
   useEffect(() => {
-    userInfoData();
+    const loading = async () => {
+      await userInfoData();
+      setControl(true)
+    }
+    loading()
     const data = userInfo;
   }, [userInfo]);
 
@@ -68,21 +75,32 @@ const InstitutionProfile = () => {
     <Container>
       <InstitutionMenu visible={visible} setVisible={setVisible} />
       <BiMenuAltLeft className="Open" onClick={showMenu} />
+
       <Contents>
         {!editable ? (
           <>
             <section className="Card">
               <h2>Meus Dados</h2>
-              {userInfo.map((elem: any) => (
-                <div>
-                  <p>Nome: {elem.name}</p>
-                  <p>Email: {elem.email}</p>
-                  <p>Endereço: {elem.address}</p>
-                  <p>Cidade: {elem.city}</p>
-                  <p>CNPJ: {elem.cnpj}</p>
-                  <p>Sobre: {elem.about}</p>
-                </div>
-              ))}
+              {control ?
+                <>
+                  {
+                    userInfo.map((elem: any) => (
+                      <div>
+                        <p>Nome: {elem.name}</p>
+                        <p>Email: {elem.email}</p>
+                        <p>Endereço: {elem.address}</p>
+                        <p>Cidade: {elem.city}</p>
+                        <p>CNPJ: {elem.cnpj}</p>
+                        <p>Sobre: {elem.about}</p>
+                      </div>
+                    ))
+                  }
+                </>
+                :
+                <Loading/>
+
+                }
+
             </section>
             <button onClick={edit}>Editar</button>
           </>
@@ -119,6 +137,8 @@ const InstitutionProfile = () => {
           </ContainerUpdate>
         )}
       </Contents>
+
+
     </Container>
   );
 };
