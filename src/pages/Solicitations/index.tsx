@@ -51,7 +51,6 @@ const Solicitations = () => {
         <InstitutionMenu visible={visible} setVisible={setVisible} />
         <BiMenuAltLeft className="Open" onClick={showMenu} />
         <SubContainer>
-          <h2>{nameInstitution}</h2>
           <Contents>
             <div className="card-top">
               <span>Doações</span>
