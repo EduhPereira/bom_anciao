@@ -4,6 +4,7 @@ export const Container = styled.div`
   width: 100vw;
   height: 100vh;
   color: black;
+  background-color: #f5f8fa;
 
   svg.Open {
     width: 30px;
@@ -11,6 +12,7 @@ export const Container = styled.div`
   }
   .search-container {
     background-color: #59a5a5;
+    height: 100vh;
     border-radius: 10px;
     padding-top: 5vh;
     max-width: 87%;
@@ -26,15 +28,17 @@ export const Container = styled.div`
       background: #f5f8fa;
       border-radius: 10px;
       width: 60%;
-      height: 7vh;
+      height: 5vh;
       border: none;
       padding: 10px;
+      margin-right: 5vw;
+      font-size: 0.9rem;
     }
     button {
       background: #f5f8fa;
       border-radius: 15px;
       width: 25%;
-      height: 7vh;
+      height: 5vh;
       border: none;
       color: #70cccc;
       font-weight: bolder;
@@ -45,23 +49,29 @@ export const Container = styled.div`
   }
 
   .list-container {
+    overflow-y: scroll;
+    ::-webkit-scrollbar {
+      width: 0px;
+    }
     display: flex;
     justify-content: center;
     color: #f5f8fa;
     font-weight: 500;
 
-    ul {
-      border-left: 4px solid #f5f8fa;
-      padding-left: 5vw;
-    }
-    li {
-      list-style-type: none;
-      margin-bottom: 3vh;
+    .list-item-container {
+      /* height: 100%; */
+      ul {
+        padding-left: 2vw;
+        border-left: 4px solid #f5f8fa;
+      }
+      li {
+        list-style-type: none;
+        margin-bottom: 3vh;
+        border-bottom: 2px solid #f5f8fa;
+      }
     }
   }
 
-  hr {
-  }
   svg {
     width: 30px;
     height: 30px;
@@ -73,20 +83,37 @@ export const Container = styled.div`
     display: flex;
     justify-content: flex-start;
 
+    .white-container {
+      width: 100vw;
+      height: 70vh;
+      margin-top: 15vh;
+      background-color: #ffffff;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+    }
+
     .Open {
       display: none;
     }
     .search-container {
-      max-height: 80vh;
-      margin-top: 10vh;
+      max-height: 65vh;
+      width: 55vw;
     }
     .search-input {
-      height: 10vh;
-      margin-left: 3vw;
+      height: 5vh;
+      margin-left: 5vw;
+
+      input {
+        font-size: 1rem;
+      }
+      button {
+        width: 43%;
+      }
     }
 
-    button {
-      width: 100px;
+    .list-container {
+      height: 45vh;
     }
   }
 `;

@@ -15,7 +15,7 @@ const DonationsList = () => {
   const [donations, setDonations] = useState<IDonation[]>([]);
 
   const { institutionId } = useAuthInstitution();
-
+  console.log(institutionId);
   const getDonations = () => {
     api
       .get(`/donations?idInstitution=${institutionId}`)
