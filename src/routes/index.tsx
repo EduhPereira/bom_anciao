@@ -73,7 +73,6 @@ const Routes = () => {
 
       <Route path="/donations">
         {institutionId ? <Solicitations />: <Redirect to="/login-institution"/>}
-        
       </Route>
 
       <Route path="*">
