@@ -99,7 +99,11 @@ const RegisterInstitution = () => {
             CNPJ:
             <span className="error">{errors.cnpj && errors.cnpj?.message}</span>
           </label>
-          <Input type="text" {...register("cnpj")} />
+          <Input
+            type="text"
+            placeholder="00.000.000/0000-00."
+            {...register("cnpj")}
+          />
 
           <label htmlFor="password">
             Senha:
