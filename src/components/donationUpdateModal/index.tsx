@@ -31,7 +31,6 @@ const DonationUpdateModal = ({
         },
       }
     );
-    console.log(response);
     showModal(false);
   }
 

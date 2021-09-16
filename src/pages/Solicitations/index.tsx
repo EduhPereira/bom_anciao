@@ -11,6 +11,7 @@ import {
 } from "./styles";
 import InstitutionMenu from "../../components/institutionMenu";
 import { BiMenuAltLeft } from "react-icons/bi";
+import { Loading } from "../../components/loading";
 interface IUser {
   email: string;
   password: string;
@@ -24,8 +25,8 @@ const Solicitations = () => {
   const [newDonation, setNewDonation] = useState<boolean>(false);
   const [nameInstitution, setNameInstitution] = useState<string>("");
   const [visible, setVisible] = useState(false);
-
   const { institutionId } = useAuthInstitution();
+  const [control, setControl] = useState(false)
 
   const showMenu = () => {
     setVisible(true);
@@ -42,31 +43,47 @@ const Solicitations = () => {
   }
 
   useEffect(() => {
-    loadNameInstitution();
-  }, []);
+    const loading = async () => {
+      await loadNameInstitution();
+      setControl(true)
+    }
+    loading()
+  }, [nameInstitution]);
 
   return (
     <>
-      <Container>
-        <InstitutionMenu visible={visible} setVisible={setVisible} />
-        <BiMenuAltLeft className="Open" onClick={showMenu} />
-        <SubContainer>
-          <h2>{nameInstitution}</h2>
-          <Contents>
-            <div className="card-top">
-              <span>Doações</span>
-              <button onClick={() => setNewDonation(true)}>Criar doação</button>
-            </div>
 
-            {newDonation && (
-              <NewDonationForm modal={newDonation} setModal={setNewDonation} />
-            )}
-            <DonationsListStyled>
-              <DonationsList />
-            </DonationsListStyled>
-          </Contents>
-        </SubContainer>
-      </Container>
+        <Container>
+          <InstitutionMenu visible={visible} setVisible={setVisible} />
+          <BiMenuAltLeft className="Open" onClick={showMenu} />
+          <SubContainer>
+            <h2>{nameInstitution}</h2>
+            <Contents>
+              <div className="card-top">
+                <span>Doações</span>
+                <button onClick={() => setNewDonation(true)}>Criar doação</button>
+              </div>
+
+              {newDonation && (
+                <NewDonationForm modal={newDonation} setModal={setNewDonation} />
+              )}
+              <DonationsListStyled>
+                {control?
+                  <DonationsList />
+                
+                :
+                  <Loading/>
+                
+                }
+
+              </DonationsListStyled>
+            </Contents>
+          </SubContainer>
+        </Container>
+
+
+ 
+
     </>
   );
 };

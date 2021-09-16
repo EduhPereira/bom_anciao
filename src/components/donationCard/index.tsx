@@ -26,7 +26,6 @@ const DonationCard = ({ key, donation }: IDonationCardProps) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response);
   }
 
   return (
