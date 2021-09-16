@@ -177,9 +177,9 @@ export const Logout = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: translate(50%, 100%);
+  transform: translateX(50%);
   right: 50%;
-  bottom: 50%;
+  bottom: 5%;
   padding: 10px;
   color: #227475;
   font-weight: bold;
@@ -192,6 +192,6 @@ export const Logout = styled.div`
   }
 
   @media (min-width: 768px) {
-    bottom: 30%;
+    bottom: 5%;
   }
 `;
