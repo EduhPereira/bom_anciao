@@ -80,7 +80,6 @@ const AddEvents = ({
   return (
     <Container visible={modalVisible}>
       <Content visible={modalVisible}>
-        <AiOutlineClose className="Close" onClick={showMenu} />
         <EventTitle>
           <h2>Cadastrar Evento</h2>
         </EventTitle>
