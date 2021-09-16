@@ -79,7 +79,7 @@ const DashboardInstitution = () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    toast.success("✅ Evento deletado com sucesso!");
+    toast.success("Evento deletado com sucesso!");
     loadEvents();
   }
 

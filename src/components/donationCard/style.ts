@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 300px;
+  display: flex;
+  justify-content: center;
   .delete {
     width: 70px;
     background-color: #ff6666;
@@ -18,10 +20,14 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
+  width: 250px;
   margin: 5px 0 0 5px;
-  width: 100%;
+
   hr {
     width: 100%;
+  }
+  @media (min-width: 768px) {
+    width: 430px;
   }
 `;
 export const ReciveContent = styled.div`
