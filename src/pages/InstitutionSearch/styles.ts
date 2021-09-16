@@ -5,7 +5,6 @@ export const Container = styled.div`
   height: 100vh;
   color: black;
   background-color: #f5f8fa;
-  cursor: pointer;
 
   svg.Open {
     width: 30px;
@@ -46,6 +45,7 @@ export const Container = styled.div`
       font-size: 0.8rem;
       margin-left: 4vw;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      cursor: pointer;
     }
   }
 
@@ -69,6 +69,7 @@ export const Container = styled.div`
         list-style-type: none;
         margin-bottom: 3vh;
         border-bottom: 2px solid #f5f8fa;
+        cursor: pointer;
       }
     }
   }
