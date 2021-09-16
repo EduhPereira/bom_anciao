@@ -98,6 +98,10 @@ export const Contents = styled.div`
   margin: auto 0 auto 0;
   background-color: #f5f8fa;
 
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
   display: flex;
   flex-direction: column;
   align-items: center;
