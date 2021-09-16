@@ -17,7 +17,7 @@ const DonationsList = () => {
 
   const getDonations = () => {
     api
-      .get(`/donations?institutionId=${institutionId}`)
+      .get(`/donations?idInstitution=${institutionId}`)
       .then((res) => setDonations(res.data))
       .catch((err) => console.log(err));
   };
