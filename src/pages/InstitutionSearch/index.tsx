@@ -57,45 +57,47 @@ const InstitutionSearch = () => {
     <Container>
       <VoluntaryMenu visible={visible} setVisible={setVisible} />
       <BiMenuAltLeft className="Open" onClick={showMenu} />
-      <div className="search-container">
-        <div className="search-input">
-          <input
-            value={searched}
-            onChange={(e) => setSearched(e.target.value)}
-            placeholder="Nome da Instituição..."
-          />
-          <button onClick={() => showSearchResults(searched)}>Pesquisar</button>
-        </div>
+      <div className="white-container">
+        <div className="search-container">
+          <div className="search-input">
+            <input
+              value={searched}
+              onChange={(e) => setSearched(e.target.value)}
+              placeholder="Nome da Instituição..."
+            />
+            <button onClick={() => showSearchResults(searched)}>
+              Pesquisar
+            </button>
+          </div>
 
-        <div className="list-container">
-          <div className="list-item-container">
-            <ul>
-              {isSearched
-                ? results?.map((inst, index) => {
-                    return (
-                      <li key={index}>
-                        <span onClick={() => handleInstituteDetails(inst.id)}>
-                          {inst.name}
-                        </span>{" "}
-                        <br />
-                        <span>{inst.address}</span>
-                        {/* <hr /> */}
-                      </li>
-                    );
-                  })
-                : institutions?.map((inst, index) => {
-                    return (
-                      <li key={index}>
-                        <span onClick={() => handleInstituteDetails(inst.id)}>
-                          {inst.name}
-                        </span>{" "}
-                        <br />
-                        <span>{inst.address}</span>
-                        {/* <hr /> */}
-                      </li>
-                    );
-                  })}
-            </ul>
+          <div className="list-container">
+            <div className="list-item-container">
+              <ul>
+                {isSearched
+                  ? results?.map((inst, index) => {
+                      return (
+                        <li key={index}>
+                          <span onClick={() => handleInstituteDetails(inst.id)}>
+                            {inst.name}
+                          </span>{" "}
+                          <br />
+                          <span>{inst.address}</span>
+                        </li>
+                      );
+                    })
+                  : institutions?.map((inst, index) => {
+                      return (
+                        <li key={index}>
+                          <span onClick={() => handleInstituteDetails(inst.id)}>
+                            {inst.name}
+                          </span>{" "}
+                          <br />
+                          <span>{inst.address}</span>
+                        </li>
+                      );
+                    })}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
