@@ -188,7 +188,6 @@ export const InstitutionDetails = () => {
                                         <p>Endereço: {i.address}</p>
                                         <p>Localizado em {i.city}</p>
                                         <p>CNPJ {i.cnpj}</p>
-                                        <p>Sobre nós: {i.about}</p>
                                     </section>
                                 })}
 

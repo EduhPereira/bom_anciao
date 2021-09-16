@@ -15,7 +15,6 @@ import {
   Content,
 } from "./styles";
 import { Dispatch, SetStateAction } from "react";
-import { AiOutlineClose } from "react-icons/ai";
 import { toast } from "react-toastify";
 
 interface inputData {
@@ -119,7 +118,6 @@ const EditEvents = ({
   return (
     <Container visible={modalAtt}>
       <Content visible={modalAtt}>
-        <AiOutlineClose className="Close" onClick={showMenu} />
         <EventTitle>
           <h2>Atualizar Evento</h2>
         </EventTitle>

@@ -56,8 +56,8 @@ export const Container = styled.div<VisibleModal>`
 
 export const Content = styled.div<VisibleModal>`
   background: #227475;
-  width: 65%;
-  height: 93vh;
+  width: 300px;
+  height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
