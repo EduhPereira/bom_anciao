@@ -68,9 +68,9 @@ const AddEvents = ({
     const nameFinder = nameInst.map((elem: any) => elem.name);
     const nameInstitution = nameFinder.join();
     CreateEvent(data, nameInstitution);
-    toast.success("Evento criado com sucesso!");
     setModalVisible(false);
     loadEvents();
+    reset();
   };
 
   const closeModal = () => {
