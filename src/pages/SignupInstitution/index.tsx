@@ -30,7 +30,7 @@ const RegisterInstitution = () => {
       .required("Campo obrigatório.")
       .matches(
         /^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/,
-        "Somente números são permitidos."
+        "Ex -> 00.000.000/0000-00"
       ),
     address: yup.string().required("Campo obrigatório."),
     city: yup.string().required("Campo obrigatório."),
@@ -101,7 +101,7 @@ const RegisterInstitution = () => {
           </label>
           <Input
             type="text"
-            placeholder="00.000.000/0000-00."
+            placeholder="00.000.000/0000-00"
             {...register("cnpj")}
           />
 
