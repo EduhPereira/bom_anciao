@@ -51,7 +51,7 @@ const DashboardInstitution = () => {
     localStorage.getItem("@Bom ancião: institutionID") || "";
 
   async function loadEvents() {
-    const response = await api.get(`events?idInstitution=${institutionID}`, {
+    const response = await api.get(`/events?idInstitution=${institutionID}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -62,7 +62,7 @@ const DashboardInstitution = () => {
 
   async function loadNameInstitution() {
     const response = await api.get(
-      `users?type=Institution&&id=${institutionID}`,
+      `/users?type=Institution&&id=${institutionID}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -74,7 +74,7 @@ const DashboardInstitution = () => {
   }
 
   async function deleteEvent(id: number) {
-    const response = await api.delete(`events/${id}`, {
+    const response = await api.delete(`/events/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

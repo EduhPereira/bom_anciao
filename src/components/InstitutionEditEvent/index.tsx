@@ -74,7 +74,7 @@ const EditEvents = ({
   const eventUpdate = async (data: inputData) => {
     const { name, local, describe, duration, hour, date } = data;
     const response = await api.patch(
-      `events/${id}`,
+      `/events/${id}`,
       {
         nameInstitution: nameInst,
         local,

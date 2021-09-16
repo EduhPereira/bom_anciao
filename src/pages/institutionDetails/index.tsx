@@ -73,22 +73,22 @@ export const InstitutionDetails = () => {
     }, [])
 
     const reqInstitutionEvents = async () => {
-        const response = await api.get(`events?idInstitution=${id}`)
+        const response = await api.get(`/events?idInstitution=${id}`)
         setListEvents(response.data)
     }
 
     const reqInstitution = async () => {
-        const response = await api.get(`users?type=Institution&&id=${id}`)
+        const response = await api.get(`/users?type=Institution&&id=${id}`)
         setInstitution(response.data)
     }
 
     const reqDonationsInstitution = async () => {
-        const response = await api.get(`donations?idInstitution=${id}`)
+        const response = await api.get(`/donations?idInstitution=${id}`)
         setListDonations(response.data)
     }
 
     const reqVerifyIdUser = async () => {
-        const response = await api.get(`subscribeEvents?idUser=${userId}`, {
+        const response = await api.get(`/subscribeEvents?idUser=${userId}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -99,7 +99,7 @@ export const InstitutionDetails = () => {
 
     const reqSubscribeEvent = async (event: iEvents) => {
         const { nameInstitution, idInstitution, id, name, local, date, hour, duration, describe } = event
-        const response = await api.post("subscribeEvents", {
+        const response = await api.post("/subscribeEvents", {
             idInstitution,
             nameInstitution,
             idUser: userId,

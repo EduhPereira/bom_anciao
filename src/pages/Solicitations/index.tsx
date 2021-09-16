@@ -33,7 +33,7 @@ const Solicitations = () => {
 
   async function loadNameInstitution() {
     const response = await api.get(
-      `users?type=Institution&&id=${institutionId}`
+      `/users?type=Institution&&id=${institutionId}`
     );
     const data = response.data.map((inst: IUser) => {
       return inst.name;

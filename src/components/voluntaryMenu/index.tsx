@@ -19,8 +19,11 @@ const VoluntaryMenu = ({ visible, setVisible }: iVoluntaryProps) => {
 
   const id = localStorage.getItem("@Bom ancião: userID") || ""
 
+  const nameUser = localStorage.getItem("@Bom ancião: userName") || ""
+  
   const [user, setUser] = useState<iUser[]>([] as iUser[])
-  const { userId, userName } = useLogin()
+  
+  const { userId, userName} = useLogin()
 
   const history = useHistory()
 
@@ -35,8 +38,9 @@ const VoluntaryMenu = ({ visible, setVisible }: iVoluntaryProps) => {
   };
 
   const reqUser = async () => {
-    const response = await api.get(`users?id=${id}`)
+    const response = await api.get(`/users?id=${id}`)
     setUser(response.data)
+    
   }
 
   const handleLogout = async () => {
