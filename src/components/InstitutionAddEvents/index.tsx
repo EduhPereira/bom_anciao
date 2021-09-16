@@ -3,7 +3,6 @@ import * as yup from "yup";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useAddEvents } from "../../Providers/Events-Institution";
 import { useAuthInstitution } from "../../Providers/Institution-Provider";
-import api from "../../services/api";
 import {
   Container,
   Forms,
@@ -69,9 +68,9 @@ const AddEvents = ({
     const nameFinder = nameInst.map((elem: any) => elem.name);
     const nameInstitution = nameFinder.join();
     CreateEvent(data, nameInstitution);
-    toast.success("Evento criado com sucesso!");
     setModalVisible(false);
     loadEvents();
+    reset();
   };
 
   const closeModal = () => {

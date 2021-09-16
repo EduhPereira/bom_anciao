@@ -24,7 +24,7 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-  width: 100vw;
+  width: 80vw;
 
   display: flex;
   align-items: center;
@@ -54,7 +54,6 @@ export const CardEvents = styled.div`
   width: 350px;
   height: 450px;
   background-color: #f5f8fa;
-  box-shadow: 0px 7px 10px -4px rgba(0, 0, 0, 0.75);
 
   color: black;
 
@@ -86,7 +85,7 @@ export const Event = styled.div`
 
   .button {
     text-align: right;
-    margin-top: 10px;
+    margin-top: 5px;
   }
 `;
 
@@ -99,6 +98,7 @@ export const TitleEvent = styled.div`
   justify-content: space-between;
 
   h2 {
+    font-size: 1.1rem;
     text-align: center;
     color: #fff;
   }
@@ -110,35 +110,41 @@ export const TitleEvent = styled.div`
 export const ButtonAtt = styled.button`
   background-color: #ffd666;
   color: #fff;
-  font-size: 10px;
-  font-weight: bold;
+  font-size: 0.9rem;
 
-  padding: 5px;
+  width: 70px;
+  height: 25px;
+  border-radius: 5px;
+
   margin-right: 20px;
   border: none;
-  border-radius: 5px;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
 `;
 
 export const ButtonRmv = styled.button`
   background-color: #ff6666;
-  color: #fff;
-  font-size: 10px;
-  font-weight: bold;
-
-  padding: 5px;
-  border: none;
+  width: 70px;
+  height: 25px;
   border-radius: 5px;
+
+  color: #fff;
+  font-size: 0.9rem;
+
+  border: none;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
 `;
 
 export const ButtonCreateEvent = styled.button`
-  background-color: #fff;
+  font-size: 0.85rem;
+  width: 90px;
+  height: 30px;
+  border-radius: 10px;
+  background-color: #ffffff;
   color: #59a5a5;
-  font-size: 10px;
   font-weight: bold;
-
   padding: 5px;
   border: none;
-  border-radius: 5px;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
 `;
 
 export const ProfileImage = styled.img`

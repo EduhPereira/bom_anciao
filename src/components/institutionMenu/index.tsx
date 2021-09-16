@@ -53,12 +53,16 @@ const InstitutionMenu = ({ visible, setVisible }: iInstitutionProps) => {
       <Container visible={visible}>
         <Contents visible={visible}>
           <section className="Institution">
-            {nameIns.map((nome) => (
               <div>
-                <h1>{nome.name.substring(0, 1)}</h1>
-                <h2>{nome.name}</h2>
+                <h1>
+                  {nameIns.map((name) => {
+                    return `${name.name.substring(0, 1)}`
+                  })}
+                </h1>
+                <h2>{nameIns.map((name)=>{
+                  return `${name.name}`
+                })}</h2>
               </div>
-            ))}
           </section>
           <AiOutlineClose className="Close" onClick={showMenu} />
           <NavLink activeClassName="selected" exact to="/institution-data">

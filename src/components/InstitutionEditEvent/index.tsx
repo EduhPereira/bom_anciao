@@ -91,8 +91,7 @@ const EditEvents = ({
         },
       }
     );
-    toast.success("✅ Evento alterado com sucesso!");
-    console.log(response);
+    toast.success("Evento alterado com sucesso!");
     loadEvents();
     setModalAtt(false);
   };
