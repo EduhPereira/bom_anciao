@@ -11,6 +11,7 @@ export const Container = styled.div`
   }
   .search-container {
     background-color: #59a5a5;
+    height: 100vh;
     border-radius: 10px;
     padding-top: 5vh;
     max-width: 87%;
@@ -45,23 +46,25 @@ export const Container = styled.div`
   }
 
   .list-container {
+    overflow-y: scroll;
     display: flex;
     justify-content: center;
     color: #f5f8fa;
     font-weight: 500;
-
-    ul {
-      border-left: 4px solid #f5f8fa;
-      padding-left: 5vw;
-    }
-    li {
-      list-style-type: none;
-      margin-bottom: 3vh;
+    .list-item-container {
+      height: 100%;
+      ul {
+        padding-left: 5vw;
+        border-left: 4px solid #f5f8fa;
+      }
+      li {
+        list-style-type: none;
+        margin-bottom: 3vh;
+        border-bottom: 2px solid #f5f8fa;
+      }
     }
   }
 
-  hr {
-  }
   svg {
     width: 30px;
     height: 30px;
@@ -87,6 +90,9 @@ export const Container = styled.div`
 
     button {
       width: 100px;
+    }
+    .list-container {
+      height: 60vh;
     }
   }
 `;

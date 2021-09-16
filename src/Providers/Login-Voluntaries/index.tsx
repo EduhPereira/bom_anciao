@@ -10,6 +10,7 @@ import {
 import { History } from "history";
 import api from "../../services/api";
 import jwt_decode from "jwt-decode";
+import { toast } from "react-toastify";
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -45,7 +46,7 @@ const LoginProvider = ({ children }: AuthProviderProps) => {
       .get(`/users?id=${userId}`)
       .then((res) => localStorage.setItem("name", res.data.name))
       .catch((err) => console.log(err));
-  }
+  };
 
   const singIn = useCallback(async (data: userData, history: History) => {
     api
@@ -57,21 +58,17 @@ const LoginProvider = ({ children }: AuthProviderProps) => {
         const usersID: any = jwt_decode(response.data.accessToken);
         setUserId(usersID.sub);
         localStorage.setItem("@Bom ancião: userID", usersID.sub);
-        
       })
       .then((response) => {
-        history.push("/my-events")
+        history.push("/my-events");
       })
-      .catch((err) => console.log("login e senha invalidos!"));
-      req()
-      
+      .catch((err) => {
+        toast.error("login ou senha inválidos");
+      });
+    req();
   }, []);
 
-  useEffect(() => {
-    
-  }, [userId]);
-
-  
+  useEffect(() => {}, [userId]);
 
   return (
     <LoginContext.Provider

@@ -14,10 +14,10 @@ const DonationsList = () => {
   const [donations, setDonations] = useState<IDonation[]>([]);
 
   const { institutionId } = useAuthInstitution();
-
+  console.log(institutionId);
   const getDonations = () => {
     api
-      .get(`/donations?institutionId=${institutionId}`)
+      .get(`/donations?idInstitution=${institutionId}`)
       .then((res) => setDonations(res.data))
       .catch((err) => console.log(err));
   };

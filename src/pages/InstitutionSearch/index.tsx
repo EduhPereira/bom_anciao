@@ -19,7 +19,7 @@ const InstitutionSearch = () => {
   const [results, setResults] = useState<Institution[]>([]);
   const [visible, setVisible] = useState(false);
   const [institutions, setInstitutions] = useState<Institution[]>([]);
-  const [control, setControl] = useState(false)
+  const [control, setControl] = useState(false);
 
   useEffect(() => {
     api
@@ -67,36 +67,36 @@ const InstitutionSearch = () => {
           <button onClick={() => showSearchResults(searched)}>Pesquisar</button>
         </div>
 
-
-
         <div className="list-container">
-          <ul>
-            {isSearched
-              ? results?.map((inst, index) => {
-                  return (
-                    <li key={index}>
-                      <span onClick={() => handleInstituteDetails(inst.id)}>
-                        {inst.name}
-                      </span>{" "}
-                      <br />
-                      <span>{inst.address}</span>
-                      <hr />
-                    </li>
-                  );
-                })
-              : institutions?.map((inst, index) => {
-                  return (
-                    <li key={index}>
-                      <span onClick={() => handleInstituteDetails(inst.id)}>
-                        {inst.name}
-                      </span>{" "}
-                      <br />
-                      <span>{inst.address}</span>
-                      <hr />
-                    </li>
-                  );
-                })}
-          </ul>
+          <div className="list-item-container">
+            <ul>
+              {isSearched
+                ? results?.map((inst, index) => {
+                    return (
+                      <li key={index}>
+                        <span onClick={() => handleInstituteDetails(inst.id)}>
+                          {inst.name}
+                        </span>{" "}
+                        <br />
+                        <span>{inst.address}</span>
+                        {/* <hr /> */}
+                      </li>
+                    );
+                  })
+                : institutions?.map((inst, index) => {
+                    return (
+                      <li key={index}>
+                        <span onClick={() => handleInstituteDetails(inst.id)}>
+                          {inst.name}
+                        </span>{" "}
+                        <br />
+                        <span>{inst.address}</span>
+                        {/* <hr /> */}
+                      </li>
+                    );
+                  })}
+            </ul>
+          </div>
         </div>
       </div>
     </Container>
