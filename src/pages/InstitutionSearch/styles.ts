@@ -5,6 +5,7 @@ export const Container = styled.div`
   height: 100vh;
   color: black;
   background-color: #f5f8fa;
+  cursor: pointer;
 
   svg.Open {
     width: 30px;
@@ -13,7 +14,7 @@ export const Container = styled.div`
   .search-container {
     background-color: #59a5a5;
     height: 100vh;
-    border-radius: 10px;
+    border-radius: 20px;
     padding-top: 5vh;
     max-width: 87%;
     margin-left: 5vw;

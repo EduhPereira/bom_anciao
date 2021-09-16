@@ -132,9 +132,13 @@ export const ContainerUpdate = styled.div`
 
 export const FormUpdate = styled.form`
   width: 80%;
-  height: 70%;
+  height: 80%;
   background-color: #59a5a5;
-
+  span {
+    color: red;
+    font-size: 1rem;
+    font-weight: 300;
+  }
   color: white;
   font-weight: bold;
   font-size: 0.9rem;
@@ -165,6 +169,7 @@ export const FormUpdate = styled.form`
   }
   @media (min-width: 768px) {
     width: 40%;
+    height: 70%;
     font-size: 1.2rem;
     div {
       margin-top: 15px;

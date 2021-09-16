@@ -57,7 +57,7 @@ export const CardEvents = styled.div`
 
   color: black;
 
-  border-radius: 10px;
+  border-radius: 20px;
   margin: 5px;
 
   overflow-y: scroll;
