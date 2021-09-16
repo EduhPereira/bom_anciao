@@ -4,12 +4,17 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
   width: 100%;
   height: 200px;
   display: flex;
-  z-index: 99;
+  justify-content: center;
+  align-items: center;
 
-  div {
-  }
+  
 `;
+
+
+export const Contents = styled.div`
+  width: 250px;
+
+`

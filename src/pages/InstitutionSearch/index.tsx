@@ -19,6 +19,7 @@ const InstitutionSearch = () => {
   const [results, setResults] = useState<Institution[]>([]);
   const [visible, setVisible] = useState(false);
   const [institutions, setInstitutions] = useState<Institution[]>([]);
+  const [control, setControl] = useState(false)
 
   useEffect(() => {
     api
@@ -65,6 +66,9 @@ const InstitutionSearch = () => {
           />
           <button onClick={() => showSearchResults(searched)}>Pesquisar</button>
         </div>
+
+
+
         <div className="list-container">
           <ul>
             {isSearched

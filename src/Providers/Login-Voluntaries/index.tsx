@@ -42,7 +42,7 @@ const LoginProvider = ({ children }: AuthProviderProps) => {
 
   const req = () => {
     api
-      .get(`/users/${userId}`)
+      .get(`/users?id=${userId}`)
       .then((res) => localStorage.setItem("name", res.data.name))
       .catch((err) => console.log(err));
   }
@@ -57,12 +57,14 @@ const LoginProvider = ({ children }: AuthProviderProps) => {
         const usersID: any = jwt_decode(response.data.accessToken);
         setUserId(usersID.sub);
         localStorage.setItem("@Bom ancião: userID", usersID.sub);
+        
       })
       .then((response) => {
         history.push("/my-events")
       })
       .catch((err) => console.log("login e senha invalidos!"));
       req()
+      
   }, []);
 
   useEffect(() => {

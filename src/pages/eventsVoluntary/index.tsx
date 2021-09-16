@@ -61,7 +61,7 @@ export const EventsVoluntary = () => {
   };
 
   const reqUserName = async () => {
-    const response = await api.get(`users?id=${userId}`, {
+    const response = await api.get(`/users?id=${userId}`, {
       headers: {
         Authorization: `Bearer ${userToken}`,
       },
@@ -70,7 +70,7 @@ export const EventsVoluntary = () => {
   };
 
   const reqEventUser = async () => {
-    const response = await api.get(`subscribeEvents?idUser=${userId}`, {
+    const response = await api.get(`/subscribeEvents?idUser=${userId}`, {
       headers: {
         Authorization: `Bearer ${userToken}`,
       },
@@ -84,7 +84,7 @@ export const EventsVoluntary = () => {
   };
 
   const cancelEvent = async (id: number) => {
-    const response = await api.delete(`subscribeEvents/${id}`, {
+    const response = await api.delete(`/subscribeEvents/${id}`, {
       headers: {
         Authorization: `Bearer ${userToken}`,
       },

@@ -1,7 +1,7 @@
 import lottie from "lottie-web";
 import animationData from "../../Assets/loading/loading.json";
 import { useEffect, useRef } from "react";
-import { Container } from "./styles";
+import { Container, Contents } from "./styles";
 
 export const Loading = () => {
   const element = useRef<HTMLDivElement>(null);
@@ -19,7 +19,12 @@ export const Loading = () => {
 
   return (
     <Container>
-      <div ref={element}></div>
+      <Contents>
+
+        <div ref={element}></div>
+
+      </Contents>
+
     </Container>
   );
 };

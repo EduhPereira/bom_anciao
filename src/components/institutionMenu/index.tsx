@@ -30,7 +30,7 @@ const InstitutionMenu = ({ visible, setVisible }: iInstitutionProps) => {
   };
 
   async function reqInst() {
-    const response = await api.get(`users?id=${institutionID}`, {
+    const response = await api.get(`/users?id=${institutionID}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
