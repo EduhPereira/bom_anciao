@@ -95,7 +95,7 @@ export const Input = styled.input`
 
   padding: 10px;
   border: none;
-  border-radius: 2px;
+  border-radius: 10px;
   outline: none;
 `;
 

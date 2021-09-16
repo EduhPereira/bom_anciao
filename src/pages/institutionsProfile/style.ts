@@ -135,7 +135,7 @@ export const ContainerUpdate = styled.div`
 
 export const FormUpdate = styled.form`
   width: 80%;
-  height: 85%;
+  height: 95%;
   background-color: #59a5a5;
 
   color: white;
@@ -148,6 +148,10 @@ export const FormUpdate = styled.form`
   align-items: center;
 
   border-radius: 20px;
+  span {
+    color: red;
+    font-weight: 300;
+  }
   div {
     width: 70%;
     margin: 10px;
